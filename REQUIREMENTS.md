@@ -165,6 +165,7 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
 ### Bonus Tier: Finishing Touches (10 EC)
 
 <details>
+  
 - Finishing Touches
   - [ ] If a user attempts to add a new student or campus without a required field, a helpful message should be displayed
   - [ ] If a user attempts to access a page that doesn't exist (ex. `/cafeteria`), a helpful "not found" message should be displayed
@@ -179,4 +180,5 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
   - [ ] Create a filter on the all-campuses view to only show campuses that do not have any registered students
 - Seed
   - [ ] Seed 100+ students and 100+ campuses
+  
 </details>
