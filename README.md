@@ -89,7 +89,7 @@ So, when you see a test with `***` at the beginning, you should delete the `thro
 ### Video Walkthrough
 Please submit a short, 5 minute screencast of a walk-through of the functionality for each user story in your app. E.g. for "As a user, I can create a campus", you can fill out the form for creating a campus and then see the new campus appear in the campuses list. *There is no need to show us the code you wrote.* We recommend using Quicktime to record the screencast (instructions on how to do that [here](https://support.apple.com/kb/PH5882?locale=en_US&viewlocale=en_US)).
 
-Once you've recorded your screencast, please *upload it to YouTube as an unlisted video*. Email the instructors with the title `Junior Phase Final Project: [Your Name]` and include your repo link and YouTube recording link. This will aid us in evaluating your submission.
+Once you've recorded your screencast, please *upload it to YouTube as an unlisted video*. Email the instructors (priti.patel@fullstackacademy.com and collin.miller@fullstackacademy.com) with the title `Junior Phase Final Project: [Your Name]` and include your repo link and YouTube recording link. This will aid us in evaluating your submission.
 
 Well before the deadline, we recommend practicing this by recording a very short screencast and uploading it as an unlisted video. If you encounter any technical issues, reach out to us so that we can help you resolve them.
 
