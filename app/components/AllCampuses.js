@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { fetchCampuses } from '../redux/campuses';
+import CreateCampus from './CreateCampus';
 
 const DisconnectedAllCampuses = props => {
   if (props.campuses.length === 0) {
@@ -24,6 +25,7 @@ const DisconnectedAllCampuses = props => {
           </li>
         ))}
       </ul>
+      <CreateCampus />
     </div>
   );
 };
