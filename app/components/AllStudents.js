@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStudents } from '../redux/campuses';
+import { fetchSingleStudent } from '../redux/singleStudent';
 import { withRouter } from 'react-router-dom';
 
 const DisconnectedAllStudents = props => {
@@ -15,14 +16,20 @@ const DisconnectedAllStudents = props => {
   return (
     <div>
       <h1>All Students</h1>
-      <ul className="student-list">
+      <div id="student-list">
         {props.students.map(student => (
-          <li key={student.id}>
+          <div
+            className="items"
+            key={student.id}
+            onClick={() => props.fetchStudent(student.id)}
+          >
+            <div>
+              <img src={student.imageUrl} />
+            </div>
             {student.firstName} {student.lastName}
-            <img src={student.imageUrl} />
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
@@ -31,12 +38,15 @@ const mapState = state => {
   return {
     students: state.students,
     campuses: state.campuses,
+    singleStudent: state.singleStudent,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, ownProps) => {
   return {
     fetchInitialStudents: () => dispatch(fetchStudents()),
+    fetchStudent: studentId =>
+      dispatch(fetchSingleStudent(studentId, ownProps)),
   };
 };
 

@@ -5,16 +5,26 @@ const Student = db.define('students', {
   firstName: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      notNull: true,
+      notEmpty: true,
+    },
   },
   lastName: {
     type: Sequelize.STRING,
     allowNull: false,
+    validate: {
+      notNull: true,
+      notEmpty: true,
+    },
   },
   email: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       isEmail: true,
+      notNull: true,
+      notEmpty: true,
     },
   },
   imageUrl: {

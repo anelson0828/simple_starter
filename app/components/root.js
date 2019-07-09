@@ -1,6 +1,9 @@
 import React from 'react';
 import AllCampuses from './AllCampuses';
 import AllStudents from './AllStudents';
+import SingleStudent from './SingleStudent';
+import SingleCampus from './SingleCampus';
+
 import { fetchCampuses } from '../redux/campuses';
 import { fetchStudents } from '../redux/students';
 import { connect } from 'react-redux';
@@ -25,13 +28,17 @@ class DisconnectedRoot extends React.Component {
           <h1>Welcome to the Margaret Hamilton Academy of JavaScript!</h1>
           <Switch>
             <Route
+              exact
               path="/campuses"
               render={() => <AllCampuses campuses={campuses} />}
             />
             <Route
+              exact
               path="/students"
               render={() => <AllStudents students={students} />}
             />
+            <Route path="/campuses/:campusId" component={SingleCampus} />
+            <Route path="/students/:studentId" component={SingleStudent} />
           </Switch>
         </main>
       </div>

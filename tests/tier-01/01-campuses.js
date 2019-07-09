@@ -156,7 +156,7 @@ describe('Tier One: Campuses', () => {
     });
   });
 
-  describe.only('Sequelize Model', () => {
+  describe('Sequelize Model', () => {
     before(() => db.sync({ force: true }));
     afterEach(() => db.sync({ force: true }));
 

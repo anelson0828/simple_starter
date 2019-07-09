@@ -1,15 +1,15 @@
 const { green, red } = require('chalk');
 const { db } = require('./server/db');
 
-const Student = require('./server/db/student');
-const Campus = require('./server/db/campus');
+const Student = require('./server/db/Student');
+const Campus = require('./server/db/Campus');
 
 const students = [
   {
     firstName: 'Amanda',
     lastName: 'Nelson',
     email: 'amandamarienelson2@gmail.com',
-    imageUrl: 'www.google.com',
+    imageUrl: '/adolescent-attractive-beautiful-1310461.jpg',
     gpa: 3.9,
     campusId: 1,
   },
@@ -17,7 +17,7 @@ const students = [
     firstName: 'Bryce',
     lastName: 'Baker',
     email: 'bryce.ebaker@gmail.com',
-    imageUrl: 'www.google.com',
+    imageUrl: '/adorable-blur-bookcase-261895.jpg',
     gpa: 4.0,
     campusId: 1,
   },
@@ -25,7 +25,7 @@ const students = [
     firstName: 'Bob',
     lastName: 'Smith',
     email: 'test@example.com',
-    imageUrl: 'www.google.com',
+    imageUrl: '/female-girl-model-41943.jpg',
     gpa: 2.0,
     campusId: 2,
   },
@@ -33,7 +33,7 @@ const students = [
     firstName: 'John',
     lastName: 'Johnson',
     email: 'test@example.com',
-    imageUrl: 'www.google.com',
+    imageUrl: '/casual-daytime-facial-expression-1329494.jpg',
     gpa: 3.0,
   },
 ];
@@ -41,13 +41,13 @@ const students = [
 const campuses = [
   {
     name: 'Test School',
-    imageUrl: 'www.google.com',
+    imageUrl: '/alabama-architecture-auburn-university-207692.jpg',
     address: '171 North Aberdeen St, Chicago, IL',
     description: 'A great school',
   },
   {
     name: 'Test School2',
-    imageUrl: 'www.google.com',
+    imageUrl: '/boys-daylight-field-1164572.jpg',
     address: '171 North Aberdeen St, Chicago, IL',
     description: 'A great school',
   },

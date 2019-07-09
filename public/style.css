@@ -18,7 +18,7 @@ body {
 
 nav {
   align-items: center;
-  background-color: #333333;
+  background-color: teal;
   color: #c0c0c0;
   display: flex;
   height: 80px;
@@ -29,5 +29,25 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
+}
+
+div.student-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: center;
+}
+
+img {
+  height: 200px;
+}
+
+#items {
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+  background-color: whitesmoke;
+  border-radius: 6px;
+  padding: 1rem;
+  margin: 2rem;
 }

@@ -1,6 +1,6 @@
 const db = require('./database');
-const Student = require('./student');
-const Campus = require('./campus');
+const Student = require('./Student');
+const Campus = require('./Campus');
 
 Student.belongsTo(Campus);
 Campus.hasMany(Student);
