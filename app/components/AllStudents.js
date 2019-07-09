@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStudents } from '../redux/campuses';
-import { fetchSingleStudent } from '../redux/singleStudent';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 
 const DisconnectedAllStudents = props => {
   if (props.students.length === 0) {
@@ -18,15 +17,13 @@ const DisconnectedAllStudents = props => {
       <h1>All Students</h1>
       <div id="student-list">
         {props.students.map(student => (
-          <div
-            className="items"
-            key={student.id}
-            onClick={() => props.fetchStudent(student.id)}
-          >
-            <div>
-              <img src={student.imageUrl} />
-            </div>
-            {student.firstName} {student.lastName}
+          <div className="items" key={student.id}>
+            <NavLink to={`/students/${student.id}`} activeClassName="active">
+              <div>
+                <img src={student.imageUrl} />
+              </div>
+              {student.firstName} {student.lastName}
+            </NavLink>
           </div>
         ))}
       </div>
@@ -37,16 +34,12 @@ const DisconnectedAllStudents = props => {
 const mapState = state => {
   return {
     students: state.students,
-    campuses: state.campuses,
-    singleStudent: state.singleStudent,
   };
 };
 
-const mapDispatch = (dispatch, ownProps) => {
+const mapDispatch = dispatch => {
   return {
     fetchInitialStudents: () => dispatch(fetchStudents()),
-    fetchStudent: studentId =>
-      dispatch(fetchSingleStudent(studentId, ownProps)),
   };
 };
 

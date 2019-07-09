@@ -16,7 +16,7 @@ export const fetchSingleCampus = (campusId, ownProps) => {
   };
 };
 
-export default (selectedCampus = {}, action) => {
+export default (selectedCampus = { students: [] }, action) => {
   switch (action.type) {
     case SET_SINGLE_CAMPUS:
       return action.selectedCampus;

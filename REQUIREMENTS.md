@@ -63,18 +63,18 @@ Congrats! You have completed your first vertical slice! Make sure to `commit -m 
 
 - Write a component to display a single campus with the following information:
   - [x ] The campus's name, image, address and description
-  - [ ] A list of the names of all students in that campus (or a helpful message if it doesn't have any students)
-- [ ] Display the appropriate campus's info when the url matches `/campuses/:campusId`
+  - [x ] A list of the names of all students in that campus (or a helpful message if it doesn't have any students)
+- [ x] Display the appropriate campus's info when the url matches `/campuses/:campusId`
 - [x ] Clicking on a campus from the all-campuses view should navigate to show that campus in the single-campus view
 
 - Write a component to display a single student with the following information:
   - [ x] The student's full name, email, image, and gpa
   - [ x] The name of their campus (or a helpful message if they don't have one)
-- [ ] Display the appropriate student when the url matches `/students/:studentId`
+- [ x] Display the appropriate student when the url matches `/students/:studentId`
 - [x ] Clicking on a student from the all-students view should navigate to show that student in the single-student view
 
-- [ ] Clicking on the name of a student in the single-campus view should navigate to show that student in the single-student view
-- [ ] Clicking on the name of a campus in the single-student view should navigate to show that campus in the single-campus view
+- [x ] Clicking on the name of a student in the single-campus view should navigate to show that student in the single-student view
+- [x ] Clicking on the name of a campus in the single-student view should navigate to show that campus in the single-campus view
 
 #### Backend
 

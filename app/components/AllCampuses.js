@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { fetchSingleCampus } from '../redux/singleCampus';
+import { withRouter, NavLink } from 'react-router-dom';
 import { fetchCampuses } from '../redux/campuses';
 
 const DisconnectedAllCampuses = props => {
@@ -18,8 +17,10 @@ const DisconnectedAllCampuses = props => {
       <h1>All Campuses</h1>
       <ul className="campus-list">
         {props.campuses.map(campus => (
-          <li key={campus.id} onClick={() => props.fetchCampus(campus.id)}>
-            {campus.name}
+          <li key={campus.id}>
+            <NavLink to={`/campuses/${campus.id}`} activeClassName="active">
+              {campus.name}
+            </NavLink>
           </li>
         ))}
       </ul>
@@ -30,14 +31,12 @@ const DisconnectedAllCampuses = props => {
 const mapState = state => {
   return {
     campuses: state.campuses,
-    selectedCampus: state.selectedCampus,
   };
 };
 
-const mapDispatch = (dispatch, ownProps) => {
+const mapDispatch = dispatch => {
   return {
     fetchInitialCampuses: () => dispatch(fetchCampuses()),
-    fetchCampus: campusId => dispatch(fetchSingleCampus(campusId, ownProps)),
   };
 };
 

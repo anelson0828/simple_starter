@@ -1,39 +1,53 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
+import { fetchSingleCampus } from '../redux/singleCampus';
 
-const DisconnectedSingleCampus = props => {
-  return (
-    <div>
-      <div id="singleCampus">
-        <div />
-        <h1>Single Campus</h1>
-        <div>
-          <img src={props.selectedCampus.imageUrl} />
-          <br />
-          {props.selectedCampus.address}
-        </div>
-        <div>
-          <h1>{props.selectedCampus.name}</h1>
-          <p>{props.selectedCampus.description}</p>
-        </div>
-      </div>
+class DisconnectedSingleCampus extends React.Component {
+  componentDidMount() {
+    this.props.fetchCampus(this.props.match.params.campusId);
+  }
+  render() {
+    const { selectedCampus } = this.props;
+    return (
       <div>
-        <h1>Students on campus</h1>
+        <div id="singleCampus">
+          <div />
+          <h1>Single Campus</h1>
+          <div>
+            <img src={selectedCampus.imageUrl} />
+            <br />
+            {selectedCampus.address}
+          </div>
+          <div>
+            <h1>{selectedCampus.name}</h1>
+            <p>{selectedCampus.description}</p>
+          </div>
+        </div>
         <div>
-          {props.selectedCampus.students.map(student => {
-            return (
-              <div key={student.id}>
-                <image src={student.imageUrl} />
-                {student.firstName} {student.lastName}
-              </div>
-            );
-          })}
+          <h1>Students on campus</h1>
+          <div>
+            {selectedCampus.students.length !== 0
+              ? selectedCampus.students.map(student => {
+                  return (
+                    <div key={student.id}>
+                      <NavLink
+                        to={`/students/${student.id}`}
+                        activeClassName="active"
+                      >
+                        <image src={student.imageUrl} />
+                        {student.firstName} {student.lastName}
+                      </NavLink>
+                    </div>
+                  );
+                })
+              : 'No students on this campus'}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const mapState = state => {
   return {
@@ -41,4 +55,15 @@ const mapState = state => {
   };
 };
 
-export default withRouter(connect(mapState)(DisconnectedSingleCampus));
+const mapDispatch = (dispatch, ownProps) => {
+  return {
+    fetchCampus: campusId => dispatch(fetchSingleCampus(campusId, ownProps)),
+  };
+};
+
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(DisconnectedSingleCampus)
+);
