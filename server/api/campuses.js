@@ -24,7 +24,6 @@ router.get('/:campusId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('posted', req.body);
     const campus = await Campus.create(req.body);
     res.send(campus);
   } catch (err) {
