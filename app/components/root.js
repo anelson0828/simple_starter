@@ -4,8 +4,8 @@ import AllStudents from './AllStudents';
 import SingleStudent from './SingleStudent';
 import SingleCampus from './SingleCampus';
 
-import { fetchCampuses } from '../redux/campuses';
-import { fetchStudents } from '../redux/students';
+import { fetchCampusesThunk } from '../redux/campuses';
+import { fetchStudentsThunk } from '../redux/students';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect, withRouter, NavLink } from 'react-router-dom';
 
@@ -55,8 +55,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchInitialStudents: () => dispatch(fetchCampuses()),
-    fetchInitialCampuses: () => dispatch(fetchStudents()),
+    fetchInitialStudents: () => dispatch(fetchCampusesThunk()),
+    fetchInitialCampuses: () => dispatch(fetchStudentsThunk()),
   };
 };
 

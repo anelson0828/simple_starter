@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { fetchCampuses } from '../redux/campuses';
+import { fetchCampusesThunk, deleteCampusThunk } from '../redux/campuses';
 import CreateCampus from './CreateCampus';
 
 const DisconnectedAllCampuses = props => {
@@ -22,6 +22,15 @@ const DisconnectedAllCampuses = props => {
             <NavLink to={`/campuses/${campus.id}`} activeClassName="active">
               {campus.name}
             </NavLink>
+            <button
+              type="button"
+              className="remove"
+              onClick={() => {
+                props.deleteCampus(campus.id);
+              }}
+            >
+              X
+            </button>
           </li>
         ))}
       </ul>
@@ -38,7 +47,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchInitialCampuses: () => dispatch(fetchCampuses()),
+    fetchInitialCampuses: () => dispatch(fetchCampusesThunk()),
+    deleteCampus: campusId => dispatch(deleteCampusThunk(campusId)),
   };
 };
 

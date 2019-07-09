@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchStudents } from '../redux/campuses';
 import { withRouter, NavLink } from 'react-router-dom';
 import CreateStudent from './CreateStudent';
+import { deleteStudentThunk } from '../redux/students';
 
 const DisconnectedAllStudents = props => {
   if (props.students.length === 0) {
@@ -25,6 +26,17 @@ const DisconnectedAllStudents = props => {
               </div>
               {student.firstName} {student.lastName}
             </NavLink>
+            <div>
+              <button
+                type="button"
+                className="remove"
+                onClick={() => {
+                  props.deleteStudent(student.id);
+                }}
+              >
+                X
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -42,6 +54,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     fetchInitialStudents: () => dispatch(fetchStudents()),
+    deleteStudent: studentId => dispatch(deleteStudentThunk(studentId)),
   };
 };
 

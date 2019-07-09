@@ -31,4 +31,17 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.delete('/:campusId', (req, res, next) => {
+  try {
+    Campus.destroy({
+      where: {
+        id: req.params.campusId,
+      },
+    });
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
