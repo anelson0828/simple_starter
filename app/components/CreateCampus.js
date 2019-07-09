@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createCampusThunk } from '../redux/campuses';
+import { CampusForm } from './CampusForm';
 
 class DisconnectedCreateCampus extends Component {
   constructor(props) {
@@ -46,57 +47,12 @@ class DisconnectedCreateCampus extends Component {
   }
 
   render() {
-    const { name, address, description, imageUrl } = this.state;
-
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">
-          Campus Name:
-          {/* {!campus.name.length ? (
-            <span className="warning">Field Required</span>
-          ) : (
-            <span />
-          )} */}
-        </label>
-        <input
-          name="name"
-          type="text"
-          value={name}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="address">Address:</label>
-        <input
-          name="address"
-          type="text"
-          value={address}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="description">Description:</label>
-        <input
-          name="description"
-          type="text"
-          value={description}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="imageUrl">Image:</label>
-        <input
-          name="imageUrl"
-          type="file"
-          accept="image/*"
-          value={imageUrl}
-          onChange={this.handleChange}
-        />
-        <br />
-        <button type="submit">Submit</button>
-        {this.state.errorMessage ? (
-          <div className="error">Yikes! Looks like you got an error!</div>
-        ) : (
-          ''
-        )}
-      </form>
+      <CampusForm
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        state={this.state}
+      />
     );
   }
 }

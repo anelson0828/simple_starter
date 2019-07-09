@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createStudentThunk } from '../redux/students';
+import { StudentForm } from './StudentForm';
 
 class DisconnectedCreateStudent extends Component {
   constructor(props) {
@@ -49,65 +50,12 @@ class DisconnectedCreateStudent extends Component {
   }
 
   render() {
-    const { firstName, lastName, email, gpa, imageUrl } = this.state;
-
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="firstName">
-          First Name:
-          {/* {!campus.name.length ? (
-            <span className="warning">Field Required</span>
-          ) : (
-            <span />
-          )} */}
-        </label>
-        <input
-          name="firstName"
-          type="text"
-          value={firstName}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="lastName">Last Name:</label>
-        <input
-          name="lastName"
-          type="text"
-          value={lastName}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="email">Email:</label>
-        <input
-          name="email"
-          type="text"
-          value={email}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="gpa">GPA:</label>
-        <input
-          name="gpa"
-          type="float"
-          value={gpa}
-          onChange={this.handleChange}
-        />
-        <br />
-        <label htmlFor="imageUrl">Image:</label>
-        <input
-          name="imageUrl"
-          type="file"
-          accept="image/*"
-          value={imageUrl}
-          onChange={this.handleChange}
-        />
-        <br />
-        <button type="submit">Submit</button>
-        {this.state.errorMessage ? (
-          <div className="error">Yikes! Looks like you got an error!</div>
-        ) : (
-          ''
-        )}
-      </form>
+      <StudentForm
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        state={this.state}
+      />
     );
   }
 }

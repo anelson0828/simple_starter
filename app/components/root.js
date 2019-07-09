@@ -3,6 +3,8 @@ import AllCampuses from './AllCampuses';
 import AllStudents from './AllStudents';
 import SingleStudent from './SingleStudent';
 import SingleCampus from './SingleCampus';
+import { CreateCampus } from './CreateCampus';
+import { CreateStudent } from './CreateStudent';
 
 import { fetchCampusesThunk } from '../redux/campuses';
 import { fetchStudentsThunk } from '../redux/students';
@@ -37,6 +39,8 @@ class DisconnectedRoot extends React.Component {
               path="/students"
               render={() => <AllStudents students={students} />}
             />
+            <Route exact path="/campuses/new" component={CreateStudent} />
+            <Route exact path="/students/new" component={CreateCampus} />
             <Route path="/campuses/:campusId" component={SingleCampus} />
             <Route path="/students/:studentId" component={SingleStudent} />
           </Switch>
