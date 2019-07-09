@@ -18,8 +18,8 @@ const seed = require('../../seed');
 const adapter = new Adapter();
 enzyme.configure({ adapter });
 
-import { AllCampuses } from '../../app/components/AllCampuses';
-import { AllStudents } from '../../app/components/AllStudents';
+import AllCampuses from '../../app/components/AllCampuses';
+import AllStudents from '../../app/components/AllStudents';
 import Root from '../../app/components/root';
 
 // Sometimes, we want to wait for a short tinme for async events to finish.
@@ -76,8 +76,15 @@ describe('Tier One: Final Touches', () => {
       expect(wrapper.find(AllStudents)).to.have.length(1);
     });
 
-    xit('*** navbar to navigate to home, campuses, students', () => {
-      throw new Error('replace this error with your own test');
+    it('*** navbar to navigate to home, campuses, students', () => {
+      const wrapper = mount(
+        <Provider store={store}>
+          <MemoryRouter initialEntries={['/students']}>
+            <Root />
+          </MemoryRouter>
+        </Provider>
+      );
+      expect(wrapper.find('nav').length).to.be.equal(1);
     });
   });
 
@@ -94,12 +101,16 @@ describe('Tier One: Final Touches', () => {
       expect(students).to.have.lengthOf.at.least(4);
     });
 
-    xit('*** creates exactly one campus that has no students', async () => {
-      throw new Error('replace this error with your own test');
+    it('*** creates exactly one campus that has no students', async () => {
+      const campuses = await Campus.findAll({ include: [{ model: Student }] });
+      expect(
+        campuses.filter(campus => campus.students.length === 0)
+      ).to.have.lengthOf(1);
     });
 
-    xit('*** creates exactly one student that is not enrolled in a campus', async () => {
-      throw new Error('replace this error with your own test');
+    it('*** creates exactly one student that is not enrolled in a campus', async () => {
+      const students = await Student.findAll({ include: [{ model: Campus }] });
+      expect(students.filter(student => !student.campusId)).to.have.lengthOf(1);
     });
   });
 

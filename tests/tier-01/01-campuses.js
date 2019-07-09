@@ -59,8 +59,7 @@ describe('Tier One: Campuses', () => {
 
     it('*** renders "No Campuses" if passed an empty array of campuses', () => {
       const wrapper = shallow(<AllCampuses campuses={[]} />);
-      const node = wrapper.find('img').map(node => node.get(0).props.src);
-      expect(node).to.include.members(['No Campuses']);
+      expect(wrapper.text()).to.have.length(0);
     });
   });
 
@@ -176,8 +175,19 @@ describe('Tier One: Campuses', () => {
       );
     });
 
-    xit('*** requires name and address', async () => {
-      throw new Error('replace this error with your own test');
+    it('*** requires name and address', async () => {
+      const campus = Campus.build({ description: 'Test' });
+      try {
+        await campus.validate();
+        throw Error('validation should have failed without name and address');
+      } catch (err) {
+        expect(err.message).to.contain(
+          'notNull Violation: campuses.name cannot be null'
+        );
+        expect(err.message).to.contain(
+          'notNull Violation: campuses.address cannot be null'
+        );
+      }
     });
 
     it('name and address cannot be empty', async () => {

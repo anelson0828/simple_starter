@@ -27,7 +27,7 @@ const { Student } = require('../../server/db');
 const adapter = new Adapter();
 enzyme.configure({ adapter });
 
-import { AllStudents } from '../../app/components/AllStudents';
+import AllStudents from '../../app/components/AllStudents';
 
 describe('Tier One: Students', () => {
   describe('<AllStudents /> component', () => {
@@ -44,8 +44,9 @@ describe('Tier One: Students', () => {
       expect(wrapper.text()).to.include('Sally Ride');
     });
 
-    xit('*** renders "No Students" if passed an empty array of students', () => {
-      throw new Error('replace this error with your own test');
+    it('*** renders "No Students" if passed an empty array of students', () => {
+      const wrapper = shallow(<AllStudents students={[]} />);
+      expect(wrapper.text()).to.have.length(0);
     });
   });
 
@@ -83,8 +84,11 @@ describe('Tier One: Students', () => {
         testStore = createStore(rootReducer);
       });
 
-      xit('*** returns the initial state by default', () => {
-        throw new Error('replace this error with your own test');
+      it('*** returns the initial state by default', () => {
+        const action = { type: 'DOES_NOT_EXIST' };
+        testStore.dispatch(action);
+        const newState = testStore.getState();
+        expect(newState.students).to.be.deep.equal(initialState);
       });
 
       it('reduces on SET_STUDENTS action', () => {
@@ -120,8 +124,13 @@ describe('Tier One: Students', () => {
       Student.findAll = studentFindAll;
     });
 
-    xit('*** GET /api/students responds with all students', async () => {
-      throw new Error('replace this error with your own test');
+    it('*** GET /api/students responds with all students', async () => {
+      const response = await agent.get('/api/students').expect(200);
+      expect(response.body).to.deep.equal([
+        { id: 1, firstName: 'Mae', lastName: 'Jemison' },
+        { id: 2, firstName: 'Sally', lastName: 'Ride' },
+      ]);
+      expect(Student.findAll.calledOnce).to.be.equal(true);
     });
   });
 
@@ -172,8 +181,14 @@ describe('Tier One: Students', () => {
       }
     });
 
-    xit('*** email must be a valid email', async () => {
-      throw new Error('replace this error with your own test');
+    it('*** email must be a valid email', async () => {
+      const student = Student.build({ email: 'amanda' });
+      try {
+        await student.validate();
+        throw Error('validation should have failed without valid email');
+      } catch (err) {
+        expect(err.message).to.contain('Validation isEmail on email failed');
+      }
     });
 
     it('gpa must be a float between 0.0 and 4.0', async () => {
