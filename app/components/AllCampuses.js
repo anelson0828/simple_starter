@@ -1,10 +1,44 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchCampuses } from '../redux/campuses';
+import { withRouter } from 'react-router-dom';
 
-export const AllCampuses = () => {
-  return <div />
-}
+const DisconnectedAllCampuses = props => {
+  if (props.campuses.length === 0) {
+    return (
+      <div>
+        <h1>All Campuses</h1>
+        <p>There are no campuses registered in the database.</p>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <h1>All Campuses</h1>
+      <ul className="campus-list">
+        {props.campuses.map(campus => (
+          <li key={campus.id}>{campus.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-// Currently, we're just exporting the component as-is. When we're ready to
-// hook it up to the redux store, we'll export the connected component by default:
-// export default connect(mapState, mapDispatch)(AllCampuses)
-export default AllCampuses
+const mapState = state => {
+  return {
+    campuses: state.campuses,
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchInitialCampuses: () => dispatch(fetchCampuses()),
+  };
+};
+
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(DisconnectedAllCampuses)
+);

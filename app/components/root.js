@@ -1,22 +1,61 @@
-import React from 'react'
+import React from 'react';
+import AllCampuses from './AllCampuses';
+import AllStudents from './AllStudents';
+import { fetchCampuses } from '../redux/campuses';
+import { fetchStudents } from '../redux/students';
+import { connect } from 'react-redux';
+import { Route, Switch, Redirect, withRouter, NavLink } from 'react-router-dom';
 
-class Root extends React.Component {
+class DisconnectedRoot extends React.Component {
   componentDidMount() {
-    // Huh, I wonder what this mysterious componentDidMount is doing here... 🤔
+    this.props.fetchInitialStudents();
+    this.props.fetchInitialCampuses();
   }
   render() {
+    const { campuses, students } = this.props;
+
     return (
       <div>
         <nav>
-          Welcome!
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/campuses/">Campuses</NavLink>
+          <NavLink to="/students/">Students</NavLink>
         </nav>
         <main>
           <h1>Welcome to the Margaret Hamilton Academy of JavaScript!</h1>
-          <p>This seems like a nice place to get started with some Routes!</p>
+          <Switch>
+            <Route
+              path="/campuses"
+              render={() => <AllCampuses campuses={campuses} />}
+            />
+            <Route
+              path="/students"
+              render={() => <AllStudents students={students} />}
+            />
+          </Switch>
         </main>
       </div>
-    )
+    );
   }
 }
 
-export default Root
+const mapState = state => {
+  return {
+    students: state.students,
+    campuses: state.campuses,
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchInitialStudents: () => dispatch(fetchCampuses()),
+    fetchInitialCampuses: () => dispatch(fetchStudents()),
+  };
+};
+
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(DisconnectedRoot)
+);

@@ -1,7 +1,10 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import campuses from './campuses';
+import students from './students';
 
-// This reducer is just a stub. We should probably do something
-// with that combineReducers thing up there...
-const appReducer = () => {}
+const appReducer = combineReducers({
+  campuses: campuses,
+  students: students,
+});
 
-export default appReducer
+export default appReducer;

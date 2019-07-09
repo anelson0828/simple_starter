@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { Student, Campus } = require('../db');
+const { Student } = require('../db');
 
 router.get('/', async (req, res, next) => {
   try {
-    const campuses = await Campus.findAll({ include: [{ model: Student }] });
-    res.send(campuses);
+    const students = await Student.findAll();
+    res.send(students);
   } catch (err) {
     next(err);
   }
