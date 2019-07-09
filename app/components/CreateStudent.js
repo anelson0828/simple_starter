@@ -55,6 +55,7 @@ class DisconnectedCreateStudent extends Component {
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
         state={this.state}
+        history={this.props.history}
       />
     );
   }

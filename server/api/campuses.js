@@ -44,4 +44,16 @@ router.delete('/:campusId', (req, res, next) => {
   }
 });
 
+router.put('/:campusId', (req, res, next) => {
+  try {
+    const updatedCampus = Campus.update(
+      { ...req.body },
+      { where: { id: req.params.campusId } }
+    );
+    res.status(204).json(updatedCampus);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

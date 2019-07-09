@@ -145,23 +145,23 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
 
 #### Frontend
 
-- [ ] Write a component to display a form updating _at least_ a campus's name and address
-- [ ] Display this component EITHER as part of the single-campus view, or as its own view
+- [ x] Write a component to display a form updating _at least_ a campus's name and address
+- [ x] Display this component EITHER as part of the single-campus view, or as its own view
 - Submitting the form with valid data should:
-  - [ ] Make an AJAX request that causes that campus to be updated in the database
-  - [ ] Update the campus in the current view without needing to refresh the page
-- [ ] In the single-campus view, display an `Unregister` button next to each of its students, which removes the student from the campus (in the database as well as this view); hint: the student is still in the database but is no longer associated with the campus
+  - [x ] Make an AJAX request that causes that campus to be updated in the database
+  - [ x] Update the campus in the current view without needing to refresh the page
+- [ x] In the single-campus view, display an `Unregister` button next to each of its students, which removes the student from the campus (in the database as well as this view); hint: the student is still in the database but is no longer associated with the campus
 
-- [ ] Write a component to display a form updating _at least_ a student's first and last names, and email
-- [ ] Display this component EITHER as part of the single-student view, or as its own view
+- [x ] Write a component to display a form updating _at least_ a student's first and last names, and email
+- [ x] Display this component EITHER as part of the single-student view, or as its own view
 - Submitting the form with valid data should:
-  - [ ] Make an AJAX request that causes that student to be updated in the database
-  - [ ] Update the student in the current view without needing to refresh the page
+  - [ x] Make an AJAX request that causes that student to be updated in the database
+  - [ x] Update the student in the current view without needing to refresh the page
 
 #### Backend
 
-- [ ] Write a route to update an existing campus
-- [ ] Write a route to update an existing student
+- [x ] Write a route to update an existing campus
+- [ x] Write a route to update an existing student
 
 </details>
 

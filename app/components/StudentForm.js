@@ -14,7 +14,7 @@ export const StudentForm = props => {
       <input
         name="firstName"
         type="text"
-        value={props.state.firstName}
+        value={props.firstName}
         onChange={props.handleChange}
       />
       <br />
@@ -42,7 +42,7 @@ export const StudentForm = props => {
         onChange={props.handleChange}
       />
       <br />
-      <label htmlFor="imageUrl">Image:</label>
+      {/* <label htmlFor="imageUrl">Image:</label>
       <input
         name="imageUrl"
         type="file"
@@ -50,8 +50,17 @@ export const StudentForm = props => {
         value={props.state.imageUrl}
         onChange={props.handleChange}
       />
-      <br />
-      <button type="submit">Submit</button>
+      <br /> */}
+      <button type="submit">Save</button>
+      <button
+        type="button"
+        onClick={() => {
+          console.log('history props', props);
+          props.history.goBack();
+        }}
+      >
+        Back
+      </button>
       {props.state.errorMessage ? (
         <div className="error">Yikes! Looks like you got an error!</div>
       ) : (

@@ -1,9 +1,14 @@
 import axios from 'axios';
 
 const SET_SINGLE_CAMPUS = 'SET_SINGLE_CAMPUS';
+const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 
 export const setSingleCampus = selectedCampus => {
   return { type: SET_SINGLE_CAMPUS, selectedCampus };
+};
+
+export const updateCampus = campus => {
+  return { type: UPDATE_CAMPUS, campus };
 };
 
 export const fetchSingleCampus = (campusId, ownProps) => {
@@ -16,10 +21,20 @@ export const fetchSingleCampus = (campusId, ownProps) => {
   };
 };
 
+export const updateCampusThunk = campus => {
+  return async dispatch => {
+    const response = await axios.put(`/api/campuses/${campus.id}`, campus);
+    const updatedCampus = response.data;
+    dispatch(updateCampus(updatedCampus));
+  };
+};
+
 export default (selectedCampus = { students: [] }, action) => {
   switch (action.type) {
     case SET_SINGLE_CAMPUS:
       return action.selectedCampus;
+    case UPDATE_CAMPUS:
+      return action.campus;
     default:
       return selectedCampus;
   }

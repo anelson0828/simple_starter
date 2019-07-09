@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStudents } from '../redux/campuses';
 import { withRouter, NavLink } from 'react-router-dom';
-import CreateStudent from './CreateStudent';
 import { deleteStudentThunk } from '../redux/students';
 
 const DisconnectedAllStudents = props => {
@@ -40,7 +39,9 @@ const DisconnectedAllStudents = props => {
           </div>
         ))}
       </div>
-      <CreateStudent />
+      <button type="button">
+        <NavLink to="/students/new">Add Student</NavLink>
+      </button>
     </div>
   );
 };
