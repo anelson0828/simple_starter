@@ -13,9 +13,7 @@ import {
 export const StudentForm = props => {
   return (
     <Container style={{ marginTop: '5rem' }}>
-      <Header as="h2">
-        <h1>Student</h1>
-      </Header>
+      <Header as="h2">Student</Header>
       <Form onSubmit={props.handleSubmit} style={{ marginTop: '2rem' }}>
         <Form.Input
           label="First Name"

@@ -4,6 +4,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { fetchSingleStudent, updateStudentThunk } from '../redux/singleStudent';
 import { StudentForm } from './StudentForm';
 import { Container, Header, Card, Image, Button } from 'semantic-ui-react';
+import NotFound from './NotFound';
 
 class DisconnectedSingleStudent extends React.Component {
   constructor(props) {
@@ -58,7 +59,9 @@ class DisconnectedSingleStudent extends React.Component {
   render() {
     const { selectedStudent } = this.props;
 
-    if (this.state.editMode) {
+    if (!selectedStudent.id) {
+      return <NotFound />;
+    } else if (this.state.editMode) {
       return (
         <StudentForm
           handleChange={this.handleChange}

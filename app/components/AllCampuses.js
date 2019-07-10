@@ -14,42 +14,40 @@ import {
 const DisconnectedAllCampuses = props => {
   if (props.campuses.length === 0) {
     return (
-      <div>
-        <h1>All Campuses</h1>
+      <Container textAlign="center" style={{ marginTop: '5rem' }}>
+        <Header as="h2">All Campuses</Header>
         <p>There are no campuses registered in the database.</p>
-      </div>
+      </Container>
     );
   }
   return (
     <Container textAlign="center" style={{ marginTop: '5rem' }}>
-      <Header as="h2">
-        <h1>All Campuses</h1>
-      </Header>
+      <Header as="h2">All Campuses</Header>
       <Container textAlign="center" style={{ marginBottom: '2rem' }}>
         <NavLink to="/campus/new">
           <Button primary>Add Campus</Button>
         </NavLink>
       </Container>
-      <Card.Group stackable itemsPerRow="2">
+      <Card.Group stackable itemsPerRow="3">
         {props.campuses.map(campus => (
-          <NavLink to={`/campuses/${campus.id}`} key={campus.id}>
-            <Card raised key={campus.id} style={{ margin: '1rem' }}>
+          <Card raised key={campus.id} style={{ margin: '1rem' }}>
+            <NavLink to={`/campuses/${campus.id}`} key={campus.id}>
               <Image size="medium" src={campus.imageUrl} />
-              <Card.Content>
-                <Card.Header>{campus.name}</Card.Header>
-              </Card.Content>
-              <Card.Content extra>
-                <Button
-                  icon
-                  onClick={() => {
-                    props.deleteCampus(campus.id);
-                  }}
-                >
-                  <Icon name="delete" />
-                </Button>
-              </Card.Content>
-            </Card>
-          </NavLink>
+            </NavLink>
+            <Card.Content>
+              <Card.Header>{campus.name}</Card.Header>
+            </Card.Content>
+            <Card.Content extra>
+              <Button
+                icon
+                onClick={() => {
+                  props.deleteCampus(campus.id);
+                }}
+              >
+                <Icon name="delete" />
+              </Button>
+            </Card.Content>
+          </Card>
         ))}
       </Card.Group>
     </Container>

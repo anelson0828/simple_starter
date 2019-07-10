@@ -15,44 +15,42 @@ import {
 const DisconnectedAllStudents = props => {
   if (props.students.length === 0) {
     return (
-      <div>
-        <h1>All Students</h1>
+      <Container textAlign="center" style={{ marginTop: '5rem' }}>
+        <Header as="h2">All Students</Header>
         <p>There are no students registered in the database.</p>
-      </div>
+      </Container>
     );
   }
   return (
     <Container textAlign="center" style={{ marginTop: '5rem' }}>
-      <Header as="h2">
-        <h1>All Students</h1>
-      </Header>
+      <Header as="h2">All Students</Header>
       <Container textAlign="center" style={{ marginBottom: '2rem' }}>
         <NavLink to="/students/new">
           <Button primary>Add Student</Button>
         </NavLink>
       </Container>
-      <Card.Group stackable itemsPerRow="2">
+      <Card.Group stackable itemsPerRow="3">
         {props.students.map(student => (
-          <NavLink to={`/students/${student.id}`} key={student.id}>
-            <Card raised key={student.id} style={{ margin: '1rem' }}>
+          <Card raised key={student.id} style={{ margin: '1rem' }}>
+            <NavLink to={`/students/${student.id}`} key={student.id}>
               <Image size="medium" src={student.imageUrl} />
-              <Card.Content>
-                <Card.Header>
-                  {student.firstName} {student.lastName}
-                </Card.Header>
-              </Card.Content>
-              <Card.Content extra>
-                <Button
-                  icon
-                  onClick={() => {
-                    props.deleteStudent(student.id);
-                  }}
-                >
-                  <Icon name="delete" />
-                </Button>
-              </Card.Content>
-            </Card>
-          </NavLink>
+            </NavLink>
+            <Card.Content>
+              <Card.Header>
+                {student.firstName} {student.lastName}
+              </Card.Header>
+            </Card.Content>
+            <Card.Content extra>
+              <Button
+                icon
+                onClick={() => {
+                  props.deleteStudent(student.id);
+                }}
+              >
+                <Icon name="delete" />
+              </Button>
+            </Card.Content>
+          </Card>
         ))}
       </Card.Group>
     </Container>

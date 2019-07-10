@@ -7,13 +7,13 @@ const Nav = () => {
     <div>
       <Menu fixed="top" inverted>
         <Container>
-          <Menu.Item as="a" header>
+          <Menu.Item header>
             <NavLink to="/">Home</NavLink>
           </Menu.Item>
-          <Menu.Item as="a" header>
+          <Menu.Item header>
             <NavLink to="/campuses/">Campuses</NavLink>
           </Menu.Item>
-          <Menu.Item as="a" header>
+          <Menu.Item header>
             <NavLink to="/students/">Students</NavLink>
           </Menu.Item>
         </Container>

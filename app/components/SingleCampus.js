@@ -4,7 +4,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { fetchSingleCampus, updateCampusThunk } from '../redux/singleCampus';
 import { updateStudentThunk } from '../redux/singleStudent';
 import { CampusForm } from './CampusForm';
-import { StudentRow } from './StudentRow';
+import StudentRow from './StudentRow';
 
 import {
   Container,
@@ -55,7 +55,10 @@ class DisconnectedSingleCampus extends React.Component {
     }
   }
   componentDidMount() {
+    console.log('before fetch', this.props);
+
     this.props.fetchCampus(this.props.match.params.campusId);
+    console.log('after fetch', this.props);
     this.setState({
       name: this.props.selectedCampus.name,
       address: this.props.selectedCampus.address,
@@ -72,15 +75,14 @@ class DisconnectedSingleCampus extends React.Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           state={this.state}
+          selectedCampus={this.props.selectedCampus}
           history={this.props.history}
         />
       );
     } else {
       return (
         <Container textAlign="center" style={{ marginTop: '5rem' }}>
-          <Header as="h2">
-            <h1>Single Campus</h1>
-          </Header>
+          <Header as="h2">Single Campus</Header>
           <Grid
             container
             stackable
@@ -110,14 +112,16 @@ class DisconnectedSingleCampus extends React.Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-          <Divider horizontal>Students</Divider>
-          <Card.Group>
+          <Divider horizontal style={{ marginTop: '2rem' }}>
+            Students
+          </Divider>
+          <Card.Group itemsPerRow="6">
             {selectedCampus.students.length !== 0
               ? selectedCampus.students.map(student => (
                   <StudentRow
                     key={student.id}
                     student={student}
-                    removeStudentFromCampus={this.removeStudentFromCampus}
+                    removeStudentFromCampus={this.props.removeStudentFromCampus}
                   />
                 ))
               : 'No students on this campus'}

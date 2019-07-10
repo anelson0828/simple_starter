@@ -16,7 +16,7 @@ export const fetchSingleStudent = (studentId, ownProps) => {
     const response = await axios.get(`/api/students/${studentId}`);
     const selectedStudent = response.data;
     dispatch(setSingleStudent(selectedStudent));
-    ownProps.history.push(`/students/${selectedStudent.id}`);
+    // ownProps.history.push(`/students/${selectedStudent.id}`);
   };
 };
 

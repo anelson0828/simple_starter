@@ -17,7 +17,7 @@ export const fetchSingleCampus = (campusId, ownProps) => {
     const selectedCampus = response.data;
     const action = setSingleCampus(selectedCampus);
     dispatch(action);
-    ownProps.history.push(`/campuses/${selectedCampus.id}`);
+    // ownProps.history.push(`/campuses/${selectedCampus.id}`);
   };
 };
 
@@ -35,6 +35,7 @@ export default (selectedCampus = { students: [] }, action) => {
       return action.selectedCampus;
     case UPDATE_CAMPUS:
       return action.campus;
+
     default:
       return selectedCampus;
   }

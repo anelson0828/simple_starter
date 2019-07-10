@@ -13,6 +13,7 @@ const createStudent = async () => {
       email: faker.internet.email(),
       imageUrl: faker.image.avatar(),
       gpa: faker.random.number({ min: 0.0, max: 4.0 }),
+      campusId: Math.floor(Math.random() * 100 + 1),
     };
     await Student.create(student);
   }
@@ -33,8 +34,8 @@ const createCampus = async () => {
 const seed = async () => {
   try {
     await db.sync({ force: true });
-    await createStudent();
     await createCampus();
+    await createStudent();
   } catch (err) {
     console.log(red(err));
   }

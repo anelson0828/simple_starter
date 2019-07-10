@@ -171,10 +171,10 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
 
 - Finishing Touches
   - [ ] If a user attempts to add a new student or campus without a required field, a helpful message should be displayed
-  - [ ] If a user attempts to access a page that doesn't exist (ex. `/cafeteria`), a helpful "not found" message should be displayed
+  - [x ] If a user attempts to access a page that doesn't exist (ex. `/cafeteria`), a helpful "not found" message should be displayed
   - [ ] If a user attempts to view a student/campus that doesn't exist, a helpful message should be displayed
   - [ ] Whenever a component needs to wait for data to load from the server, a "loading" message should be displayed until the data is available
-  - [ ] Overall, the app is spectacularly styled and visually stunning
+  - [ x] Overall, the app is spectacularly styled and visually stunning
 - Ordering
   - [ ] Create option for students to be ordered based on GPA on all-students view
   - [ ] Create option for campuses to be ordered alphabetically on all-campuses view
@@ -182,6 +182,6 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
   - [ ] Create a filter on all-students view to only show students who are not registered to a campus
   - [ ] Create a filter on the all-campuses view to only show campuses that do not have any registered students
 - Seed
-  - [ ] Seed 100+ students and 100+ campuses
+  - [ x] Seed 100+ students and 100+ campuses
 
 </details>

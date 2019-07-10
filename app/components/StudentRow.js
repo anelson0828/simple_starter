@@ -1,26 +1,29 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Button, Card } from 'semantic-ui-react';
+import { Button, Card, Image } from 'semantic-ui-react';
 
-export const StudentRow = props => {
+const StudentRow = props => {
   return (
-    <Card fluid color="blue">
+    <Card color="blue">
       <NavLink to={`/students/${props.student.id}`}>
-        <Card.Header>
-          {props.student.firstName} {props.student.lastName}
-        </Card.Header>
-        <Card.Image size="small" src={props.student.imageUrl} />
-        <Button
-          onClick={() => {
-            props.removeStudentFromCampus({
-              id: props.student.id,
-              campusId: null,
-            });
-          }}
-        >
-          Unregister
-        </Button>
+        <Image fluid src={props.student.imageUrl} />
       </NavLink>
+      <Card.Header as="h3">
+        {props.student.firstName} {props.student.lastName}
+      </Card.Header>
+      <Button
+        floated="center"
+        onClick={() => {
+          props.removeStudentFromCampus({
+            id: props.student.id,
+            campusId: null,
+          });
+        }}
+      >
+        Unregister
+      </Button>
     </Card>
   );
 };
+
+export default StudentRow;
