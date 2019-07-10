@@ -1,71 +1,72 @@
 import React from 'react';
+import {
+  Container,
+  Header,
+  Card,
+  Icon,
+  Image,
+  Form,
+  Button,
+  Message,
+} from 'semantic-ui-react';
 
 export const StudentForm = props => {
   return (
-    <form onSubmit={props.handleSubmit}>
-      <label htmlFor="firstName">
-        First Name:
-        {/* {!campus.name.length ? (
-            <span className="warning">Field Required</span>
-          ) : (
-            <span />
-          )} */}
-      </label>
-      <input
-        name="firstName"
-        type="text"
-        value={props.firstName}
-        onChange={props.handleChange}
-      />
-      <br />
-      <label htmlFor="lastName">Last Name:</label>
-      <input
-        name="lastName"
-        type="text"
-        value={props.state.lastName}
-        onChange={props.handleChange}
-      />
-      <br />
-      <label htmlFor="email">Email:</label>
-      <input
-        name="email"
-        type="text"
-        value={props.state.email}
-        onChange={props.handleChange}
-      />
-      <br />
-      <label htmlFor="gpa">GPA:</label>
-      <input
-        name="gpa"
-        type="float"
-        value={props.state.gpa}
-        onChange={props.handleChange}
-      />
-      <br />
-      {/* <label htmlFor="imageUrl">Image:</label>
-      <input
-        name="imageUrl"
-        type="file"
-        accept="image/*"
-        value={props.state.imageUrl}
-        onChange={props.handleChange}
-      />
-      <br /> */}
-      <button type="submit">Save</button>
-      <button
-        type="button"
-        onClick={() => {
-          console.log('history props', props);
-          props.history.goBack();
-        }}
-      >
-        Back
-      </button>
-      {props.state.errorMessage ? (
-        <div className="error">Yikes! Looks like you got an error!</div>
-      ) : (
-        ''
-      )}
-    </form>
+    <Container style={{ marginTop: '5rem' }}>
+      <Header as="h2">
+        <h1>Student</h1>
+      </Header>
+      <Form onSubmit={props.handleSubmit} style={{ marginTop: '2rem' }}>
+        <Form.Input
+          label="First Name"
+          required
+          name="firstName"
+          value={props.state.firstName}
+          onChange={props.handleChange}
+        />
+        <Form.Input
+          label="Last Name"
+          required
+          name="lastName"
+          value={props.state.lastName}
+          onChange={props.handleChange}
+        />
+        <Form.Input
+          label="Email"
+          required
+          name="email"
+          value={props.state.email}
+          onChange={props.handleChange}
+        />
+        <Form.Input
+          label="GPA"
+          name="gpa"
+          value={props.state.gpa}
+          onChange={props.handleChange}
+        />
+        <Form.Input
+          label="Image"
+          name="imageUrl"
+          value={props.state.imageUrl}
+          onChange={props.handleChange}
+          type="file"
+          accept="image/*"
+        />
+        <Button type="submit">Save</Button>
+        <Button
+          primary
+          onClick={() => {
+            props.history.goBack();
+          }}
+        >
+          Back
+        </Button>
+        <Message
+          error
+          header="Error"
+          content="Looks like there's a problem with your submission. Please try again."
+        />
+      </Form>
+    </Container>
   );
 };

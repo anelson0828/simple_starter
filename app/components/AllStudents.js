@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 import { fetchStudents } from '../redux/campuses';
 import { withRouter, NavLink } from 'react-router-dom';
 import { deleteStudentThunk } from '../redux/students';
+import {
+  Button,
+  Card,
+  Image,
+  Container,
+  Header,
+  Icon,
+} from 'semantic-ui-react';
 
 const DisconnectedAllStudents = props => {
   if (props.students.length === 0) {
@@ -14,35 +22,40 @@ const DisconnectedAllStudents = props => {
     );
   }
   return (
-    <div>
-      <h1>All Students</h1>
-      <div id="student-list">
+    <Container textAlign="center" style={{ marginTop: '5rem' }}>
+      <Header as="h2">
+        <h1>All Students</h1>
+      </Header>
+      <Container textAlign="center" style={{ marginBottom: '2rem' }}>
+        <NavLink to="/students/new">
+          <Button primary>Add Student</Button>
+        </NavLink>
+      </Container>
+      <Card.Group stackable itemsPerRow="2">
         {props.students.map(student => (
-          <div className="items" key={student.id}>
-            <NavLink to={`/students/${student.id}`} activeClassName="active">
-              <div>
-                <img src={student.imageUrl} />
-              </div>
-              {student.firstName} {student.lastName}
-            </NavLink>
-            <div>
-              <button
-                type="button"
-                className="remove"
-                onClick={() => {
-                  props.deleteStudent(student.id);
-                }}
-              >
-                X
-              </button>
-            </div>
-          </div>
+          <NavLink to={`/students/${student.id}`} key={student.id}>
+            <Card raised key={student.id} style={{ margin: '1rem' }}>
+              <Image size="medium" src={student.imageUrl} />
+              <Card.Content>
+                <Card.Header>
+                  {student.firstName} {student.lastName}
+                </Card.Header>
+              </Card.Content>
+              <Card.Content extra>
+                <Button
+                  icon
+                  onClick={() => {
+                    props.deleteStudent(student.id);
+                  }}
+                >
+                  <Icon name="delete" />
+                </Button>
+              </Card.Content>
+            </Card>
+          </NavLink>
         ))}
-      </div>
-      <button type="button">
-        <NavLink to="/students/new">Add Student</NavLink>
-      </button>
-    </div>
+      </Card.Group>
+    </Container>
   );
 };
 

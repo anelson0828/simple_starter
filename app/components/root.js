@@ -5,6 +5,7 @@ import SingleStudent from './SingleStudent';
 import SingleCampus from './SingleCampus';
 import CreateCampus from './CreateCampus';
 import CreateStudent from './CreateStudent';
+import Nav from './Nav';
 
 import { fetchCampusesThunk } from '../redux/campuses';
 import { fetchStudentsThunk } from '../redux/students';
@@ -21,11 +22,7 @@ class DisconnectedRoot extends React.Component {
 
     return (
       <div>
-        <nav>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/campuses/">Campuses</NavLink>
-          <NavLink to="/students/">Students</NavLink>
-        </nav>
+        <Nav />
         <main>
           <h1>Welcome to the Margaret Hamilton Academy of JavaScript!</h1>
           <Switch>

@@ -21,6 +21,7 @@
     "body-parser": "^1.18.2",
     "chalk": "^2.4.1",
     "express": "^4.14.0",
+    "faker": "^4.1.0",
     "pg": "^7.4.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -30,6 +31,9 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-less": "^2.4.1",
+    "semantic-ui-react": "^0.87.3",
     "sequelize": "^5.9.4"
   },
   "devDependencies": {
@@ -49,7 +53,11 @@
     "eslint": "^4.19.1",
     "eslint-config-fullstack": "^5.0.0",
     "eslint-plugin-react": "^7.8.2",
+    "file-loader": "^4.0.0",
     "jsdom": "^11.12.0",
+    "less": "^3.9.0",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.7.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10",
     "redux-devtools-extension": "^2.13.8",
@@ -57,6 +65,7 @@
     "sinon": "^6.1.5",
     "style-loader": "^0.21.0",
     "supertest": "^3.1.0",
+    "url-loader": "^2.0.1",
     "volleyball": "^1.5.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"

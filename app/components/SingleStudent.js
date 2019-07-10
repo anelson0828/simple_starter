@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { fetchSingleStudent, updateStudentThunk } from '../redux/singleStudent';
 import { StudentForm } from './StudentForm';
+import { Container, Header, Card, Image, Button } from 'semantic-ui-react';
 
 class DisconnectedSingleStudent extends React.Component {
   constructor(props) {
@@ -68,42 +69,46 @@ class DisconnectedSingleStudent extends React.Component {
       );
     } else {
       return (
-        <div id="singleStudent">
-          <h1>Single Student</h1>
-          <div>
-            <img src={selectedStudent.imageUrl} />
-          </div>
-          <div>
-            <h2>
-              {selectedStudent.firstName} {selectedStudent.lastName}
-            </h2>
-            Email: {selectedStudent.email}
-            <br />
-            GPA: {selectedStudent.gpa}
-            <button
-              type="button"
-              onClick={() => {
-                this.setState({ editMode: true });
-              }}
-            >
-              Edit
-            </button>
-          </div>
-          <div>
-            <h3>
-              {selectedStudent.campus ? (
-                <NavLink
-                  to={`/campuses/${selectedStudent.campus.id}`}
-                  activeClassName="active"
-                >
-                  {selectedStudent.campus.name}
-                </NavLink>
-              ) : (
-                'This student does not have a campus.'
-              )}
-            </h3>
-          </div>
-        </div>
+        <Container textAlign="center" style={{ marginTop: '5rem' }}>
+          <Header as="h2">
+            <h1>Single Student</h1>
+          </Header>
+
+          <Card>
+            <Image src={selectedStudent.imageUrl} wrapped ui={false} />
+            <Card.Content>
+              <Card.Header>
+                {selectedStudent.firstName} {selectedStudent.lastName}
+              </Card.Header>
+              <Card.Description>
+                <strong>Email:</strong> {selectedStudent.email}
+                <br />
+                <strong>GPA:</strong> {selectedStudent.gpa}
+                <br />
+                {selectedStudent.campus ? (
+                  <NavLink
+                    to={`/campuses/${selectedStudent.campus.id}`}
+                    activeClassName="active"
+                  >
+                    {selectedStudent.campus.name}
+                  </NavLink>
+                ) : (
+                  'This student does not have a campus.'
+                )}
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <Button
+                primary
+                onClick={() => {
+                  this.setState({ editMode: true });
+                }}
+              >
+                Edit
+              </Button>
+            </Card.Content>
+          </Card>
+        </Container>
       );
     }
   }

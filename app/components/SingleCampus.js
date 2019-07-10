@@ -4,6 +4,17 @@ import { withRouter, NavLink } from 'react-router-dom';
 import { fetchSingleCampus, updateCampusThunk } from '../redux/singleCampus';
 import { updateStudentThunk } from '../redux/singleStudent';
 import { CampusForm } from './CampusForm';
+import { StudentRow } from './StudentRow';
+
+import {
+  Container,
+  Header,
+  Grid,
+  Image,
+  Button,
+  Card,
+  Divider,
+} from 'semantic-ui-react';
 
 class DisconnectedSingleCampus extends React.Component {
   constructor(props) {
@@ -66,60 +77,52 @@ class DisconnectedSingleCampus extends React.Component {
       );
     } else {
       return (
-        <div>
-          <div id="singleCampus">
-            <div />
+        <Container textAlign="center" style={{ marginTop: '5rem' }}>
+          <Header as="h2">
             <h1>Single Campus</h1>
-            <div>
-              <img src={selectedCampus.imageUrl} />
-              <br />
-              {selectedCampus.address}
-            </div>
-            <div>
-              <h1>{selectedCampus.name}</h1>
-              <p>{selectedCampus.description}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  this.setState({ editMode: true });
-                }}
-              >
-                Edit
-              </button>
-            </div>
-          </div>
-          <div>
-            <h1>Students on campus</h1>
-            <div>
-              {selectedCampus.students.length !== 0
-                ? selectedCampus.students.map(student => {
-                    return (
-                      <div key={student.id}>
-                        <NavLink
-                          to={`/students/${student.id}`}
-                          activeClassName="active"
-                        >
-                          <image src={student.imageUrl} />
-                          {student.firstName} {student.lastName}
-                          <button
-                            type="button"
-                            onClick={() => {
-                              this.props.removeStudentFromCampus({
-                                id: student.id,
-                                campusId: null,
-                              });
-                            }}
-                          >
-                            Unregister
-                          </button>
-                        </NavLink>
-                      </div>
-                    );
-                  })
-                : 'No students on this campus'}
-            </div>
-          </div>
-        </div>
+          </Header>
+          <Grid
+            container
+            stackable
+            verticalAlign="middle"
+            style={{ marginTop: '2rem' }}
+          >
+            <Grid.Row>
+              <Grid.Column width={8}>
+                <Header as="h1">{selectedCampus.name}</Header>
+                <p>{selectedCampus.description}</p>
+                <Button
+                  onClick={() => {
+                    this.setState({ editMode: true });
+                  }}
+                >
+                  Edit
+                </Button>
+              </Grid.Column>
+              <Grid.Column floated="right" width={6}>
+                <Image
+                  bordered
+                  rounded
+                  size="large"
+                  src={selectedCampus.imageUrl}
+                />
+                <p>{selectedCampus.address}</p>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+          <Divider horizontal>Students</Divider>
+          <Card.Group>
+            {selectedCampus.students.length !== 0
+              ? selectedCampus.students.map(student => (
+                  <StudentRow
+                    key={student.id}
+                    student={student}
+                    removeStudentFromCampus={this.removeStudentFromCampus}
+                  />
+                ))
+              : 'No students on this campus'}
+          </Card.Group>
+        </Container>
       );
     }
   }
