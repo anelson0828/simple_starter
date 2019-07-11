@@ -16,8 +16,8 @@ import { Route, Switch, Redirect, withRouter, NavLink } from 'react-router-dom';
 
 class DisconnectedRoot extends React.Component {
   componentDidMount() {
-    this.props.fetchInitialStudents();
     this.props.fetchInitialCampuses();
+    this.props.fetchInitialStudents();
   }
   render() {
     return (

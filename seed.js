@@ -12,7 +12,9 @@ const createStudent = async () => {
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
       imageUrl: faker.image.avatar(),
-      gpa: faker.random.number({ min: 0.0, max: 4.0 }),
+      gpa: faker.random
+        .number({ min: 0.0, max: 4.0, precision: 0.1 })
+        .toFixed(2),
       campusId: Math.floor(Math.random() * 100 + 1),
     };
     await Student.create(student);
@@ -24,7 +26,7 @@ const createCampus = async () => {
     const campus = {
       name: faker.company.companyName(),
       imageUrl: faker.image.image(),
-      address: faker.address.streetAddress(),
+      address: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`,
       description: faker.lorem.paragraphs(),
     };
     await Campus.create(campus);

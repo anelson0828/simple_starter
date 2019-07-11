@@ -10,6 +10,7 @@ import {
   Header,
   Icon,
   Input,
+  Dropdown,
 } from 'semantic-ui-react';
 
 class DisconnectedAllCampuses extends React.Component {
@@ -18,8 +19,13 @@ class DisconnectedAllCampuses extends React.Component {
     this.state = {
       campuses: [],
       searchActive: false,
+      options: [
+        { key: 1, text: 'Has Students', value: 1 },
+        { key: 2, text: 'No Students', value: 2 },
+      ],
     };
     this.search = this.search.bind(this);
+    this.filter = this.filter.bind(this);
   }
   componentDidMount() {
     this.setState({
@@ -42,7 +48,23 @@ class DisconnectedAllCampuses extends React.Component {
       this.setState({ searchActive: false });
     }
   }
-
+  filter(event) {
+    if (event.target.innerText === 'Has Students') {
+      const campuses = this.props.campuses.filter(
+        campus => campus.students.length
+      );
+      this.setState({
+        campuses,
+      });
+    } else if (event.target.innerText === 'No Students') {
+      const campuses = this.props.campuses.filter(
+        campus => !campus.students.length
+      );
+      this.setState({
+        campuses,
+      });
+    }
+  }
   render() {
     if (this.props.campuses.length === 0) {
       return (
@@ -63,6 +85,14 @@ class DisconnectedAllCampuses extends React.Component {
             action={{ icon: 'search' }}
             placeholder="Search..."
             onChange={this.search}
+          />
+          <Dropdown
+            placeholder="Filter"
+            search
+            clearable
+            options={this.state.options}
+            selection
+            onChange={this.filter}
           />
         </Container>
         <Card.Group stackable itemsPerRow="3">
