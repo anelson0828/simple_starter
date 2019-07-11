@@ -20,8 +20,7 @@ export const fetchCampusesThunk = () => {
   return async dispatch => {
     const response = await axios.get('/api/campuses');
     const campuses = response.data;
-    const action = setCampuses(campuses);
-    dispatch(action);
+    dispatch(setCampuses(campuses));
   };
 };
 

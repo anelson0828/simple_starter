@@ -22,16 +22,6 @@ module.exports = {
         include: resolve(__dirname, './app'),
         loader: 'babel-loader',
       },
-      // {
-      //   test: /\.css$/,
-      //   use: ['style-loader', 'css-loader'],
-      // },
-      // {
-      //   use: ExtractTextPlugin.extract({
-      //     use: ['css-loader', 'less-loader'],
-      //   }),
-      //   test: /\.less$/,
-      // },
       {
         test: /\.css$/,
         use: [

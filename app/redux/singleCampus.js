@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const SET_SINGLE_CAMPUS = 'SET_SINGLE_CAMPUS';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
+const UNREGISTER_STUDENT = 'UNREGISTER_STUDENT';
 
 export const setSingleCampus = selectedCampus => {
   return { type: SET_SINGLE_CAMPUS, selectedCampus };
@@ -9,6 +10,10 @@ export const setSingleCampus = selectedCampus => {
 
 export const updateCampus = campus => {
   return { type: UPDATE_CAMPUS, campus };
+};
+
+export const unregisterStudent = student => {
+  return { type: UNREGISTER_STUDENT, student };
 };
 
 export const fetchSingleCampus = (campusId, ownProps) => {
@@ -29,13 +34,25 @@ export const updateCampusThunk = campus => {
   };
 };
 
+export const unregisterStudentThunk = student => {
+  return async dispatch => {
+    await axios.put(`/api/students/${student.id}`, student);
+    dispatch(unregisterStudent(student));
+  };
+};
+
 export default (selectedCampus = { students: [] }, action) => {
   switch (action.type) {
     case SET_SINGLE_CAMPUS:
       return action.selectedCampus;
     case UPDATE_CAMPUS:
       return action.campus;
-
+    case UNREGISTER_STUDENT: {
+      const newStudents = selectedCampus.students.filter(
+        student => student.id !== action.student.id
+      );
+      return { ...selectedCampus, students: newStudents };
+    }
     default:
       return selectedCampus;
   }

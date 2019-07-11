@@ -33,7 +33,7 @@ const DisconnectedAllStudents = props => {
         {props.students.map(student => (
           <Card raised key={student.id} style={{ margin: '1rem' }}>
             <NavLink to={`/students/${student.id}`} key={student.id}>
-              <Image size="medium" src={student.imageUrl} />
+              <Image centered size="medium" src={student.imageUrl} />
             </NavLink>
             <Card.Content>
               <Card.Header>
@@ -65,7 +65,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchInitialStudents: () => dispatch(fetchStudents()),
     deleteStudent: studentId => dispatch(deleteStudentThunk(studentId)),
   };
 };
