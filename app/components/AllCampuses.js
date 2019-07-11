@@ -72,7 +72,9 @@ class DisconnectedAllCampuses extends React.Component {
                 <Image centered size="medium" src={campus.imageUrl} />
               </NavLink>
               <Card.Content>
-                <Card.Header>{campus.name}</Card.Header>
+                <NavLink to={`/campuses/${campus.id}`} key={campus.id}>
+                  <Card.Header>{campus.name}</Card.Header>
+                </NavLink>
               </Card.Content>
               <Card.Content extra>
                 <Button

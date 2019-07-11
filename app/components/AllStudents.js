@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchStudents } from '../redux/campuses';
 import { withRouter, NavLink } from 'react-router-dom';
 import { deleteStudentThunk } from '../redux/students';
 import {

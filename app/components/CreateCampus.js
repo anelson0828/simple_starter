@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createCampusThunk } from '../redux/campuses';
-import { CampusForm } from './CampusForm';
+import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
 
 class DisconnectedCreateCampus extends Component {
   constructor(props) {
@@ -48,12 +48,55 @@ class DisconnectedCreateCampus extends Component {
 
   render() {
     return (
-      <CampusForm
-        handleChange={this.handleChange}
-        handleSubmit={this.handleSubmit}
-        state={this.state}
-        history={this.props.history}
-      />
+      <Container style={{ marginTop: '5rem' }}>
+        <Header as="h2">Campus</Header>
+        <Form onSubmit={this.handleSubmit} style={{ marginTop: '2rem' }}>
+          <Form.Input
+            label="Name"
+            required
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="Address"
+            required
+            name="address"
+            value={this.state.address}
+            onChange={this.handleChange}
+          />
+          <Form.TextArea
+            label="Description"
+            required
+            name="description"
+            value={this.state.description}
+            onChange={this.handleChange}
+          />
+          {/* <Form.Input
+          label="Image"
+          name="imageUrl"
+          value={props.state.imageUrl}
+          onChange={props.handleChange}
+          type="file"
+          accept="image/*"
+        /> */}
+          <Button primary type="submit">
+            Create
+          </Button>
+          <Button
+            onClick={() => {
+              this.props.history.goBack();
+            }}
+          >
+            Back
+          </Button>
+          <Message
+            error
+            header="Error"
+            content="Looks like there's a problem with your submission. Please try again."
+          />
+        </Form>
+      </Container>
     );
   }
 }
