@@ -12,61 +12,26 @@ import {
   Input,
   Dropdown,
 } from 'semantic-ui-react';
+import {
+  filterCampusesThunk,
+  searchCampusesThunk,
+} from '../redux/filteredCampuses';
 
 class DisconnectedAllCampuses extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      campuses: [],
-      searchActive: false,
       options: [
         { key: 1, text: 'Has Students', value: 1 },
         { key: 2, text: 'No Students', value: 2 },
       ],
     };
-    this.search = this.search.bind(this);
-    this.filter = this.filter.bind(this);
   }
-  componentDidMount() {
-    this.setState({
-      campuses: this.props.campuses,
-    });
-  }
-  search(event) {
-    if (event.target.value.length) {
-      this.setState({ searchActive: true });
-      const campuses = this.props.campuses.filter(campus => {
-        return (
-          campus.name.toLowerCase().search(event.target.value.toLowerCase()) !==
-          -1
-        );
-      });
-      this.setState({
-        campuses,
-      });
-    } else {
-      this.setState({ searchActive: false });
-    }
-  }
-  filter(event) {
-    if (event.target.innerText === 'Has Students') {
-      const campuses = this.props.campuses.filter(
-        campus => campus.students.length
-      );
-      this.setState({
-        campuses,
-      });
-    } else if (event.target.innerText === 'No Students') {
-      const campuses = this.props.campuses.filter(
-        campus => !campus.students.length
-      );
-      this.setState({
-        campuses,
-      });
-    }
-  }
+
   render() {
-    if (this.props.campuses.length === 0) {
+    const campuses = this.props.filteredCampuses;
+
+    if (campuses.length === 0) {
       return (
         <Container textAlign="center" style={{ marginTop: '5rem' }}>
           <Header as="h2">All Campuses</Header>
@@ -84,7 +49,7 @@ class DisconnectedAllCampuses extends React.Component {
           <Input
             action={{ icon: 'search' }}
             placeholder="Search..."
-            onChange={this.search}
+            onChange={this.props.searchCampuses}
           />
           <Dropdown
             placeholder="Filter"
@@ -92,11 +57,11 @@ class DisconnectedAllCampuses extends React.Component {
             clearable
             options={this.state.options}
             selection
-            onChange={this.filter}
+            onChange={this.props.filterCampuses}
           />
         </Container>
         <Card.Group stackable itemsPerRow="3">
-          {this.state.campuses.map(campus => (
+          {campuses.map(campus => (
             <Card raised key={campus.id} style={{ margin: '1rem' }}>
               <NavLink to={`/campuses/${campus.id}`} key={campus.id}>
                 <Image centered size="medium" src={campus.imageUrl} />
@@ -127,13 +92,15 @@ class DisconnectedAllCampuses extends React.Component {
 const mapState = state => {
   return {
     campuses: state.campuses,
+    filteredCampuses: state.filteredCampuses,
   };
 };
 
 const mapDispatch = dispatch => {
   return {
-    fetchInitialCampuses: () => dispatch(fetchCampusesThunk()),
     deleteCampus: campusId => dispatch(deleteCampusThunk(campusId)),
+    filterCampuses: event => dispatch(filterCampusesThunk(event)),
+    searchCampuses: event => dispatch(searchCampusesThunk(event)),
   };
 };
 

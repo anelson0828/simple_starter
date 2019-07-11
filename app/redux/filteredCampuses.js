@@ -1,44 +1,56 @@
-import axios from 'axios';
+import { SET_CAMPUSES, CREATE_CAMPUS, DELETE_CAMPUS } from './campuses';
 
 const FILTER_CAMPUSES = 'FILTER_CAMPUSES';
 
-export const filterCampuses = campuses => {
-  return { type: FILTER_CAMPUSES, campuses };
+export const filterCampuses = filteredCampuses => {
+  return { type: FILTER_CAMPUSES, filteredCampuses };
 };
 
-export const fetchCampusesThunk = () => {
-  return async dispatch => {
-    const response = await axios.get('/api/campuses');
-    const campuses = response.data;
-    dispatch(setCampuses(campuses));
+export const filterCampusesThunk = event => {
+  const filter = event.target.innerText;
+
+  return (dispatch, getState) => {
+    const { campuses } = getState();
+
+    if (filter === 'Has Students') {
+      const filteredCampuses = campuses.filter(
+        campus => campus.students.length
+      );
+      dispatch(filterCampuses(filteredCampuses));
+    } else if (filter === 'No Students') {
+      const filteredCampuses = campuses.filter(
+        campus => !campus.students.length
+      );
+      dispatch(filterCampuses(filteredCampuses));
+    } else {
+      dispatch(filterCampuses(campuses));
+    }
   };
 };
 
-export const createCampusThunk = campus => {
-  return async dispatch => {
-    const response = await axios.post('/api/campuses', campus);
-    const newCampus = response.data;
-    const action = createCampus(newCampus);
-    dispatch(action);
+export const searchCampusesThunk = event => {
+  const filter = event.target.value.toLowerCase();
+
+  return (dispatch, getState) => {
+    const { campuses } = getState();
+    const filteredCampuses = campuses.filter(campus => {
+      return campus.name.toLowerCase().search(filter) !== -1;
+    });
+    dispatch(filterCampuses(filteredCampuses));
   };
 };
 
-export const deleteCampusThunk = campusId => {
-  return async dispatch => {
-    await axios.delete(`/api/campuses/${campusId}`);
-    dispatch(deleteCampus(campusId));
-  };
-};
-
-export default (campuses = [], action) => {
+export default (filteredCampuses = [], action) => {
   switch (action.type) {
+    case FILTER_CAMPUSES:
+      return action.filteredCampuses;
     case SET_CAMPUSES:
       return action.campuses;
     case CREATE_CAMPUS:
-      return [...campuses, action.campus];
+      return [...filteredCampuses, action.campus];
     case DELETE_CAMPUS:
-      return campuses.filter(campus => campus.id !== action.campusId);
+      return filteredCampuses.filter(campus => campus.id !== action.campusId);
     default:
-      return campuses;
+      return filteredCampuses;
   }
 };

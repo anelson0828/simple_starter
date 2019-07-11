@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const SET_CAMPUSES = 'SET_CAMPUSES';
-const CREATE_CAMPUS = 'CREATE_CAMPUS';
-const DELETE_CAMPUS = 'DELETE_CAMPUS';
+export const SET_CAMPUSES = 'SET_CAMPUSES';
+export const CREATE_CAMPUS = 'CREATE_CAMPUS';
+export const DELETE_CAMPUS = 'DELETE_CAMPUS';
 
 export const setCampuses = campuses => {
   return { type: SET_CAMPUSES, campuses };

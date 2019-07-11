@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const SET_STUDENTS = 'SET_STUDENTS';
-const CREATE_STUDENT = 'CREATE_STUDENT';
-const DELETE_STUDENT = 'DELETE_STUDENT';
+export const SET_STUDENTS = 'SET_STUDENTS';
+export const CREATE_STUDENT = 'CREATE_STUDENT';
+export const DELETE_STUDENT = 'DELETE_STUDENT';
 
 export const setStudents = students => {
   return { type: SET_STUDENTS, students };

@@ -12,42 +12,28 @@ import {
   Dropdown,
   Menu,
   Item,
+  Input,
 } from 'semantic-ui-react';
+import {
+  searchStudentsThunk,
+  filterStudentsThunk,
+} from '../redux/filteredStudents';
 
 class DisconnectedAllStudents extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      students: [],
       options: [
         { key: 1, text: 'Has Campus', value: 1 },
         { key: 2, text: 'No Campus', value: 2 },
       ],
     };
-    this.filter = this.filter.bind(this);
   }
-  componentDidMount() {
-    this.setState({
-      students: this.props.students,
-    });
-  }
-  filter(event) {
-    if (event.target.innerText === 'Has Campus') {
-      const students = this.props.students.filter(student => student.campusId);
-      this.setState({
-        students,
-      });
-    } else if (event.target.innerText === 'No Campus') {
-      const students = this.props.students.filter(student => !student.campusId);
-      this.setState({
-        students,
-      });
-    }
-  }
-  render() {
-    const { students } = this.state;
 
-    if (this.props.students.length === 0) {
+  render() {
+    const students = this.props.filteredStudents;
+
+    if (students.length === 0) {
       return (
         <Container textAlign="center" style={{ marginTop: '5rem' }}>
           <Header as="h2">All Students</Header>
@@ -62,13 +48,18 @@ class DisconnectedAllStudents extends React.Component {
           <NavLink to="/students/new">
             <Button primary>Add Student</Button>
           </NavLink>
+          <Input
+            action={{ icon: 'search' }}
+            placeholder="Search..."
+            onChange={this.props.searchStudents}
+          />
           <Dropdown
             placeholder="Filter"
             search
             clearable
             options={this.state.options}
             selection
-            onChange={this.filter}
+            onChange={this.props.filterStudents}
           />
         </Container>
         <Card.Group stackable itemsPerRow="3">
@@ -103,12 +94,15 @@ class DisconnectedAllStudents extends React.Component {
 const mapState = state => {
   return {
     students: state.students,
+    filteredStudents: state.filteredStudents,
   };
 };
 
 const mapDispatch = dispatch => {
   return {
     deleteStudent: studentId => dispatch(deleteStudentThunk(studentId)),
+    filterStudents: event => dispatch(filterStudentsThunk(event)),
+    searchStudents: event => dispatch(searchStudentsThunk(event)),
   };
 };
 

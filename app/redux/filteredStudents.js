@@ -1,0 +1,54 @@
+import { SET_STUDENTS, CREATE_STUDENT, DELETE_STUDENT } from './students';
+
+const FILTER_STUDENTS = 'FILTER_STUDENTS';
+
+export const filterStudents = filteredStudents => {
+  return { type: FILTER_STUDENTS, filteredStudents };
+};
+
+export const filterStudentsThunk = event => {
+  const filter = event.target.innerText;
+  return (dispatch, getState) => {
+    const { students } = getState();
+
+    if (filter === 'Has Campus') {
+      const filteredStudents = students.filter(student => student.campusId);
+      dispatch(filterStudents(filteredStudents));
+    } else if (filter === 'No Campus') {
+      const filteredStudents = students.filter(student => !student.campusId);
+      dispatch(filterStudents(filteredStudents));
+    } else {
+      dispatch(filterStudents(students));
+    }
+  };
+};
+
+export const searchStudentsThunk = event => {
+  const filter = event.target.value.toLowerCase();
+
+  return (dispatch, getState) => {
+    const { students } = getState();
+    const filteredStudents = students.filter(student => {
+      const name = `${student.firstName} ${student.lastName}`;
+      return name.toLowerCase().search(filter) !== -1;
+    });
+    dispatch(filterStudents(filteredStudents));
+  };
+};
+
+export default (filteredStudents = [], action) => {
+  switch (action.type) {
+    case FILTER_STUDENTS:
+      return action.filteredStudents;
+    case SET_STUDENTS:
+      return action.students;
+    case CREATE_STUDENT:
+      return [...filteredStudents, action.student];
+    case DELETE_STUDENT:
+      return filteredStudents.filter(
+        student => student.id !== action.studentId
+      );
+    default:
+      return filteredStudents;
+  }
+};
