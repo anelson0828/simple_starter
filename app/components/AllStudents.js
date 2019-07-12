@@ -10,8 +10,6 @@ import {
   Header,
   Icon,
   Dropdown,
-  Menu,
-  Item,
   Input,
 } from 'semantic-ui-react';
 import {
@@ -69,9 +67,11 @@ class DisconnectedAllStudents extends React.Component {
                 <Image centered size="medium" src={student.imageUrl} />
               </NavLink>
               <Card.Content>
-                <Card.Header>
-                  {student.firstName} {student.lastName}
-                </Card.Header>
+                <NavLink to={`/students/${student.id}`} key={student.id}>
+                  <Card.Header>
+                    {student.firstName} {student.lastName}
+                  </Card.Header>
+                </NavLink>
               </Card.Content>
               <Card.Content extra>
                 <Button

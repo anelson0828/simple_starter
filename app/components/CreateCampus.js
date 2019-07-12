@@ -33,6 +33,9 @@ class DisconnectedCreateCampus extends Component {
         imageUrl: this.state.imageUrl,
       };
       this.props.create(campus);
+      setTimeout(() => {
+        this.props.history.push(`/campuses/${this.props.selectedCampus.id}`);
+      }, 1000);
       this.setState({
         name: '',
         address: '',
@@ -101,7 +104,13 @@ class DisconnectedCreateCampus extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapState = state => {
+  return {
+    selectedCampus: state.selectedCampus,
+  };
+};
+
+const mapDispatch = dispatch => {
   return {
     create: campus => {
       dispatch(createCampusThunk(campus));
@@ -110,6 +119,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
-  mapDispatchToProps
+  mapState,
+  mapDispatch
 )(DisconnectedCreateCampus);

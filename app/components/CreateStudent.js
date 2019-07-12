@@ -35,6 +35,9 @@ class DisconnectedCreateStudent extends Component {
         gpa: this.state.gpa,
       };
       this.props.create(campus);
+      setTimeout(() => {
+        this.props.history.push(`/students/${this.props.selectedStudent.id}`);
+      }, 1000);
       this.setState({
         firstName: '',
         lastName: '',
@@ -111,7 +114,13 @@ class DisconnectedCreateStudent extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapState = state => {
+  return {
+    selectedStudent: state.selectedStudent,
+  };
+};
+
+const mapDispatch = dispatch => {
   return {
     create: student => {
       dispatch(createStudentThunk(student));
@@ -120,6 +129,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
-  mapDispatchToProps
+  mapState,
+  mapDispatch
 )(DisconnectedCreateStudent);

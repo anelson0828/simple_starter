@@ -18,35 +18,42 @@ import {
   Button,
   Card,
   Divider,
+  Dropdown,
 } from 'semantic-ui-react';
 
 class DisconnectedSingleCampus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editMode: false,
       errorMessage: '',
+      addStudents: [],
     };
   }
   componentDidMount() {
     this.props.fetchCampus(this.props.match.params.campusId);
+
+    this.setState({
+      addStudents: [
+        this.props.addStudents.map(student => {
+          return {
+            key: student.name,
+            text: student.name,
+            value: student.name,
+            image: { avatar: true, src: student.imageUrl },
+          };
+        }),
+      ],
+    });
+    console.log(this.state.addStudents);
   }
   render() {
     const { selectedCampus } = this.props;
 
     if (!selectedCampus.id) {
       return <NotFound />;
-    } else if (this.state.editMode) {
-      return (
-        <CampusForm
-          selectedCampus={selectedCampus}
-          update={this.props.update}
-        />
-      );
     }
     return (
       <Container textAlign="center" style={{ marginTop: '5rem' }}>
-        <Header as="h2">Single Campus</Header>
         <Grid
           container
           stackable
@@ -58,8 +65,11 @@ class DisconnectedSingleCampus extends React.Component {
               <Header as="h1">{selectedCampus.name}</Header>
               <p>{selectedCampus.description}</p>
               <Button
+                primary
                 onClick={() => {
-                  this.setState({ editMode: true });
+                  this.props.history.push(
+                    `/campuses/${selectedCampus.id}/edit`
+                  );
                 }}
               >
                 Edit
@@ -76,20 +86,26 @@ class DisconnectedSingleCampus extends React.Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <Divider horizontal style={{ marginTop: '2rem' }}>
-          Students
-        </Divider>
-        <Card.Group itemsPerRow="6">
-          {selectedCampus.students.length !== 0
-            ? selectedCampus.students.map(student => (
-                <StudentRow
-                  key={student.id}
-                  student={student}
-                  removeStudentFromCampus={this.props.removeStudentFromCampus}
-                />
-              ))
-            : 'No students on this campus'}
-        </Card.Group>
+        <Container style={{ marginTop: '2rem' }}>
+          <Divider horizontal>Students</Divider>
+          <Dropdown
+            placeholder="Add Student"
+            fluid
+            selection
+            options={this.state.addStudents}
+          />
+          <Card.Group itemsPerRow="6">
+            {selectedCampus.students && selectedCampus.students.length !== 0
+              ? selectedCampus.students.map(student => (
+                  <StudentRow
+                    key={student.id}
+                    student={student}
+                    removeStudentFromCampus={this.props.removeStudentFromCampus}
+                  />
+                ))
+              : 'No students on this campus'}
+          </Card.Group>
+        </Container>
       </Container>
     );
   }
@@ -98,6 +114,7 @@ class DisconnectedSingleCampus extends React.Component {
 const mapState = state => {
   return {
     selectedCampus: state.selectedCampus,
+    addStudents: state.students,
   };
 };
 

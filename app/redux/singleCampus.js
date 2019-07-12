@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { CREATE_CAMPUS } from './campuses';
 
 const SET_SINGLE_CAMPUS = 'SET_SINGLE_CAMPUS';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
@@ -43,6 +44,8 @@ export const unregisterStudentThunk = student => {
 
 export default (selectedCampus = { students: [] }, action) => {
   switch (action.type) {
+    case CREATE_CAMPUS:
+      return action.campus;
     case SET_SINGLE_CAMPUS:
       return action.selectedCampus;
     case UPDATE_CAMPUS:

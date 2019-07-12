@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter, NavLink, Route } from 'react-router-dom';
 import { fetchSingleStudent, updateStudentThunk } from '../redux/singleStudent';
 import StudentForm from './StudentForm';
 import { Container, Header, Card, Image, Button } from 'semantic-ui-react';
@@ -10,31 +10,31 @@ class DisconnectedSingleStudent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editMode: false,
       errorMessage: '',
+      loading: true,
     };
   }
   componentDidMount() {
+    this.setState({ loading: false });
     this.props.fetchStudent(this.props.match.params.studentId);
+    this.setState({ loading: false });
   }
   render() {
     const { selectedStudent } = this.props;
 
+    if (this.state.loading) {
+      return (
+        <Container textAlign="center" style={{ marginTop: '5rem' }}>
+          <Header as="h2">Loading</Header>
+        </Container>
+      );
+    }
     if (!selectedStudent.id) {
       return <NotFound />;
-    } else if (this.state.editMode) {
-      return (
-        <StudentForm
-          selectedStudent={selectedStudent}
-          update={this.props.update}
-        />
-      );
     }
     return (
       <Container textAlign="center" style={{ marginTop: '5rem' }}>
-        <Header as="h2">
-          <h1>Single Student</h1>
-        </Header>
+        <Header as="h2">Single Student</Header>
 
         <Card>
           <Image src={selectedStudent.imageUrl} wrapped ui={false} />
@@ -63,7 +63,7 @@ class DisconnectedSingleStudent extends React.Component {
             <Button
               primary
               onClick={() => {
-                this.setState({ editMode: true });
+                this.props.history.push(`/students/${selectedStudent.id}/edit`);
               }}
             >
               Edit

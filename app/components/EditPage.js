@@ -3,16 +3,39 @@ import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
 import { withRouter, NavLink, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateStudentThunk } from '../redux/singleStudent';
+import StudentForm from './StudentForm';
 
-class DisconnectedStudentForm extends React.Component {
+class DisconnectedEditPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: this.props.selectedStudent.firstName,
-      lastName: this.props.selectedStudent.lastName,
-      email: this.props.selectedStudent.email,
-      imageUrl: this.props.selectedStudent.imageUrl,
-      gpa: this.props.selectedStudent.gpa,
+      fields: [
+        {
+          label: 'First Name',
+          name: 'firstName',
+          value: this.props.selectedStudent.firstName,
+        },
+        {
+          label: 'Last Name',
+          name: 'lastName',
+          value: this.props.selectedStudent.lastName,
+        },
+        {
+          label: 'Email',
+          name: 'email',
+          value: this.props.selectedStudent.email,
+        },
+        {
+          label: 'Image URL',
+          name: 'imageUrl',
+          value: this.props.selectedStudent.imageUrl,
+        },
+        {
+          label: 'GPA',
+          name: 'gpa',
+          value: this.props.selectedStudent.gpa,
+        },
+      ],
       errorMessage: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -28,15 +51,12 @@ class DisconnectedStudentForm extends React.Component {
   handleSubmit(event) {
     try {
       event.preventDefault();
-      const student = {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-        imageUrl: this.state.imageUrl,
-        gpa: this.state.gpa,
-        id: this.props.selectedStudent.id,
-      };
-      this.props.update(student);
+      const item = {};
+      this.state.fields.map(field => {
+        item[field.name] = field.value;
+      });
+      item.id = this.props.selectedStudent.id;
+      this.props.update(item);
     } catch (error) {
       console.log('error', error.message);
       this.setState({ errorMessage: error.message });
@@ -48,42 +68,18 @@ class DisconnectedStudentForm extends React.Component {
       <Container style={{ marginTop: '5rem' }}>
         <Header as="h2">Student</Header>
         <Form onSubmit={this.handleSubmit} style={{ marginTop: '2rem' }}>
-          <Form.Input
-            label="First Name"
-            required
-            name="firstName"
-            value={this.state.firstName}
-            onChange={this.handleChange}
-          />
-          <Form.Input
-            label="Last Name"
-            required
-            name="lastName"
-            value={this.state.lastName}
-            onChange={this.handleChange}
-          />
-          <Form.Input
-            label="Email"
-            required
-            type="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-          <Form.Input
-            label="GPA"
-            name="gpa"
-            value={this.state.gpa}
-            onChange={this.handleChange}
-          />
-          {/* <Form.Input
-          label="Image"
-          name="imageUrl"
-          value={props.state.imageUrl}
-          onChange={props.handleChange}
-          type="file"
-          accept="image/*"
-        /> */}
+          {this.state.fields.map(field => {
+            return (
+              <Form.Input
+                key={field.name}
+                label={field.label}
+                required
+                name={field.name}
+                value={field.value}
+                onChange={this.handleChange}
+              />
+            );
+          })}
           <Button primary type="submit">
             Save
           </Button>
@@ -121,5 +117,5 @@ export default withRouter(
   connect(
     mapState,
     mapDispatch
-  )(DisconnectedStudentForm)
+  )(DisconnectedEditPage)
 );

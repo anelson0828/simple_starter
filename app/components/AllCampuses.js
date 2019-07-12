@@ -35,7 +35,26 @@ class DisconnectedAllCampuses extends React.Component {
       return (
         <Container textAlign="center" style={{ marginTop: '5rem' }}>
           <Header as="h2">All Campuses</Header>
-          <p>There are no campuses registered in the database.</p>
+          <Container textAlign="center" style={{ marginBottom: '2rem' }}>
+            <NavLink to="/campuses/new">
+              <Button primary>Add Campus</Button>
+            </NavLink>
+            <Input
+              action={{ icon: 'search' }}
+              placeholder="Search..."
+              onChange={this.props.searchCampuses}
+            />
+            <Dropdown
+              placeholder="Filter"
+              search
+              clearable
+              options={this.state.options}
+              selection
+              onChange={this.props.filterCampuses}
+            />
+            <br />
+            <p>No Campuses Found</p>
+          </Container>
         </Container>
       );
     }

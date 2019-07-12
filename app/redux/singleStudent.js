@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { CREATE_STUDENT } from './students';
 
 const SET_SINGLE_STUDENT = 'SET_SINGLE_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT';
@@ -30,6 +31,8 @@ export const updateStudentThunk = student => {
 
 export default (selectedStudent = {}, action) => {
   switch (action.type) {
+    case CREATE_STUDENT:
+      return action.student;
     case SET_SINGLE_STUDENT:
       return action.selectedStudent;
     case UPDATE_STUDENT:

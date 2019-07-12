@@ -12,7 +12,6 @@ const StudentRow = props => {
         {props.student.firstName} {props.student.lastName}
       </Card.Header>
       <Button
-        floated="center"
         onClick={() => {
           props.removeStudentFromCampus({
             id: props.student.id,

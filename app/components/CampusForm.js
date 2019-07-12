@@ -1,11 +1,13 @@
 import React from 'react';
 import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
+import { withRouter, NavLink, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { updateCampusThunk } from '../redux/singleCampus';
 
-class CampusForm extends React.Component {
+class DisconnectedCampusForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editMode: true,
       name: this.props.selectedCampus.name,
       address: this.props.selectedCampus.address,
       imageUrl: this.props.selectedCampus.imageUrl,
@@ -33,7 +35,6 @@ class CampusForm extends React.Component {
         id: this.props.selectedCampus.id,
       };
       this.props.update(campus);
-      this.setState({ editMode: false });
     } catch (error) {
       console.log('error', error.message);
       this.setState({ errorMessage: error.message });
@@ -95,4 +96,21 @@ class CampusForm extends React.Component {
   }
 }
 
-export default CampusForm;
+const mapState = state => {
+  return {
+    selectedCampus: state.selectedCampus,
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    update: campus => dispatch(updateCampusThunk(campus)),
+  };
+};
+
+export default withRouter(
+  connect(
+    mapState,
+    mapDispatch
+  )(DisconnectedCampusForm)
+);

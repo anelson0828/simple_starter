@@ -25,7 +25,7 @@ router.get('/:campusId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const campus = await Campus.create(req.body);
-    res.send(campus);
+    res.json(campus);
   } catch (err) {
     next(err);
   }
