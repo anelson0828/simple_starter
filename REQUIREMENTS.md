@@ -176,7 +176,7 @@ Congrats! You have completed your fourth vertical slice! Make sure to `commit -m
   - [ ] Whenever a component needs to wait for data to load from the server, a "loading" message should be displayed until the data is available
   - [ x] Overall, the app is spectacularly styled and visually stunning
 - Ordering
-  - [ ] Create option for students to be ordered based on GPA on all-students view
+  - [ x] Create option for students to be ordered based on GPA on all-students view
   - [ ] Create option for campuses to be ordered alphabetically on all-campuses view
 - Filtering
   - [ x] Create a filter on all-students view to only show students who are not registered to a campus

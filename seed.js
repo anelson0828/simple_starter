@@ -22,7 +22,7 @@ const createStudent = async () => {
 };
 
 const createCampus = async () => {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 1000; i++) {
     const campus = {
       name: faker.company.companyName(),
       imageUrl: faker.image.image(),

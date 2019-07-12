@@ -13,7 +13,7 @@ const StudentRow = props => {
       </Card.Header>
       <Button
         onClick={() => {
-          props.removeStudentFromCampus({
+          props.updateStudentFromCampus({
             id: props.student.id,
             campusId: null,
           });

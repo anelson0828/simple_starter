@@ -5,6 +5,7 @@ import singleCampus from './singleCampus';
 import singleStudent from './singleStudent';
 import filteredCampuses from './filteredCampuses';
 import filteredStudents from './filteredStudents';
+import pagination from './pagination';
 
 const appReducer = combineReducers({
   campuses: campuses,
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   selectedStudent: singleStudent,
   filteredCampuses: filteredCampuses,
   filteredStudents: filteredStudents,
+  paginatedCampuses: pagination,
 });
 
 export default appReducer;

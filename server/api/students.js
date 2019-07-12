@@ -11,6 +11,17 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/sorted/:key', async (req, res, next) => {
+  try {
+    const students = await Student.findAll({
+      order: [[req.params.key, 'ASC']],
+    });
+    res.send(students);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/:studentId', async (req, res, next) => {
   try {
     const student = await Student.findByPk(req.params.studentId, {
@@ -44,13 +55,24 @@ router.delete('/:studentId', (req, res, next) => {
   }
 });
 
-router.put('/:studentId', (req, res, next) => {
+// router.put('/:studentId', async (req, res, next) => {
+//   try {
+//     const updatedStudent = Student.update(
+//       { ...req.body },
+//       { where: { id: req.params.studentId } }
+//     );
+//     res.status(204).json(updatedStudent);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+router.put('/:studentId', async (req, res, next) => {
   try {
-    const updatedStudent = Student.update(
-      { ...req.body },
-      { where: { id: req.params.studentId } }
-    );
-    res.status(204).json(updatedStudent);
+    const student = await Student.findByPk(req.params.studentId);
+    student.update(req.body);
+    console.log(student.dataValues);
+    res.status(204).json(student.dataValues);
   } catch (err) {
     next(err);
   }

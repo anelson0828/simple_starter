@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('./database');
+const Datatypes = require('sequelize/lib/data-types');
 
 const Student = db.define('students', {
   firstName: {
@@ -32,11 +33,11 @@ const Student = db.define('students', {
     defaultValue: 'http://placekitten.com/200/300',
   },
   gpa: {
-    type: Sequelize.FLOAT,
+    type: Datatypes.DECIMAL(2, 1),
     defaultValue: 0.0,
     validate: {
-      min: 0,
-      max: 4,
+      min: 0.0,
+      max: 4.0,
     },
   },
 });

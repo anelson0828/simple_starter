@@ -4,7 +4,7 @@ import { withRouter, NavLink } from 'react-router-dom';
 import {
   fetchSingleCampus,
   updateCampusThunk,
-  unregisterStudentThunk,
+  updateStudentFromCampusThunk,
 } from '../redux/singleCampus';
 import CampusForm from './CampusForm';
 import StudentRow from './StudentRow';
@@ -20,6 +20,7 @@ import {
   Divider,
   Dropdown,
 } from 'semantic-ui-react';
+import { fetchStudentsThunk } from '../redux/students';
 
 class DisconnectedSingleCampus extends React.Component {
   constructor(props) {
@@ -27,25 +28,27 @@ class DisconnectedSingleCampus extends React.Component {
     this.state = {
       errorMessage: '',
       addStudents: [],
+      value: 1,
     };
   }
   componentDidMount() {
     this.props.fetchCampus(this.props.match.params.campusId);
-
     this.setState({
-      addStudents: [
-        this.props.addStudents.map(student => {
-          return {
-            key: student.name,
-            text: student.name,
-            value: student.name,
-            image: { avatar: true, src: student.imageUrl },
-          };
-        }),
-      ],
+      addStudents: this.props.students.map(student => {
+        const name = student.firstName + ' ' + student.lastName;
+        return {
+          key: student.id,
+          text: name,
+          value: student.id,
+          image: { avatar: true, src: student.imageUrl },
+        };
+      }),
     });
-    console.log(this.state.addStudents);
   }
+  handleChange = (e, { value }) => {
+    this.setState({ value });
+  };
+
   render() {
     const { selectedCampus } = this.props;
 
@@ -88,23 +91,41 @@ class DisconnectedSingleCampus extends React.Component {
         </Grid>
         <Container style={{ marginTop: '2rem' }}>
           <Divider horizontal>Students</Divider>
-          <Dropdown
-            placeholder="Add Student"
-            fluid
-            selection
-            options={this.state.addStudents}
-          />
-          <Card.Group itemsPerRow="6">
-            {selectedCampus.students && selectedCampus.students.length !== 0
-              ? selectedCampus.students.map(student => (
-                  <StudentRow
-                    key={student.id}
-                    student={student}
-                    removeStudentFromCampus={this.props.removeStudentFromCampus}
-                  />
-                ))
-              : 'No students on this campus'}
-          </Card.Group>
+          <Container>
+            <Dropdown
+              placeholder="Add Student"
+              selection
+              noResultsMessage="No students found"
+              options={this.state.addStudents}
+              onChange={this.handleChange}
+              value={this.state.value}
+            />
+            <Button
+              onClick={() => {
+                this.props.updateStudentFromCampus({
+                  id: this.state.value,
+                  campusId: selectedCampus.id,
+                });
+              }}
+            >
+              Register Student
+            </Button>
+          </Container>
+          <Container style={{ marginTop: '2rem' }}>
+            <Card.Group itemsPerRow="6">
+              {selectedCampus.students && selectedCampus.students.length !== 0
+                ? selectedCampus.students.map(student => (
+                    <StudentRow
+                      key={student.id}
+                      student={student}
+                      updateStudentFromCampus={
+                        this.props.updateStudentFromCampus
+                      }
+                    />
+                  ))
+                : 'No students on this campus'}
+            </Card.Group>
+          </Container>
         </Container>
       </Container>
     );
@@ -114,7 +135,7 @@ class DisconnectedSingleCampus extends React.Component {
 const mapState = state => {
   return {
     selectedCampus: state.selectedCampus,
-    addStudents: state.students,
+    students: state.students,
   };
 };
 
@@ -122,8 +143,8 @@ const mapDispatch = (dispatch, ownProps) => {
   return {
     fetchCampus: campusId => dispatch(fetchSingleCampus(campusId, ownProps)),
     update: campus => dispatch(updateCampusThunk(campus)),
-    removeStudentFromCampus: student =>
-      dispatch(unregisterStudentThunk(student)),
+    updateStudentFromCampus: student =>
+      dispatch(updateStudentFromCampusThunk(student)),
   };
 };
 

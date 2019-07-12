@@ -1,21 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { deleteStudentThunk } from '../redux/students';
-import {
-  Button,
-  Card,
-  Image,
-  Container,
-  Header,
-  Icon,
-  Dropdown,
-  Input,
-} from 'semantic-ui-react';
+import { Card, Container } from 'semantic-ui-react';
 import {
   searchStudentsThunk,
   filterStudentsThunk,
+  sortStudentsThunk,
 } from '../redux/filteredStudents';
+import AllStudentsHeader from './AllStudentsHeader';
+import AllStudentsCard from './AllStudentsCard';
 
 class DisconnectedAllStudents extends React.Component {
   constructor(props) {
@@ -34,56 +28,31 @@ class DisconnectedAllStudents extends React.Component {
     if (students.length === 0) {
       return (
         <Container textAlign="center" style={{ marginTop: '5rem' }}>
-          <Header as="h2">All Students</Header>
+          <AllStudentsHeader
+            options={this.state.options}
+            searchStudents={this.props.searchStudents}
+            filterStudents={this.props.filterStudents}
+            sort={this.props.sort}
+          />
           <p>There are no students registered in the database.</p>
         </Container>
       );
     }
     return (
       <Container textAlign="center" style={{ marginTop: '5rem' }}>
-        <Header as="h2">All Students</Header>
-        <Container textAlign="center" style={{ marginBottom: '2rem' }}>
-          <NavLink to="/students/new">
-            <Button primary>Add Student</Button>
-          </NavLink>
-          <Input
-            action={{ icon: 'search' }}
-            placeholder="Search..."
-            onChange={this.props.searchStudents}
-          />
-          <Dropdown
-            placeholder="Filter"
-            search
-            clearable
-            options={this.state.options}
-            selection
-            onChange={this.props.filterStudents}
-          />
-        </Container>
+        <AllStudentsHeader
+          options={this.state.options}
+          searchStudents={this.props.searchStudents}
+          filterStudents={this.props.filterStudents}
+          sort={this.props.sort}
+        />
         <Card.Group stackable itemsPerRow="3">
           {students.map(student => (
-            <Card raised key={student.id} style={{ margin: '1rem' }}>
-              <NavLink to={`/students/${student.id}`} key={student.id}>
-                <Image centered size="medium" src={student.imageUrl} />
-              </NavLink>
-              <Card.Content>
-                <NavLink to={`/students/${student.id}`} key={student.id}>
-                  <Card.Header>
-                    {student.firstName} {student.lastName}
-                  </Card.Header>
-                </NavLink>
-              </Card.Content>
-              <Card.Content extra>
-                <Button
-                  icon
-                  onClick={() => {
-                    this.props.deleteStudent(student.id);
-                  }}
-                >
-                  <Icon name="delete" />
-                </Button>
-              </Card.Content>
-            </Card>
+            <AllStudentsCard
+              deleteStudent={this.props.deleteStudent}
+              student={student}
+              key={student.id}
+            />
           ))}
         </Card.Group>
       </Container>
@@ -103,6 +72,7 @@ const mapDispatch = dispatch => {
     deleteStudent: studentId => dispatch(deleteStudentThunk(studentId)),
     filterStudents: event => dispatch(filterStudentsThunk(event)),
     searchStudents: event => dispatch(searchStudentsThunk(event)),
+    sort: event => dispatch(sortStudentsThunk(event)),
   };
 };
 

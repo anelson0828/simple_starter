@@ -53,8 +53,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    fetchInitialStudents: () => dispatch(fetchCampusesThunk()),
-    fetchInitialCampuses: () => dispatch(fetchStudentsThunk()),
+    fetchInitialCampuses: () => dispatch(fetchCampusesThunk()),
+    fetchInitialStudents: () => dispatch(fetchStudentsThunk()),
   };
 };
 
