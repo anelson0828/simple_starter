@@ -37,7 +37,7 @@ class DisconnectedCreateStudent extends Component {
       this.props.create(campus);
       setTimeout(() => {
         this.props.history.push(`/students/${this.props.selectedStudent.id}`);
-      }, 1000);
+      }, 500);
       this.setState({
         firstName: '',
         lastName: '',
@@ -85,14 +85,6 @@ class DisconnectedCreateStudent extends Component {
             value={this.state.gpa}
             onChange={this.handleChange}
           />
-          {/* <Form.Input
-          label="Image"
-          name="imageUrl"
-          value={props.state.imageUrl}
-          onChange={props.handleChange}
-          type="file"
-          accept="image/*"
-        /> */}
           <Button primary type="submit">
             Save
           </Button>

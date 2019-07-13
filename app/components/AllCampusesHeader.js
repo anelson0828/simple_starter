@@ -4,7 +4,6 @@ import {
   Container,
   Header,
   Dropdown,
-  Input,
   Pagination,
 } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';

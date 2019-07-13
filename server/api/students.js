@@ -55,18 +55,6 @@ router.delete('/:studentId', (req, res, next) => {
   }
 });
 
-// router.put('/:studentId', async (req, res, next) => {
-//   try {
-//     const updatedStudent = Student.update(
-//       { ...req.body },
-//       { where: { id: req.params.studentId } }
-//     );
-//     res.status(204).json(updatedStudent);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
-
 router.put('/:studentId', async (req, res, next) => {
   try {
     const student = await Student.findByPk(req.params.studentId);

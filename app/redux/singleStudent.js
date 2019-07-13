@@ -12,12 +12,11 @@ export const updateStudent = student => {
   return { type: UPDATE_STUDENT, student };
 };
 
-export const fetchSingleStudent = (studentId, ownProps) => {
+export const fetchSingleStudent = studentId => {
   return async dispatch => {
     const response = await axios.get(`/api/students/${studentId}`);
     const selectedStudent = response.data;
     dispatch(setSingleStudent(selectedStudent));
-    // ownProps.history.push(`/students/${selectedStudent.id}`);
   };
 };
 

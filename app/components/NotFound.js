@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Header,
-  Card,
-  Icon,
-  Image,
-  Form,
-  Button,
-  Message,
-} from 'semantic-ui-react';
+import { Container, Header, Image } from 'semantic-ui-react';
 
 const NotFound = () => {
   return (

@@ -7,10 +7,7 @@ import {
   fetchCampusesFilterThunk,
 } from '../redux/pagination';
 import { Card, Container } from 'semantic-ui-react';
-import {
-  filterCampusesThunk,
-  searchCampusesThunk,
-} from '../redux/filteredCampuses';
+import { searchCampusesThunk } from '../redux/filteredCampuses';
 import AllCampusesHeader from './AllCampusesHeader';
 import CampusCard from './CampusCard';
 
@@ -29,10 +26,12 @@ class DisconnectedAllCampuses extends React.Component {
   async componentDidMount() {
     await this.props.getPaginationCampuses(this.state.activePage);
     this.setState({ totalPages: this.props.paginatedCampuses.pages });
+    console.log('active', this.state.activePage);
   }
 
   handlePaginationChange = (e, { activePage }) => {
     this.setState({ activePage });
+    console.log('active', this.state.activePage);
     this.props.getPaginationCampuses(this.state.activePage);
   };
 

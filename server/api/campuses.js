@@ -20,8 +20,6 @@ router.get('/page/:page', (req, res) => {
       let pages = Math.ceil(data.count / limit);
       offset = limit * (page - 1);
 
-      let filter = req.query.filter;
-
       Campus.findAll({
         include: [
           {

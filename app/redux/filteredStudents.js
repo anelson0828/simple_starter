@@ -43,7 +43,6 @@ export const searchStudentsThunk = event => {
 };
 
 export const sortStudentsThunk = event => {
-  console.log('event', event.target);
   let key = event.target.innerText
     .toLowerCase()
     .replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {

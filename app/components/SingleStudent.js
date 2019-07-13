@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { fetchSingleStudent, updateStudentThunk } from '../redux/singleStudent';
 import {
   Container,
   Header,
-  Card,
   Image,
   Button,
   Divider,

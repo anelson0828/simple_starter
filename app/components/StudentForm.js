@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
-import { withRouter, NavLink, Route } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateStudentThunk } from '../redux/singleStudent';
 
@@ -76,14 +76,6 @@ class DisconnectedStudentForm extends React.Component {
             value={this.state.gpa}
             onChange={this.handleChange}
           />
-          {/* <Form.Input
-          label="Image"
-          name="imageUrl"
-          value={props.state.imageUrl}
-          onChange={props.handleChange}
-          type="file"
-          accept="image/*"
-        /> */}
           <Button primary type="submit">
             Save
           </Button>

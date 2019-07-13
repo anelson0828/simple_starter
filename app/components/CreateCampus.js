@@ -75,14 +75,6 @@ class DisconnectedCreateCampus extends Component {
             value={this.state.description}
             onChange={this.handleChange}
           />
-          {/* <Form.Input
-          label="Image"
-          name="imageUrl"
-          value={props.state.imageUrl}
-          onChange={props.handleChange}
-          type="file"
-          accept="image/*"
-        /> */}
           <Button primary type="submit">
             Create
           </Button>

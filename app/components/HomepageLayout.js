@@ -2,13 +2,8 @@ import React from 'react';
 import {
   Button,
   Container,
-  Divider,
-  Grid,
   Header,
-  Icon,
   Image,
-  List,
-  Segment,
   Statistic,
   Card,
 } from 'semantic-ui-react';
