@@ -18,13 +18,12 @@ export const updateStudent = (student, updatedStudent) => {
   return { type: UPDATE_STUDENT_FROM_CAMPUS, student, updatedStudent };
 };
 
-export const fetchSingleCampus = (campusId, ownProps) => {
+export const fetchSingleCampus = campusId => {
   return async dispatch => {
     const response = await axios.get(`/api/campuses/${campusId}`);
     const selectedCampus = response.data;
     const action = setSingleCampus(selectedCampus);
     dispatch(action);
-    // ownProps.history.push(`/campuses/${selectedCampus.id}`);
   };
 };
 
@@ -38,11 +37,8 @@ export const updateCampusThunk = campus => {
 
 export const updateStudentFromCampusThunk = student => {
   return async dispatch => {
-    const updatedStudent = await axios.put(
-      `/api/students/${student.id}`,
-      student
-    );
-    console.log('updated student', updatedStudent);
+    const response = await axios.put(`/api/students/${student.id}`, student);
+    const updatedStudent = response.data;
     dispatch(updateStudent(student, updatedStudent));
   };
 };

@@ -12,13 +12,12 @@ import {
   Icon,
   Input,
   Dropdown,
-  Pagination,
 } from 'semantic-ui-react';
 import {
   filterCampusesThunk,
   searchCampusesThunk,
 } from '../redux/filteredCampuses';
-import PaginationBar from './Pagination';
+import AllCampusesHeader from './AllCampusesHeader';
 
 class DisconnectedAllCampuses extends React.Component {
   constructor(props) {
@@ -46,62 +45,32 @@ class DisconnectedAllCampuses extends React.Component {
 
   render() {
     const campuses = this.props.paginatedCampuses.result;
-    console.log(campuses);
-    const { activePage, totalPages } = this.state;
-    console.log('total pages', totalPages);
+
     if (!campuses || campuses.length === 0) {
       return (
         <Container textAlign="center" style={{ marginTop: '5rem' }}>
-          <Header as="h2">All Campuses</Header>
-          <Container textAlign="center" style={{ marginBottom: '2rem' }}>
-            <NavLink to="/campuses/new">
-              <Button primary>Add Campus</Button>
-            </NavLink>
-            <Input
-              action={{ icon: 'search' }}
-              placeholder="Search..."
-              onChange={this.props.searchCampuses}
-            />
-            <Dropdown
-              placeholder="Filter"
-              search
-              clearable
-              options={this.state.options}
-              selection
-              onChange={this.props.filterCampuses}
-            />
-            <br />
-            <p>No Campuses Found</p>
-          </Container>
+          <AllCampusesHeader
+            searchCampuses={this.props.searchCampuses}
+            options={this.state.options}
+            filterCampuses={this.props.filterCampuses}
+            activePage={this.state.activePage}
+            totalPages={this.state.totalPages}
+            handlePaginationChange={this.handlePaginationChange}
+          />
+          <p>No Campuses Found</p>
         </Container>
       );
     }
     return (
       <Container textAlign="center" style={{ marginTop: '5rem' }}>
-        <Header as="h2">All Campuses</Header>
-        <Container textAlign="center" style={{ marginBottom: '2rem' }}>
-          <NavLink to="/campuses/new">
-            <Button primary>Add Campus</Button>
-          </NavLink>
-          <Input
-            action={{ icon: 'search' }}
-            placeholder="Search..."
-            onChange={this.props.searchCampuses}
-          />
-          <Dropdown
-            placeholder="Filter"
-            search
-            clearable
-            options={this.state.options}
-            selection
-            onChange={this.props.filterCampuses}
-          />
-          <Pagination
-            activePage={activePage}
-            onPageChange={this.handlePaginationChange}
-            totalPages={totalPages}
-          />
-        </Container>
+        <AllCampusesHeader
+          searchCampuses={this.props.searchCampuses}
+          options={this.state.options}
+          filterCampuses={this.props.filterCampuses}
+          activePage={this.state.activePage}
+          totalPages={this.state.totalPages}
+          handlePaginationChange={this.handlePaginationChange}
+        />
         <Card.Group stackable itemsPerRow="3">
           {campuses.map(campus => (
             <Card raised key={campus.id} style={{ margin: '1rem' }}>

@@ -71,8 +71,7 @@ router.put('/:studentId', async (req, res, next) => {
   try {
     const student = await Student.findByPk(req.params.studentId);
     student.update(req.body);
-    console.log(student.dataValues);
-    res.status(204).json(student.dataValues);
+    res.status(200).send(student);
   } catch (err) {
     next(err);
   }

@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import {
   fetchSingleCampus,
   updateCampusThunk,
   updateStudentFromCampusThunk,
 } from '../redux/singleCampus';
-import CampusForm from './CampusForm';
 import StudentRow from './StudentRow';
-import NotFound from './NotFound';
 
 import {
   Container,
@@ -20,7 +18,6 @@ import {
   Divider,
   Dropdown,
 } from 'semantic-ui-react';
-import { fetchStudentsThunk } from '../redux/students';
 
 class DisconnectedSingleCampus extends React.Component {
   constructor(props) {
@@ -51,10 +48,6 @@ class DisconnectedSingleCampus extends React.Component {
 
   render() {
     const { selectedCampus } = this.props;
-
-    if (!selectedCampus.id) {
-      return <NotFound />;
-    }
     return (
       <Container textAlign="center" style={{ marginTop: '5rem' }}>
         <Grid
@@ -85,12 +78,14 @@ class DisconnectedSingleCampus extends React.Component {
                 size="large"
                 src={selectedCampus.imageUrl}
               />
-              <p>{selectedCampus.address}</p>
+              <p style={{ margin: '1rem' }}>{selectedCampus.address}</p>
             </Grid.Column>
           </Grid.Row>
         </Grid>
         <Container style={{ marginTop: '2rem' }}>
-          <Divider horizontal>Students</Divider>
+          <Divider style={{ margin: '1rem' }} horizontal>
+            Students
+          </Divider>
           <Container>
             <Dropdown
               placeholder="Add Student"

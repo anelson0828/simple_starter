@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink, Route } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import { fetchSingleStudent, updateStudentThunk } from '../redux/singleStudent';
-import StudentForm from './StudentForm';
 import { Container, Header, Card, Image, Button } from 'semantic-ui-react';
-import NotFound from './NotFound';
 
 class DisconnectedSingleStudent extends React.Component {
   constructor(props) {
@@ -29,14 +27,12 @@ class DisconnectedSingleStudent extends React.Component {
         </Container>
       );
     }
-    if (!selectedStudent.id) {
-      return <NotFound />;
-    }
+
     return (
       <Container textAlign="center" style={{ marginTop: '5rem' }}>
         <Header as="h2">Single Student</Header>
 
-        <Card>
+        <Card className="centered">
           <Image src={selectedStudent.imageUrl} wrapped ui={false} />
           <Card.Content>
             <Card.Header>
