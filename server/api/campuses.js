@@ -32,12 +32,6 @@ router.get('/page/:page', (req, res) => {
         offset: offset,
         $sort: { id: 1 },
       }).then(campuses => {
-        if (filter === 'hasStudents') {
-          campuses.filter(campus => campus.dataValues.students.length);
-        } else if (filter === 'noStudents') {
-          campuses.filter(campus => !campus.dataValues.students.length);
-        }
-        console.log(campuses);
         res
           .status(200)
           .json({ result: campuses, count: data.count, pages: pages });

@@ -4,6 +4,7 @@ import { CREATE_CAMPUS } from './campuses';
 const SET_SINGLE_CAMPUS = 'SET_SINGLE_CAMPUS';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS';
 const UPDATE_STUDENT_FROM_CAMPUS = 'UPDATE_STUDENT_FROM_CAMPUS';
+const SET_STUDENTS_FOR_CAMPUS = 'SET_STUDENTS_FOR_CAMPUS';
 
 export const setSingleCampus = selectedCampus => {
   return { type: SET_SINGLE_CAMPUS, selectedCampus };
@@ -14,8 +15,11 @@ export const updateCampus = campus => {
 };
 
 export const updateStudent = (student, updatedStudent) => {
-  console.log('updated student 2', updatedStudent);
   return { type: UPDATE_STUDENT_FROM_CAMPUS, student, updatedStudent };
+};
+
+export const setStudentsForCampus = students => {
+  return { type: SET_STUDENTS_FOR_CAMPUS, students };
 };
 
 export const fetchSingleCampus = campusId => {
@@ -40,6 +44,15 @@ export const updateStudentFromCampusThunk = student => {
     const response = await axios.put(`/api/students/${student.id}`, student);
     const updatedStudent = response.data;
     dispatch(updateStudent(student, updatedStudent));
+  };
+};
+
+export const fetchStudentsForCampusThunk = selectedCampus => {
+  return async dispatch => {
+    const response = await axios.get('/api/students');
+    const students = response.data;
+    students.filter(student => student.campusId !== selectedCampus.id);
+    dispatch(setStudentsForCampus(students));
   };
 };
 

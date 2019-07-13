@@ -10,13 +10,12 @@ import NotFound from './NotFound';
 import HomepageLayout from './HomepageLayout';
 import StudentForm from './StudentForm';
 import CampusForm from './CampusForm';
-import EditPage from './EditPage';
 
 import { fetchCampusesThunk } from '../redux/campuses';
 import { fetchStudentsThunk } from '../redux/students';
 import { connect } from 'react-redux';
-import { Route, Switch, Redirect, withRouter, NavLink } from 'react-router-dom';
-import { Container, Header, Form, Button, Message } from 'semantic-ui-react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
 
 class DisconnectedRoot extends React.Component {
   componentDidMount() {

@@ -23,7 +23,15 @@ export const fetchCampusesFilterThunk = (page, filter) => {
       `/api/campuses/page/${page}/?filter=${filter}`
     );
     const campusesData = response.data;
-    dispatch(paginationAction(campusesData));
+    const campuses = campusesData.result;
+
+    if (filter === 'hasStudents') {
+      let newCampuses = campuses.filter(campus => campus.students.length);
+      dispatch(paginationAction({ ...campusesData, result: newCampuses }));
+    } else if (filter === 'noStudents') {
+      let newCampuses = campuses.filter(campus => campus.students.length === 0);
+      dispatch(paginationAction({ ...campusesData, result: newCampuses }));
+    }
   };
 };
 

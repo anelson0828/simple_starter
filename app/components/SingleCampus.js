@@ -6,6 +6,8 @@ import {
   updateCampusThunk,
   updateStudentFromCampusThunk,
 } from '../redux/singleCampus';
+import { fetchStudentsThunk } from '../redux/students';
+
 import StudentRow from './StudentRow';
 
 import {
@@ -24,14 +26,21 @@ class DisconnectedSingleCampus extends React.Component {
     super(props);
     this.state = {
       errorMessage: '',
-      addStudents: [],
+      studentOptions: [],
       value: 1,
     };
+    this.studentsDropdown = this.studentsDropdown.bind(this);
   }
-  componentDidMount() {
-    this.props.fetchCampus(this.props.match.params.campusId);
-    this.setState({
-      addStudents: this.props.students.map(student => {
+  async componentDidMount() {
+    await this.props.fetchCampus(this.props.match.params.campusId);
+    await this.props.fetchInitialStudents();
+    await this.studentsDropdown(this.props.students);
+  }
+
+  studentsDropdown() {
+    const studentOptions = this.props.students
+      .filter(student => student.campusId !== this.props.selectedCampus.id)
+      .map(student => {
         const name = student.firstName + ' ' + student.lastName;
         return {
           key: student.id,
@@ -39,7 +48,9 @@ class DisconnectedSingleCampus extends React.Component {
           value: student.id,
           image: { avatar: true, src: student.imageUrl },
         };
-      }),
+      });
+    this.setState({
+      studentOptions,
     });
   }
   handleChange = (e, { value }) => {
@@ -91,7 +102,7 @@ class DisconnectedSingleCampus extends React.Component {
               placeholder="Add Student"
               selection
               noResultsMessage="No students found"
-              options={this.state.addStudents}
+              options={this.state.studentOptions}
               onChange={this.handleChange}
               value={this.state.value}
             />
@@ -140,6 +151,7 @@ const mapDispatch = (dispatch, ownProps) => {
     update: campus => dispatch(updateCampusThunk(campus)),
     updateStudentFromCampus: student =>
       dispatch(updateStudentFromCampusThunk(student)),
+    fetchInitialStudents: () => dispatch(fetchStudentsThunk()),
   };
 };
 
