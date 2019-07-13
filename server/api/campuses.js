@@ -22,52 +22,26 @@ router.get('/page/:page', (req, res) => {
 
       let filter = req.query.filter;
 
-      if (filter === 'hasStudents') {
-        Campus.findAll({
-          include: [
-            {
-              model: Student,
-              where: {
-                campusId: 1,
-              },
-            },
-          ],
-          limit: limit,
-          offset: offset,
-          $sort: { id: 1 },
-        }).then(campuses => {
-          res
-            .status(200)
-            .json({ result: campuses, count: data.count, pages: pages });
-        });
-      } else if (filter === 'noStudents') {
-        Campus.findAll({
-          include: [
-            {
-              model: Student,
-              where: { id: null },
-            },
-          ],
-          limit: limit,
-          offset: offset,
-          $sort: { id: 1 },
-        }).then(campuses => {
-          res
-            .status(200)
-            .json({ result: campuses, count: data.count, pages: pages });
-        });
-      } else {
-        Campus.findAll({
-          include: [{ model: Student }],
-          limit: limit,
-          offset: offset,
-          $sort: { id: 1 },
-        }).then(campuses => {
-          res
-            .status(200)
-            .json({ result: campuses, count: data.count, pages: pages });
-        });
-      }
+      Campus.findAll({
+        include: [
+          {
+            model: Student,
+          },
+        ],
+        limit: limit,
+        offset: offset,
+        $sort: { id: 1 },
+      }).then(campuses => {
+        if (filter === 'hasStudents') {
+          campuses.filter(campus => campus.dataValues.students.length);
+        } else if (filter === 'noStudents') {
+          campuses.filter(campus => !campus.dataValues.students.length);
+        }
+        console.log(campuses);
+        res
+          .status(200)
+          .json({ result: campuses, count: data.count, pages: pages });
+      });
     })
     .catch(function(error) {
       res.status(500).send('Internal Server Error', error);
