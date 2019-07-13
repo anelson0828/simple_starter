@@ -2,7 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { fetchSingleStudent, updateStudentThunk } from '../redux/singleStudent';
-import { Container, Header, Card, Image, Button } from 'semantic-ui-react';
+import {
+  Container,
+  Header,
+  Card,
+  Image,
+  Button,
+  Divider,
+  Grid,
+} from 'semantic-ui-react';
+import CampusCard from './CampusCard';
 
 class DisconnectedSingleStudent extends React.Component {
   constructor(props) {
@@ -32,40 +41,55 @@ class DisconnectedSingleStudent extends React.Component {
       <Container textAlign="center" style={{ marginTop: '5rem' }}>
         <Header as="h2">Single Student</Header>
 
-        <Card className="centered">
-          <Image src={selectedStudent.imageUrl} wrapped ui={false} />
-          <Card.Content>
-            <Card.Header>
-              {selectedStudent.firstName} {selectedStudent.lastName}
-            </Card.Header>
-            <Card.Description>
-              <strong>Email:</strong> {selectedStudent.email}
-              <br />
-              <strong>GPA:</strong> {selectedStudent.gpa}
-              <br />
-              {selectedStudent.campus ? (
-                <NavLink
-                  to={`/campuses/${selectedStudent.campus.id}`}
-                  activeClassName="active"
-                >
-                  {selectedStudent.campus.name}
-                </NavLink>
-              ) : (
-                'This student does not have a campus.'
-              )}
-            </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <Button
-              primary
-              onClick={() => {
-                this.props.history.push(`/students/${selectedStudent.id}/edit`);
-              }}
-            >
-              Edit
-            </Button>
-          </Card.Content>
-        </Card>
+        <Grid
+          container
+          stackable
+          verticalAlign="middle"
+          style={{ marginTop: '2rem' }}
+        >
+          <Grid.Row>
+            <Grid.Column width={8}>
+              <Header as="h1">
+                {selectedStudent.firstName + ' ' + selectedStudent.lastName}
+              </Header>
+              <p>
+                {selectedStudent.gpa}
+                <br />
+                {selectedStudent.email}
+              </p>
+              <Button
+                primary
+                onClick={() => {
+                  this.props.history.push(
+                    `/students/${selectedStudent.id}/edit`
+                  );
+                }}
+              >
+                Edit
+              </Button>
+            </Grid.Column>
+            <Grid.Column floated="right" width={6}>
+              <Image
+                bordered
+                rounded
+                size="large"
+                src={selectedStudent.imageUrl}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <Container style={{ marginTop: '2rem' }}>
+          <Divider style={{ margin: '1rem' }} horizontal>
+            Campus
+          </Divider>
+          {selectedStudent.campus ? (
+            <Container className="centered">
+              <CampusCard campus={selectedStudent.campus} />
+            </Container>
+          ) : (
+            'This student does not have a campus.'
+          )}
+        </Container>
       </Container>
     );
   }

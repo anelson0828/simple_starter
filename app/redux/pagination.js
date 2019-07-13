@@ -17,6 +17,16 @@ export const fetchCampusesPaginationThunk = page => {
   };
 };
 
+export const fetchCampusesFilterThunk = (page, filter) => {
+  return async dispatch => {
+    const response = await axios.get(
+      `/api/campuses/page/${page}/?filter=${filter}`
+    );
+    const campusesData = response.data;
+    dispatch(paginationAction(campusesData));
+  };
+};
+
 export default (paginatatedCampuses = {}, action) => {
   switch (action.type) {
     case PAGINATION:

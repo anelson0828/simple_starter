@@ -17,19 +17,57 @@ router.get('/page/:page', (req, res) => {
   Campus.findAndCountAll()
     .then(data => {
       let page = req.params.page; // page number
-      console.log('campuses api pages', page);
       let pages = Math.ceil(data.count / limit);
       offset = limit * (page - 1);
-      Campus.findAll({
-        include: [{ model: Student }],
-        limit: limit,
-        offset: offset,
-        $sort: { id: 1 },
-      }).then(campuses => {
-        res
-          .status(200)
-          .json({ result: campuses, count: data.count, pages: pages });
-      });
+
+      let filter = req.query.filter;
+
+      if (filter === 'hasStudents') {
+        Campus.findAll({
+          include: [
+            {
+              model: Student,
+              where: {
+                campusId: 1,
+              },
+            },
+          ],
+          limit: limit,
+          offset: offset,
+          $sort: { id: 1 },
+        }).then(campuses => {
+          res
+            .status(200)
+            .json({ result: campuses, count: data.count, pages: pages });
+        });
+      } else if (filter === 'noStudents') {
+        Campus.findAll({
+          include: [
+            {
+              model: Student,
+              where: { id: null },
+            },
+          ],
+          limit: limit,
+          offset: offset,
+          $sort: { id: 1 },
+        }).then(campuses => {
+          res
+            .status(200)
+            .json({ result: campuses, count: data.count, pages: pages });
+        });
+      } else {
+        Campus.findAll({
+          include: [{ model: Student }],
+          limit: limit,
+          offset: offset,
+          $sort: { id: 1 },
+        }).then(campuses => {
+          res
+            .status(200)
+            .json({ result: campuses, count: data.count, pages: pages });
+        });
+      }
     })
     .catch(function(error) {
       res.status(500).send('Internal Server Error', error);

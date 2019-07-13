@@ -18,12 +18,6 @@ const AllCampusesHeader = props => (
       </NavLink>
     </Container>
     <Container textAlign="center" style={{ marginBottom: '1rem' }}>
-      <Input
-        style={{ margin: '1rem' }}
-        action={{ icon: 'search' }}
-        placeholder="Search..."
-        onChange={props.searchCampuses}
-      />
       <Dropdown
         style={{ margin: '1rem' }}
         placeholder="Filter"
@@ -31,7 +25,15 @@ const AllCampusesHeader = props => (
         clearable
         options={props.options}
         selection
-        onChange={props.filterCampuses}
+        onChange={event => {
+          let filter = event.target.innerText
+            .toLowerCase()
+            .replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+              if (+match === 0) return '';
+              return index === 0 ? match.toLowerCase() : match.toUpperCase();
+            });
+          props.filterCampuses(props.activePage, filter);
+        }}
       />
       <Container textAlign="center" style={{ margin: '1rem' }}>
         <Pagination

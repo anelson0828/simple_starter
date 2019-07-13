@@ -1,23 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
-import { fetchCampusesThunk, deleteCampusThunk } from '../redux/campuses';
-import { fetchCampusesPaginationThunk } from '../redux/pagination';
+import { withRouter } from 'react-router-dom';
+import { deleteCampusThunk } from '../redux/campuses';
 import {
-  Button,
-  Card,
-  Image,
-  Container,
-  Header,
-  Icon,
-  Input,
-  Dropdown,
-} from 'semantic-ui-react';
+  fetchCampusesPaginationThunk,
+  fetchCampusesFilterThunk,
+} from '../redux/pagination';
+import { Card, Container } from 'semantic-ui-react';
 import {
   filterCampusesThunk,
   searchCampusesThunk,
 } from '../redux/filteredCampuses';
 import AllCampusesHeader from './AllCampusesHeader';
+import CampusCard from './CampusCard';
 
 class DisconnectedAllCampuses extends React.Component {
   constructor(props) {
@@ -37,8 +32,6 @@ class DisconnectedAllCampuses extends React.Component {
   }
 
   handlePaginationChange = (e, { activePage }) => {
-    console.log('page changes e', e);
-    console.log('page changes activepage', activePage);
     this.setState({ activePage });
     this.props.getPaginationCampuses(this.state.activePage);
   };
@@ -73,26 +66,11 @@ class DisconnectedAllCampuses extends React.Component {
         />
         <Card.Group stackable itemsPerRow="3">
           {campuses.map(campus => (
-            <Card raised key={campus.id} style={{ margin: '1rem' }}>
-              <NavLink to={`/campuses/${campus.id}`} key={campus.id}>
-                <Image centered size="medium" src={campus.imageUrl} />
-              </NavLink>
-              <Card.Content>
-                <NavLink to={`/campuses/${campus.id}`} key={campus.id}>
-                  <Card.Header>{campus.name}</Card.Header>
-                </NavLink>
-              </Card.Content>
-              <Card.Content extra>
-                <Button
-                  icon
-                  onClick={() => {
-                    this.props.deleteCampus(campus.id);
-                  }}
-                >
-                  <Icon name="delete" />
-                </Button>
-              </Card.Content>
-            </Card>
+            <CampusCard
+              campus={campus}
+              key={campus.id}
+              deleteCampus={this.props.deleteCampus}
+            />
           ))}
         </Card.Group>
       </Container>
@@ -111,7 +89,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     deleteCampus: campusId => dispatch(deleteCampusThunk(campusId)),
-    filterCampuses: event => dispatch(filterCampusesThunk(event)),
+    filterCampuses: (page, filter) =>
+      dispatch(fetchCampusesFilterThunk(page, filter)),
     searchCampuses: event => dispatch(searchCampusesThunk(event)),
     getPaginationCampuses: page => dispatch(fetchCampusesPaginationThunk(page)),
   };
