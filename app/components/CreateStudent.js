@@ -10,7 +10,6 @@ class DisconnectedCreateStudent extends Component {
       firstName: '',
       lastName: '',
       email: '',
-      imageUrl: '',
       gpa: 0.0,
       errorMessage: '',
     };
@@ -27,14 +26,14 @@ class DisconnectedCreateStudent extends Component {
   handleSubmit(event) {
     try {
       event.preventDefault();
-      const campus = {
+      const student = {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         email: this.state.email,
         imageUrl: this.state.imageUrl,
         gpa: this.state.gpa,
       };
-      this.props.create(campus);
+      this.props.create(student);
       setTimeout(() => {
         this.props.history.push(`/students/${this.props.selectedStudent.id}`);
       }, 500);
@@ -42,7 +41,6 @@ class DisconnectedCreateStudent extends Component {
         firstName: '',
         lastName: '',
         email: '',
-        imageUrl: '',
         gpa: 0.0,
         errorMessage: '',
       });
@@ -79,6 +77,7 @@ class DisconnectedCreateStudent extends Component {
             value={this.state.email}
             onChange={this.handleChange}
           />
+
           <Form.Input
             label="GPA"
             name="gpa"

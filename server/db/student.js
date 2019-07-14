@@ -30,7 +30,8 @@ const Student = db.define('students', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'http://placekitten.com/200/300',
+    defaultValue:
+      'https://s3.amazonaws.com/uifaces/faces/twitter/travis_arnold/128.jpg',
   },
   gpa: {
     type: Datatypes.DECIMAL(2, 1),

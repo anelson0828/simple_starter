@@ -20,7 +20,7 @@ const Campus = db.define('campuses', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: 'http://placekitten.com/200/300',
+    defaultValue: 'http://lorempixel.com/640/480/business/',
   },
   description: {
     type: Sequelize.TEXT,

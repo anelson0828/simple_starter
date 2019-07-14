@@ -10,7 +10,6 @@ class DisconnectedCreateCampus extends Component {
       name: '',
       address: '',
       description: '',
-      imageUrl: '',
       errorMessage: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -30,7 +29,6 @@ class DisconnectedCreateCampus extends Component {
         name: this.state.name,
         address: this.state.address,
         description: this.state.description,
-        imageUrl: this.state.imageUrl,
       };
       this.props.create(campus);
       setTimeout(() => {
@@ -40,7 +38,6 @@ class DisconnectedCreateCampus extends Component {
         name: '',
         address: '',
         description: '',
-        imageUrl: '',
         errorMessage: '',
       });
     } catch (error) {
