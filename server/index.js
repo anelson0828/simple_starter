@@ -5,7 +5,6 @@ const volleyball = require('volleyball');
 const app = express();
 
 // logging middleware
-// Only use logging middleware when not running tests
 const debug = process.env.NODE_ENV === 'test';
 app.use(volleyball.custom({ debug }));
 
@@ -16,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // static middleware
 app.use(express.static(path.join(__dirname, '../public')));
 
-app.use('/api', require('./api')); // include our routes!
+app.use('/api', require('./api'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
