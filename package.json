@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-dev": "npm run build-watch & npm run start-server",
-    "start-server": "nodemon main.js -e html,js,css --ignore public",
+    "start-server": "node main.js -e html,js,css --ignore public",
     "build-watch": "webpack -w",
     "test": "NODE_ENV='test' mocha  ./tests --recursive --watch --require babel-polyfill --require babel-register",
     "start": "npm run build-watch & npm run start-server",
