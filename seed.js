@@ -1,8 +1,8 @@
 const { green, red } = require('chalk');
 const { db } = require('./server/db');
 
-const Student = require('./server/db/Student');
-const Campus = require('./server/db/Campus');
+const Student = require('./server/db/student');
+const Campus = require('./server/db/campus');
 const faker = require('faker');
 
 const createStudent = async () => {
