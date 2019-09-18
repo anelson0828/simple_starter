@@ -1,9 +1,5 @@
-# SCRUD App
+# Starter CRUD app
 
-## Search, Create, Read, Update
+## Create, Read, Update, Delete
 
-This app deals with a one to many relationship between Students and their Campus.
-
-I wanted to explore filtering, searching, sorting, and load times. I used pagination on the All Campus page and applied filtering on the backend.
-
-Students uses filtering on the front end but does not use pagination. The load time is slower but it was simpler to implement sorting and searching.
+This app is a starter template using React, Redux, Postgres, Sequelize, Semantic UI, Express, & Node
