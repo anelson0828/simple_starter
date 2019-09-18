@@ -86,274 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./app/components/AllCampuses.js":
-/*!***************************************!*\
-  !*** ./app/components/AllCampuses.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-var _campuses = __webpack_require__(/*! ../redux/campuses */ "./app/redux/campuses.js");
-
-var _pagination = __webpack_require__(/*! ../redux/pagination */ "./app/redux/pagination.js");
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-var _filteredCampuses = __webpack_require__(/*! ../redux/filteredCampuses */ "./app/redux/filteredCampuses.js");
-
-var _AllCampusesHeader = __webpack_require__(/*! ./AllCampusesHeader */ "./app/components/AllCampusesHeader.js");
-
-var _AllCampusesHeader2 = _interopRequireDefault(_AllCampusesHeader);
-
-var _CampusCard = __webpack_require__(/*! ./CampusCard */ "./app/components/CampusCard.js");
-
-var _CampusCard2 = _interopRequireDefault(_CampusCard);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DisconnectedAllCampuses = function (_React$Component) {
-  _inherits(DisconnectedAllCampuses, _React$Component);
-
-  function DisconnectedAllCampuses(props) {
-    _classCallCheck(this, DisconnectedAllCampuses);
-
-    var _this = _possibleConstructorReturn(this, (DisconnectedAllCampuses.__proto__ || Object.getPrototypeOf(DisconnectedAllCampuses)).call(this, props));
-
-    _this.handlePaginationChange = function (e, _ref) {
-      var activePage = _ref.activePage;
-
-      _this.setState({ activePage: activePage });
-      console.log('active', _this.state.activePage);
-      _this.props.getPaginationCampuses(_this.state.activePage);
-    };
-
-    _this.state = {
-      options: [{ key: 1, text: 'Has Students', value: 1 }, { key: 2, text: 'No Students', value: 2 }],
-      activePage: 1,
-      totalPages: 1
-    };
-    return _this;
-  }
-
-  _createClass(DisconnectedAllCampuses, [{
-    key: 'componentDidMount',
-    value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.props.getPaginationCampuses(this.state.activePage);
-
-              case 2:
-                this.setState({ totalPages: this.props.paginatedCampuses.pages });
-                console.log('active', this.state.activePage);
-
-              case 4:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function componentDidMount() {
-        return _ref2.apply(this, arguments);
-      }
-
-      return componentDidMount;
-    }()
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var campuses = this.props.paginatedCampuses.result;
-
-      if (!campuses || campuses.length === 0) {
-        return _react2.default.createElement(
-          _semanticUiReact.Container,
-          { textAlign: 'center', style: { marginTop: '5rem' } },
-          _react2.default.createElement(_AllCampusesHeader2.default, {
-            searchCampuses: this.props.searchCampuses,
-            options: this.state.options,
-            filterCampuses: this.props.filterCampuses,
-            activePage: this.state.activePage,
-            totalPages: this.state.totalPages,
-            handlePaginationChange: this.handlePaginationChange
-          }),
-          _react2.default.createElement(
-            'p',
-            null,
-            'No Campuses Found'
-          )
-        );
-      }
-      return _react2.default.createElement(
-        _semanticUiReact.Container,
-        { textAlign: 'center', style: { marginTop: '5rem' } },
-        _react2.default.createElement(_AllCampusesHeader2.default, {
-          searchCampuses: this.props.searchCampuses,
-          options: this.state.options,
-          filterCampuses: this.props.filterCampuses,
-          activePage: this.state.activePage,
-          totalPages: this.state.totalPages,
-          handlePaginationChange: this.handlePaginationChange
-        }),
-        _react2.default.createElement(
-          _semanticUiReact.Card.Group,
-          { stackable: true, itemsPerRow: '3' },
-          campuses.map(function (campus) {
-            return _react2.default.createElement(_CampusCard2.default, {
-              campus: campus,
-              key: campus.id,
-              deleteCampus: _this2.props.deleteCampus
-            });
-          })
-        )
-      );
-    }
-  }]);
-
-  return DisconnectedAllCampuses;
-}(_react2.default.Component);
-
-var mapState = function mapState(state) {
-  return {
-    campuses: state.campuses,
-    filteredCampuses: state.filteredCampuses,
-    paginatedCampuses: state.paginatedCampuses
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    deleteCampus: function deleteCampus(campusId) {
-      return dispatch((0, _campuses.deleteCampusThunk)(campusId));
-    },
-    filterCampuses: function filterCampuses(page, filter) {
-      return dispatch((0, _pagination.fetchCampusesFilterThunk)(page, filter));
-    },
-    searchCampuses: function searchCampuses(event) {
-      return dispatch((0, _filteredCampuses.searchCampusesThunk)(event));
-    },
-    getPaginationCampuses: function getPaginationCampuses(page) {
-      return dispatch((0, _pagination.fetchCampusesPaginationThunk)(page));
-    }
-  };
-};
-
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(DisconnectedAllCampuses));
-
-/***/ }),
-
-/***/ "./app/components/AllCampusesHeader.js":
-/*!*********************************************!*\
-  !*** ./app/components/AllCampusesHeader.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var AllCampusesHeader = function AllCampusesHeader(props) {
-  return _react2.default.createElement(
-    _semanticUiReact.Container,
-    null,
-    _react2.default.createElement(
-      _semanticUiReact.Header,
-      { as: 'h2' },
-      'All Campuses'
-    ),
-    _react2.default.createElement(
-      _semanticUiReact.Container,
-      { textAlign: 'center', style: { marginBottom: '2rem' } },
-      _react2.default.createElement(
-        _reactRouterDom.NavLink,
-        { to: '/campuses/new' },
-        _react2.default.createElement(
-          _semanticUiReact.Button,
-          { primary: true },
-          'Add Campus'
-        )
-      )
-    ),
-    _react2.default.createElement(
-      _semanticUiReact.Container,
-      { textAlign: 'center', style: { marginBottom: '1rem' } },
-      _react2.default.createElement(_semanticUiReact.Dropdown, {
-        style: { margin: '1rem' },
-        placeholder: 'Filter',
-        search: true,
-        clearable: true,
-        options: props.options,
-        selection: true,
-        onChange: function onChange(event) {
-          var filter = event.target.innerText.toLowerCase().replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
-            if (+match === 0) return '';
-            return index === 0 ? match.toLowerCase() : match.toUpperCase();
-          });
-          props.filterCampuses(props.activePage, filter);
-        }
-      }),
-      _react2.default.createElement(
-        _semanticUiReact.Container,
-        { textAlign: 'center', style: { margin: '1rem' } },
-        _react2.default.createElement(_semanticUiReact.Pagination, {
-          activePage: props.activePage,
-          onPageChange: props.handlePaginationChange,
-          totalPages: props.totalPages
-        })
-      )
-    )
-  );
-};
-
-exports.default = AllCampusesHeader;
-
-/***/ }),
-
 /***/ "./app/components/AllStudents.js":
 /*!***************************************!*\
   !*** ./app/components/AllStudents.js ***!
@@ -382,8 +114,6 @@ var _students = __webpack_require__(/*! ../redux/students */ "./app/redux/studen
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
-var _filteredStudents = __webpack_require__(/*! ../redux/filteredStudents */ "./app/redux/filteredStudents.js");
-
 var _AllStudentsHeader = __webpack_require__(/*! ./AllStudentsHeader */ "./app/components/AllStudentsHeader.js");
 
 var _AllStudentsHeader2 = _interopRequireDefault(_AllStudentsHeader);
@@ -403,15 +133,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var DisconnectedAllStudents = function (_React$Component) {
   _inherits(DisconnectedAllStudents, _React$Component);
 
-  function DisconnectedAllStudents(props) {
+  function DisconnectedAllStudents() {
     _classCallCheck(this, DisconnectedAllStudents);
 
-    var _this = _possibleConstructorReturn(this, (DisconnectedAllStudents.__proto__ || Object.getPrototypeOf(DisconnectedAllStudents)).call(this, props));
-
-    _this.state = {
-      options: [{ key: 1, text: 'Has Campus', value: 1 }, { key: 2, text: 'No Campus', value: 2 }]
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (DisconnectedAllStudents.__proto__ || Object.getPrototypeOf(DisconnectedAllStudents)).apply(this, arguments));
   }
 
   _createClass(DisconnectedAllStudents, [{
@@ -419,18 +144,13 @@ var DisconnectedAllStudents = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var students = this.props.filteredStudents;
+      var students = this.props.students;
 
       if (students.length === 0) {
         return _react2.default.createElement(
           _semanticUiReact.Container,
           { textAlign: 'center', style: { marginTop: '5rem' } },
-          _react2.default.createElement(_AllStudentsHeader2.default, {
-            options: this.state.options,
-            searchStudents: this.props.searchStudents,
-            filterStudents: this.props.filterStudents,
-            sort: this.props.sort
-          }),
+          _react2.default.createElement(_AllStudentsHeader2.default, null),
           _react2.default.createElement(
             'p',
             null,
@@ -441,12 +161,7 @@ var DisconnectedAllStudents = function (_React$Component) {
       return _react2.default.createElement(
         _semanticUiReact.Container,
         { textAlign: 'center', style: { marginTop: '5rem' } },
-        _react2.default.createElement(_AllStudentsHeader2.default, {
-          options: this.state.options,
-          searchStudents: this.props.searchStudents,
-          filterStudents: this.props.filterStudents,
-          sort: this.props.sort
-        }),
+        _react2.default.createElement(_AllStudentsHeader2.default, null),
         _react2.default.createElement(
           _semanticUiReact.Card.Group,
           { stackable: true, itemsPerRow: '3' },
@@ -467,8 +182,7 @@ var DisconnectedAllStudents = function (_React$Component) {
 
 var mapState = function mapState(state) {
   return {
-    students: state.students,
-    filteredStudents: state.filteredStudents
+    students: state.students
   };
 };
 
@@ -476,15 +190,6 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     deleteStudent: function deleteStudent(studentId) {
       return dispatch((0, _students.deleteStudentThunk)(studentId));
-    },
-    filterStudents: function filterStudents(event) {
-      return dispatch((0, _filteredStudents.filterStudentsThunk)(event));
-    },
-    searchStudents: function searchStudents(event) {
-      return dispatch((0, _filteredStudents.searchStudentsThunk)(event));
-    },
-    sort: function sort(event) {
-      return dispatch((0, _filteredStudents.sortStudentsThunk)(event));
     }
   };
 };
@@ -588,7 +293,7 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AllStudentsHeader = function AllStudentsHeader(props) {
+var AllStudentsHeader = function AllStudentsHeader() {
   return _react2.default.createElement(
     _semanticUiReact.Container,
     null,
@@ -609,446 +314,11 @@ var AllStudentsHeader = function AllStudentsHeader(props) {
           'Add Student'
         )
       )
-    ),
-    _react2.default.createElement(
-      _semanticUiReact.Container,
-      { textAlign: 'center', style: { marginBottom: '1rem' } },
-      _react2.default.createElement(_semanticUiReact.Input, {
-        style: { margin: '1rem' },
-        action: { icon: 'search' },
-        placeholder: 'Search...',
-        onChange: props.searchStudents
-      }),
-      _react2.default.createElement(_semanticUiReact.Dropdown, {
-        style: { margin: '1rem' },
-        placeholder: 'Filter',
-        search: true,
-        clearable: true,
-        options: props.options,
-        selection: true,
-        onChange: props.filterStudents
-      }),
-      _react2.default.createElement(_semanticUiReact.Dropdown, {
-        style: { margin: '1rem' },
-        placeholder: 'Sort by...',
-        search: true,
-        clearable: true,
-        options: [{ key: 1, text: 'First Name', value: 'firstName' }, { key: 2, text: 'Last Name', value: 'lastName' }, { key: 3, text: 'GPA', value: 'gpa' }],
-        selection: true,
-        onChange: props.sort
-      })
     )
   );
 };
 
 exports.default = AllStudentsHeader;
-
-/***/ }),
-
-/***/ "./app/components/CampusCard.js":
-/*!**************************************!*\
-  !*** ./app/components/CampusCard.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CampusCard = function CampusCard(props) {
-  var campus = props.campus;
-
-  return _react2.default.createElement(
-    _semanticUiReact.Card,
-    {
-      className: 'centered',
-      raised: true,
-      key: campus.id,
-      style: { margin: '1rem' }
-    },
-    _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { to: '/campuses/' + campus.id, key: campus.id },
-      _react2.default.createElement(_semanticUiReact.Image, { centered: true, size: 'medium', src: campus.imageUrl })
-    ),
-    _react2.default.createElement(
-      _semanticUiReact.Card.Content,
-      null,
-      _react2.default.createElement(
-        _reactRouterDom.NavLink,
-        { to: '/campuses/' + campus.id, key: campus.id },
-        _react2.default.createElement(
-          _semanticUiReact.Card.Header,
-          null,
-          campus.name
-        )
-      ),
-      campus.address
-    ),
-    _react2.default.createElement(
-      _semanticUiReact.Card.Content,
-      { extra: true },
-      _react2.default.createElement(
-        _semanticUiReact.Button,
-        {
-          icon: true,
-          onClick: function onClick() {
-            props.deleteCampus(campus.id);
-          }
-        },
-        _react2.default.createElement(_semanticUiReact.Icon, { name: 'delete' })
-      )
-    )
-  );
-};
-
-exports.default = CampusCard;
-
-/***/ }),
-
-/***/ "./app/components/CampusForm.js":
-/*!**************************************!*\
-  !*** ./app/components/CampusForm.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _singleCampus = __webpack_require__(/*! ../redux/singleCampus */ "./app/redux/singleCampus.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DisconnectedCampusForm = function (_React$Component) {
-  _inherits(DisconnectedCampusForm, _React$Component);
-
-  function DisconnectedCampusForm(props) {
-    _classCallCheck(this, DisconnectedCampusForm);
-
-    var _this = _possibleConstructorReturn(this, (DisconnectedCampusForm.__proto__ || Object.getPrototypeOf(DisconnectedCampusForm)).call(this, props));
-
-    _this.state = {
-      name: _this.props.selectedCampus.name,
-      address: _this.props.selectedCampus.address,
-      imageUrl: _this.props.selectedCampus.imageUrl,
-      description: _this.props.selectedCampus.description,
-      errorMessage: ''
-    };
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    return _this;
-  }
-
-  _createClass(DisconnectedCampusForm, [{
-    key: 'handleChange',
-    value: function handleChange(event) {
-      this.setState(_defineProperty({}, event.target.name, event.target.value));
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      try {
-        event.preventDefault();
-        var campus = {
-          name: this.state.name,
-          address: this.state.address,
-          imageUrl: this.state.imageUrl,
-          description: this.state.description,
-          id: this.props.selectedCampus.id
-        };
-        this.props.update(campus);
-      } catch (error) {
-        console.log('error', error.message);
-        this.setState({ errorMessage: error.message });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        _semanticUiReact.Container,
-        { style: { marginTop: '5rem' } },
-        _react2.default.createElement(
-          _semanticUiReact.Header,
-          { as: 'h2' },
-          'Campus'
-        ),
-        _react2.default.createElement(
-          _semanticUiReact.Form,
-          { onSubmit: this.handleSubmit, style: { marginTop: '2rem' } },
-          _react2.default.createElement(_semanticUiReact.Form.Input, {
-            label: 'Name',
-            required: true,
-            name: 'name',
-            value: this.state.name,
-            onChange: this.handleChange
-          }),
-          _react2.default.createElement(_semanticUiReact.Form.Input, {
-            label: 'Address',
-            required: true,
-            name: 'address',
-            value: this.state.address,
-            onChange: this.handleChange
-          }),
-          _react2.default.createElement(_semanticUiReact.Form.TextArea, {
-            label: 'Description',
-            required: true,
-            name: 'description',
-            value: this.state.description,
-            onChange: this.handleChange
-          }),
-          _react2.default.createElement(
-            _semanticUiReact.Button,
-            { primary: true, type: 'submit' },
-            'Save'
-          ),
-          _react2.default.createElement(
-            _semanticUiReact.Button,
-            {
-              onClick: function onClick() {
-                _this2.props.history.goBack();
-              }
-            },
-            'Back'
-          ),
-          _react2.default.createElement(_semanticUiReact.Message, {
-            error: true,
-            header: 'Error',
-            content: 'Looks like there\'s a problem with your submission. Please try again.'
-          })
-        )
-      );
-    }
-  }]);
-
-  return DisconnectedCampusForm;
-}(_react2.default.Component);
-
-var mapState = function mapState(state) {
-  return {
-    selectedCampus: state.selectedCampus
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    update: function update(campus) {
-      return dispatch((0, _singleCampus.updateCampusThunk)(campus));
-    }
-  };
-};
-
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(DisconnectedCampusForm));
-
-/***/ }),
-
-/***/ "./app/components/CreateCampus.js":
-/*!****************************************!*\
-  !*** ./app/components/CreateCampus.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _campuses = __webpack_require__(/*! ../redux/campuses */ "./app/redux/campuses.js");
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DisconnectedCreateCampus = function (_Component) {
-  _inherits(DisconnectedCreateCampus, _Component);
-
-  function DisconnectedCreateCampus(props) {
-    _classCallCheck(this, DisconnectedCreateCampus);
-
-    var _this = _possibleConstructorReturn(this, (DisconnectedCreateCampus.__proto__ || Object.getPrototypeOf(DisconnectedCreateCampus)).call(this, props));
-
-    _this.state = {
-      name: '',
-      address: '',
-      description: '',
-      errorMessage: ''
-    };
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    return _this;
-  }
-
-  _createClass(DisconnectedCreateCampus, [{
-    key: 'handleChange',
-    value: function handleChange(event) {
-      this.setState(_defineProperty({}, event.target.name, event.target.value));
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      var _this2 = this;
-
-      try {
-        event.preventDefault();
-        var campus = {
-          name: this.state.name,
-          address: this.state.address,
-          description: this.state.description
-        };
-        this.props.create(campus);
-        setTimeout(function () {
-          _this2.props.history.push('/campuses/' + _this2.props.selectedCampus.id);
-        }, 1000);
-        this.setState({
-          name: '',
-          address: '',
-          description: '',
-          errorMessage: ''
-        });
-      } catch (error) {
-        console.log('error', error.message);
-        this.setState({ errorMessage: error.message });
-      }
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      return _react2.default.createElement(
-        _semanticUiReact.Container,
-        { style: { marginTop: '5rem' } },
-        _react2.default.createElement(
-          _semanticUiReact.Header,
-          { as: 'h2' },
-          'Campus'
-        ),
-        _react2.default.createElement(
-          _semanticUiReact.Form,
-          { onSubmit: this.handleSubmit, style: { marginTop: '2rem' } },
-          _react2.default.createElement(_semanticUiReact.Form.Input, {
-            label: 'Name',
-            required: true,
-            name: 'name',
-            value: this.state.name,
-            onChange: this.handleChange
-          }),
-          _react2.default.createElement(_semanticUiReact.Form.Input, {
-            label: 'Address',
-            required: true,
-            name: 'address',
-            value: this.state.address,
-            onChange: this.handleChange
-          }),
-          _react2.default.createElement(_semanticUiReact.Form.TextArea, {
-            label: 'Description',
-            required: true,
-            name: 'description',
-            value: this.state.description,
-            onChange: this.handleChange
-          }),
-          _react2.default.createElement(
-            _semanticUiReact.Button,
-            { primary: true, type: 'submit' },
-            'Create'
-          ),
-          _react2.default.createElement(
-            _semanticUiReact.Button,
-            {
-              onClick: function onClick() {
-                _this3.props.history.goBack();
-              }
-            },
-            'Back'
-          ),
-          _react2.default.createElement(_semanticUiReact.Message, {
-            error: true,
-            header: 'Error',
-            content: 'Looks like there\'s a problem with your submission. Please try again.'
-          })
-        )
-      );
-    }
-  }]);
-
-  return DisconnectedCreateCampus;
-}(_react.Component);
-
-var mapState = function mapState(state) {
-  return {
-    selectedCampus: state.selectedCampus
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch) {
-  return {
-    create: function create(campus) {
-      dispatch((0, _campuses.createCampusThunk)(campus));
-    }
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(DisconnectedCreateCampus);
 
 /***/ }),
 
@@ -1100,8 +370,7 @@ var DisconnectedCreateStudent = function (_Component) {
       firstName: '',
       lastName: '',
       email: '',
-      gpa: 0.0,
-      errorMessage: ''
+      gpa: 0.0
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -1135,12 +404,10 @@ var DisconnectedCreateStudent = function (_Component) {
           firstName: '',
           lastName: '',
           email: '',
-          gpa: 0.0,
-          errorMessage: ''
+          gpa: 0.0
         });
       } catch (error) {
         console.log('error', error.message);
-        this.setState({ errorMessage: error.message });
       }
     }
   }, {
@@ -1200,12 +467,7 @@ var DisconnectedCreateStudent = function (_Component) {
               }
             },
             'Back'
-          ),
-          _react2.default.createElement(_semanticUiReact.Message, {
-            error: true,
-            header: 'Error',
-            content: 'Looks like there\'s a problem with your submission. Please try again.'
-          })
+          )
         )
       );
     }
@@ -1271,48 +533,6 @@ var DisconnectedHomepage = function DisconnectedHomepage(props) {
       _react2.default.createElement(
         _semanticUiReact.Card,
         { raised: true, style: { margin: '1rem' } },
-        _react2.default.createElement(_semanticUiReact.Image, {
-          src: 'https://d13b2ieg84qqce.cloudfront.net/ad72f5277e4ca7e90712c9b8145a1145168a0ce2.jpg',
-          wrapped: true,
-          ui: false,
-          size: 'medium'
-        }),
-        _react2.default.createElement(
-          _semanticUiReact.Card.Content,
-          null,
-          _react2.default.createElement(
-            _semanticUiReact.Statistic,
-            null,
-            _react2.default.createElement(
-              _semanticUiReact.Statistic.Value,
-              null,
-              props.campuses.length
-            ),
-            _react2.default.createElement(
-              _semanticUiReact.Statistic.Label,
-              null,
-              'Campuses'
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _semanticUiReact.Card.Content,
-          { extra: true },
-          _react2.default.createElement(
-            _semanticUiReact.Button,
-            {
-              onClick: function onClick() {
-                props.history.push('/campuses');
-              }
-            },
-            'View Campuses'
-          )
-        )
-      ),
-      _react2.default.createElement(
-        _semanticUiReact.Card,
-        { raised: true, style: { margin: '1rem' } },
-        _react2.default.createElement(_semanticUiReact.Image, { src: '/student_home.jpg', wrapped: true }),
         _react2.default.createElement(
           _semanticUiReact.Card.Content,
           null,
@@ -1351,8 +571,7 @@ var DisconnectedHomepage = function DisconnectedHomepage(props) {
 
 var mapState = function mapState(state) {
   return {
-    students: state.students,
-    campuses: state.campuses
+    students: state.students
   };
 };
 
@@ -1398,15 +617,6 @@ var Nav = function Nav() {
           _reactRouterDom.NavLink,
           { to: '/' },
           'Home'
-        )
-      ),
-      _react2.default.createElement(
-        _semanticUiReact.Menu.Item,
-        { header: true },
-        _react2.default.createElement(
-          _reactRouterDom.NavLink,
-          { to: '/campuses/' },
-          'Campuses'
         )
       ),
       _react2.default.createElement(
@@ -1470,271 +680,6 @@ exports.default = NotFound;
 
 /***/ }),
 
-/***/ "./app/components/SingleCampus.js":
-/*!****************************************!*\
-  !*** ./app/components/SingleCampus.js ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-var _singleCampus = __webpack_require__(/*! ../redux/singleCampus */ "./app/redux/singleCampus.js");
-
-var _students = __webpack_require__(/*! ../redux/students */ "./app/redux/students.js");
-
-var _StudentRow = __webpack_require__(/*! ./StudentRow */ "./app/components/StudentRow.js");
-
-var _StudentRow2 = _interopRequireDefault(_StudentRow);
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var DisconnectedSingleCampus = function (_React$Component) {
-  _inherits(DisconnectedSingleCampus, _React$Component);
-
-  function DisconnectedSingleCampus(props) {
-    _classCallCheck(this, DisconnectedSingleCampus);
-
-    var _this = _possibleConstructorReturn(this, (DisconnectedSingleCampus.__proto__ || Object.getPrototypeOf(DisconnectedSingleCampus)).call(this, props));
-
-    _this.handleChange = function (e, _ref) {
-      var value = _ref.value;
-
-      _this.setState({ value: value });
-    };
-
-    _this.state = {
-      errorMessage: '',
-      studentOptions: [],
-      value: 1
-    };
-    _this.studentsDropdown = _this.studentsDropdown.bind(_this);
-    return _this;
-  }
-
-  _createClass(DisconnectedSingleCampus, [{
-    key: 'componentDidMount',
-    value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.props.fetchCampus(this.props.match.params.campusId);
-
-              case 2:
-                _context.next = 4;
-                return this.props.fetchInitialStudents();
-
-              case 4:
-                _context.next = 6;
-                return this.studentsDropdown(this.props.students);
-
-              case 6:
-              case 'end':
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function componentDidMount() {
-        return _ref2.apply(this, arguments);
-      }
-
-      return componentDidMount;
-    }()
-  }, {
-    key: 'studentsDropdown',
-    value: function studentsDropdown() {
-      var _this2 = this;
-
-      var studentOptions = this.props.students.filter(function (student) {
-        return student.campusId !== _this2.props.selectedCampus.id;
-      }).map(function (student) {
-        var name = student.firstName + ' ' + student.lastName;
-        return {
-          key: student.id,
-          text: name,
-          value: student.id,
-          image: { avatar: true, src: student.imageUrl }
-        };
-      });
-      this.setState({
-        studentOptions: studentOptions
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this3 = this;
-
-      var selectedCampus = this.props.selectedCampus;
-
-      return _react2.default.createElement(
-        _semanticUiReact.Container,
-        { textAlign: 'center', style: { marginTop: '5rem' } },
-        _react2.default.createElement(
-          _semanticUiReact.Grid,
-          {
-            container: true,
-            stackable: true,
-            verticalAlign: 'middle',
-            style: { marginTop: '2rem' }
-          },
-          _react2.default.createElement(
-            _semanticUiReact.Grid.Row,
-            null,
-            _react2.default.createElement(
-              _semanticUiReact.Grid.Column,
-              { width: 8 },
-              _react2.default.createElement(
-                _semanticUiReact.Header,
-                { as: 'h1' },
-                selectedCampus.name
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                selectedCampus.description
-              ),
-              _react2.default.createElement(
-                _semanticUiReact.Button,
-                {
-                  primary: true,
-                  onClick: function onClick() {
-                    _this3.props.history.push('/campuses/' + selectedCampus.id + '/edit');
-                  }
-                },
-                'Edit'
-              )
-            ),
-            _react2.default.createElement(
-              _semanticUiReact.Grid.Column,
-              { floated: 'right', width: 6 },
-              _react2.default.createElement(_semanticUiReact.Image, {
-                bordered: true,
-                rounded: true,
-                size: 'large',
-                src: selectedCampus.imageUrl
-              }),
-              _react2.default.createElement(
-                'p',
-                { style: { margin: '1rem' } },
-                selectedCampus.address
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _semanticUiReact.Container,
-          { style: { marginTop: '2rem' } },
-          _react2.default.createElement(
-            _semanticUiReact.Divider,
-            { style: { margin: '1rem' }, horizontal: true },
-            'Students'
-          ),
-          _react2.default.createElement(
-            _semanticUiReact.Container,
-            null,
-            _react2.default.createElement(_semanticUiReact.Dropdown, {
-              placeholder: 'Add Student',
-              selection: true,
-              noResultsMessage: 'No students found',
-              options: this.state.studentOptions,
-              onChange: this.handleChange,
-              value: this.state.value
-            }),
-            _react2.default.createElement(
-              _semanticUiReact.Button,
-              {
-                onClick: function onClick() {
-                  _this3.props.updateStudentFromCampus({
-                    id: _this3.state.value,
-                    campusId: selectedCampus.id
-                  });
-                }
-              },
-              'Register Student'
-            )
-          ),
-          _react2.default.createElement(
-            _semanticUiReact.Container,
-            { style: { marginTop: '2rem' } },
-            _react2.default.createElement(
-              _semanticUiReact.Card.Group,
-              { itemsPerRow: '6' },
-              selectedCampus.students && selectedCampus.students.length !== 0 ? selectedCampus.students.map(function (student) {
-                return _react2.default.createElement(_StudentRow2.default, {
-                  key: student.id,
-                  student: student,
-                  updateStudentFromCampus: _this3.props.updateStudentFromCampus
-                });
-              }) : 'No students on this campus'
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return DisconnectedSingleCampus;
-}(_react2.default.Component);
-
-var mapState = function mapState(state) {
-  return {
-    selectedCampus: state.selectedCampus,
-    students: state.students
-  };
-};
-
-var mapDispatch = function mapDispatch(dispatch, ownProps) {
-  return {
-    fetchCampus: function fetchCampus(campusId) {
-      return dispatch((0, _singleCampus.fetchSingleCampus)(campusId, ownProps));
-    },
-    update: function update(campus) {
-      return dispatch((0, _singleCampus.updateCampusThunk)(campus));
-    },
-    updateStudentFromCampus: function updateStudentFromCampus(student) {
-      return dispatch((0, _singleCampus.updateStudentFromCampusThunk)(student));
-    },
-    fetchInitialStudents: function fetchInitialStudents() {
-      return dispatch((0, _students.fetchStudentsThunk)());
-    }
-  };
-};
-
-exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapState, mapDispatch)(DisconnectedSingleCampus));
-
-/***/ }),
-
 /***/ "./app/components/SingleStudent.js":
 /*!*****************************************!*\
   !*** ./app/components/SingleStudent.js ***!
@@ -1763,10 +708,6 @@ var _singleStudent = __webpack_require__(/*! ../redux/singleStudent */ "./app/re
 
 var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
 
-var _CampusCard = __webpack_require__(/*! ./CampusCard */ "./app/components/CampusCard.js");
-
-var _CampusCard2 = _interopRequireDefault(_CampusCard);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1784,7 +725,6 @@ var DisconnectedSingleStudent = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (DisconnectedSingleStudent.__proto__ || Object.getPrototypeOf(DisconnectedSingleStudent)).call(this, props));
 
     _this.state = {
-      errorMessage: '',
       loading: true
     };
     return _this;
@@ -1873,20 +813,6 @@ var DisconnectedSingleStudent = function (_React$Component) {
               })
             )
           )
-        ),
-        _react2.default.createElement(
-          _semanticUiReact.Container,
-          { style: { marginTop: '2rem' } },
-          _react2.default.createElement(
-            _semanticUiReact.Divider,
-            { style: { margin: '1rem' }, horizontal: true },
-            'Campus'
-          ),
-          selectedStudent.campus ? _react2.default.createElement(
-            _semanticUiReact.Container,
-            { className: 'centered' },
-            _react2.default.createElement(_CampusCard2.default, { campus: selectedStudent.campus })
-          ) : 'This student does not have a campus.'
         )
       );
     }
@@ -1967,8 +893,7 @@ var DisconnectedStudentForm = function (_React$Component) {
       lastName: _this.props.selectedStudent.lastName,
       email: _this.props.selectedStudent.email,
       imageUrl: _this.props.selectedStudent.imageUrl,
-      gpa: _this.props.selectedStudent.gpa,
-      errorMessage: ''
+      gpa: _this.props.selectedStudent.gpa
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -1996,7 +921,6 @@ var DisconnectedStudentForm = function (_React$Component) {
         this.props.update(student);
       } catch (error) {
         console.log('error', error.message);
-        this.setState({ errorMessage: error.message });
       }
     }
   }, {
@@ -2056,12 +980,7 @@ var DisconnectedStudentForm = function (_React$Component) {
               }
             },
             'Back'
-          ),
-          _react2.default.createElement(_semanticUiReact.Message, {
-            error: true,
-            header: 'Error',
-            content: 'Looks like there\'s a problem with your submission. Please try again.'
-          })
+          )
         )
       );
     }
@@ -2088,65 +1007,6 @@ exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapSt
 
 /***/ }),
 
-/***/ "./app/components/StudentRow.js":
-/*!**************************************!*\
-  !*** ./app/components/StudentRow.js ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-
-var _semanticUiReact = __webpack_require__(/*! semantic-ui-react */ "./node_modules/semantic-ui-react/dist/es/index.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var StudentRow = function StudentRow(props) {
-  return _react2.default.createElement(
-    _semanticUiReact.Card,
-    { color: 'blue' },
-    _react2.default.createElement(
-      _reactRouterDom.NavLink,
-      { to: '/students/' + props.student.id },
-      _react2.default.createElement(_semanticUiReact.Image, { fluid: true, src: props.student.imageUrl })
-    ),
-    _react2.default.createElement(
-      _semanticUiReact.Card.Header,
-      { as: 'h3' },
-      props.student.firstName,
-      ' ',
-      props.student.lastName
-    ),
-    _react2.default.createElement(
-      _semanticUiReact.Button,
-      {
-        onClick: function onClick() {
-          props.updateStudentFromCampus({
-            id: props.student.id,
-            campusId: null
-          });
-        }
-      },
-      'Unregister'
-    )
-  );
-};
-
-exports.default = StudentRow;
-
-/***/ }),
-
 /***/ "./app/components/root.js":
 /*!********************************!*\
   !*** ./app/components/root.js ***!
@@ -2167,10 +1027,6 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _AllCampuses = __webpack_require__(/*! ./AllCampuses */ "./app/components/AllCampuses.js");
-
-var _AllCampuses2 = _interopRequireDefault(_AllCampuses);
-
 var _AllStudents = __webpack_require__(/*! ./AllStudents */ "./app/components/AllStudents.js");
 
 var _AllStudents2 = _interopRequireDefault(_AllStudents);
@@ -2178,14 +1034,6 @@ var _AllStudents2 = _interopRequireDefault(_AllStudents);
 var _SingleStudent = __webpack_require__(/*! ./SingleStudent */ "./app/components/SingleStudent.js");
 
 var _SingleStudent2 = _interopRequireDefault(_SingleStudent);
-
-var _SingleCampus = __webpack_require__(/*! ./SingleCampus */ "./app/components/SingleCampus.js");
-
-var _SingleCampus2 = _interopRequireDefault(_SingleCampus);
-
-var _CreateCampus = __webpack_require__(/*! ./CreateCampus */ "./app/components/CreateCampus.js");
-
-var _CreateCampus2 = _interopRequireDefault(_CreateCampus);
 
 var _CreateStudent = __webpack_require__(/*! ./CreateStudent */ "./app/components/CreateStudent.js");
 
@@ -2206,12 +1054,6 @@ var _HomepageLayout2 = _interopRequireDefault(_HomepageLayout);
 var _StudentForm = __webpack_require__(/*! ./StudentForm */ "./app/components/StudentForm.js");
 
 var _StudentForm2 = _interopRequireDefault(_StudentForm);
-
-var _CampusForm = __webpack_require__(/*! ./CampusForm */ "./app/components/CampusForm.js");
-
-var _CampusForm2 = _interopRequireDefault(_CampusForm);
-
-var _campuses = __webpack_require__(/*! ../redux/campuses */ "./app/redux/campuses.js");
 
 var _students = __webpack_require__(/*! ../redux/students */ "./app/redux/students.js");
 
@@ -2241,7 +1083,6 @@ var DisconnectedRoot = function (_React$Component) {
   _createClass(DisconnectedRoot, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.props.fetchInitialCampuses();
       this.props.fetchInitialStudents();
     }
   }, {
@@ -2255,13 +1096,9 @@ var DisconnectedRoot = function (_React$Component) {
           _reactRouterDom.Switch,
           null,
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _HomepageLayout2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/campuses', component: _AllCampuses2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/students', component: _AllStudents2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/campuses/new', component: _CreateCampus2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/students/new', component: _CreateStudent2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/campuses/:campusId/edit', component: _CampusForm2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/students/:studentId/edit', component: _StudentForm2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/campuses/:campusId', component: _SingleCampus2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/students/:studentId', component: _SingleStudent2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '*', component: _NotFound2.default })
         )
@@ -2274,16 +1111,12 @@ var DisconnectedRoot = function (_React$Component) {
 
 var mapState = function mapState(state) {
   return {
-    students: state.students,
-    campuses: state.campuses
+    students: state.students
   };
 };
 
 var mapDispatch = function mapDispatch(dispatch) {
   return {
-    fetchInitialCampuses: function fetchInitialCampuses() {
-      return dispatch((0, _campuses.fetchCampusesThunk)());
-    },
     fetchInitialStudents: function fetchInitialStudents() {
       return dispatch((0, _students.fetchStudentsThunk)());
     }
@@ -2338,378 +1171,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./app/redux/campuses.js":
-/*!*******************************!*\
-  !*** ./app/redux/campuses.js ***!
-  \*******************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.deleteCampusThunk = exports.createCampusThunk = exports.fetchCampusesThunk = exports.deleteCampus = exports.createCampus = exports.setCampuses = exports.DELETE_CAMPUS = exports.CREATE_CAMPUS = exports.SET_CAMPUSES = undefined;
-
-var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var SET_CAMPUSES = exports.SET_CAMPUSES = 'SET_CAMPUSES';
-var CREATE_CAMPUS = exports.CREATE_CAMPUS = 'CREATE_CAMPUS';
-var DELETE_CAMPUS = exports.DELETE_CAMPUS = 'DELETE_CAMPUS';
-
-var setCampuses = exports.setCampuses = function setCampuses(campuses) {
-  return { type: SET_CAMPUSES, campuses: campuses };
-};
-
-var createCampus = exports.createCampus = function createCampus(campus) {
-  return { type: CREATE_CAMPUS, campus: campus };
-};
-
-var deleteCampus = exports.deleteCampus = function deleteCampus(campusId) {
-  return { type: DELETE_CAMPUS, campusId: campusId };
-};
-
-var fetchCampusesThunk = exports.fetchCampusesThunk = function fetchCampusesThunk() {
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var response, campuses;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _axios2.default.get('/api/campuses');
-
-            case 2:
-              response = _context.sent;
-              campuses = response.data;
-
-              dispatch(setCampuses(campuses));
-
-            case 5:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-var createCampusThunk = exports.createCampusThunk = function createCampusThunk(campus) {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var response, newCampus, action;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return _axios2.default.post('/api/campuses', campus);
-
-            case 2:
-              response = _context2.sent;
-              newCampus = response.data;
-              action = createCampus(newCampus);
-
-              dispatch(action);
-
-            case 6:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var deleteCampusThunk = exports.deleteCampusThunk = function deleteCampusThunk(campusId) {
-  return function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return _axios2.default.delete('/api/campuses/' + campusId);
-
-            case 2:
-              dispatch(deleteCampus(campusId));
-
-            case 3:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined);
-    }));
-
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-};
-
-exports.default = function () {
-  var campuses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case SET_CAMPUSES:
-      return action.campuses;
-    case CREATE_CAMPUS:
-      return [].concat(_toConsumableArray(campuses), [action.campus]);
-    case DELETE_CAMPUS:
-      return campuses.filter(function (campus) {
-        return campus.id !== action.campusId;
-      });
-    default:
-      return campuses;
-  }
-};
-
-/***/ }),
-
-/***/ "./app/redux/filteredCampuses.js":
-/*!***************************************!*\
-  !*** ./app/redux/filteredCampuses.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.searchCampusesThunk = exports.filterCampusesThunk = exports.filterCampuses = undefined;
-
-var _campuses = __webpack_require__(/*! ./campuses */ "./app/redux/campuses.js");
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var FILTER_CAMPUSES = 'FILTER_CAMPUSES';
-
-var filterCampuses = exports.filterCampuses = function filterCampuses(filteredCampuses) {
-  return { type: FILTER_CAMPUSES, filteredCampuses: filteredCampuses };
-};
-
-var filterCampusesThunk = exports.filterCampusesThunk = function filterCampusesThunk(event) {
-  var filter = event.target.innerText;
-
-  return function (dispatch, getState) {
-    var _getState = getState(),
-        campuses = _getState.campuses;
-
-    if (filter === 'Has Students') {
-      var filteredCampuses = campuses.filter(function (campus) {
-        return campus.students.length;
-      });
-      dispatch(filterCampuses(filteredCampuses));
-    } else if (filter === 'No Students') {
-      var _filteredCampuses = campuses.filter(function (campus) {
-        return !campus.students.length;
-      });
-      dispatch(filterCampuses(_filteredCampuses));
-    } else {
-      dispatch(filterCampuses(campuses));
-    }
-  };
-};
-
-var searchCampusesThunk = exports.searchCampusesThunk = function searchCampusesThunk(event) {
-  var filter = event.target.value.toLowerCase();
-
-  return function (dispatch, getState) {
-    var _getState2 = getState(),
-        campuses = _getState2.campuses;
-
-    var filteredCampuses = campuses.filter(function (campus) {
-      return campus.name.toLowerCase().search(filter) !== -1;
-    });
-    dispatch(filterCampuses(filteredCampuses));
-  };
-};
-
-exports.default = function () {
-  var filteredCampuses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case FILTER_CAMPUSES:
-      return action.filteredCampuses;
-    case _campuses.SET_CAMPUSES:
-      return action.campuses;
-    case _campuses.CREATE_CAMPUS:
-      return [].concat(_toConsumableArray(filteredCampuses), [action.campus]);
-    case _campuses.DELETE_CAMPUS:
-      return filteredCampuses.filter(function (campus) {
-        return campus.id !== action.campusId;
-      });
-    default:
-      return filteredCampuses;
-  }
-};
-
-/***/ }),
-
-/***/ "./app/redux/filteredStudents.js":
-/*!***************************************!*\
-  !*** ./app/redux/filteredStudents.js ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.sortStudentsThunk = exports.searchStudentsThunk = exports.filterStudentsThunk = exports.sortStudents = exports.filterStudents = undefined;
-
-var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _students = __webpack_require__(/*! ./students */ "./app/redux/students.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var FILTER_STUDENTS = 'FILTER_STUDENTS';
-var SORT_STUDENTS = 'SORT_STUDENTS';
-
-var filterStudents = exports.filterStudents = function filterStudents(filteredStudents) {
-  return { type: FILTER_STUDENTS, filteredStudents: filteredStudents };
-};
-
-var sortStudents = exports.sortStudents = function sortStudents(sortedStudents) {
-  return { type: SORT_STUDENTS, sortedStudents: sortedStudents };
-};
-
-var filterStudentsThunk = exports.filterStudentsThunk = function filterStudentsThunk(event) {
-  var filter = event.target.innerText;
-  return function (dispatch, getState) {
-    var _getState = getState(),
-        students = _getState.students;
-
-    if (filter === 'Has Campus') {
-      var filteredStudents = students.filter(function (student) {
-        return student.campusId;
-      });
-      dispatch(filterStudents(filteredStudents));
-    } else if (filter === 'No Campus') {
-      var _filteredStudents = students.filter(function (student) {
-        return !student.campusId;
-      });
-      dispatch(filterStudents(_filteredStudents));
-    } else {
-      dispatch(filterStudents(students));
-    }
-  };
-};
-
-var searchStudentsThunk = exports.searchStudentsThunk = function searchStudentsThunk(event) {
-  var filter = event.target.value.toLowerCase();
-
-  return function (dispatch, getState) {
-    var _getState2 = getState(),
-        students = _getState2.students;
-
-    var filteredStudents = students.filter(function (student) {
-      var name = student.firstName + ' ' + student.lastName;
-      return name.toLowerCase().search(filter) !== -1;
-    });
-    dispatch(filterStudents(filteredStudents));
-  };
-};
-
-var sortStudentsThunk = exports.sortStudentsThunk = function sortStudentsThunk(event) {
-  var key = event.target.innerText.toLowerCase().replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
-    if (+match === 0) return '';
-    return index === 0 ? match.toLowerCase() : match.toUpperCase();
-  });
-  if (!key) {
-    key = 'id';
-  }
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var response, sortedStudents;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _axios2.default.get('/api/students/sorted/' + key);
-
-            case 2:
-              response = _context.sent;
-              sortedStudents = response.data;
-
-              dispatch(sortStudents(sortedStudents));
-
-            case 5:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-exports.default = function () {
-  var filteredStudents = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments[1];
-
-  switch (action.type) {
-    case FILTER_STUDENTS:
-      return action.filteredStudents;
-    case _students.SET_STUDENTS:
-      return action.students;
-    case SORT_STUDENTS:
-      return action.sortedStudents;
-    case _students.CREATE_STUDENT:
-      return [].concat(_toConsumableArray(filteredStudents), [action.student]);
-    case _students.DELETE_STUDENT:
-      return filteredStudents.filter(function (student) {
-        return student.id !== action.studentId;
-      });
-    default:
-      return filteredStudents;
-  }
-};
-
-/***/ }),
-
 /***/ "./app/redux/index.js":
 /*!****************************!*\
   !*** ./app/redux/index.js ***!
@@ -2726,399 +1187,22 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 
-var _campuses = __webpack_require__(/*! ./campuses */ "./app/redux/campuses.js");
-
-var _campuses2 = _interopRequireDefault(_campuses);
-
 var _students = __webpack_require__(/*! ./students */ "./app/redux/students.js");
 
 var _students2 = _interopRequireDefault(_students);
-
-var _singleCampus = __webpack_require__(/*! ./singleCampus */ "./app/redux/singleCampus.js");
-
-var _singleCampus2 = _interopRequireDefault(_singleCampus);
 
 var _singleStudent = __webpack_require__(/*! ./singleStudent */ "./app/redux/singleStudent.js");
 
 var _singleStudent2 = _interopRequireDefault(_singleStudent);
 
-var _filteredCampuses = __webpack_require__(/*! ./filteredCampuses */ "./app/redux/filteredCampuses.js");
-
-var _filteredCampuses2 = _interopRequireDefault(_filteredCampuses);
-
-var _filteredStudents = __webpack_require__(/*! ./filteredStudents */ "./app/redux/filteredStudents.js");
-
-var _filteredStudents2 = _interopRequireDefault(_filteredStudents);
-
-var _pagination = __webpack_require__(/*! ./pagination */ "./app/redux/pagination.js");
-
-var _pagination2 = _interopRequireDefault(_pagination);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var appReducer = (0, _redux.combineReducers)({
-  campuses: _campuses2.default,
   students: _students2.default,
-  selectedCampus: _singleCampus2.default,
-  selectedStudent: _singleStudent2.default,
-  filteredCampuses: _filteredCampuses2.default,
-  filteredStudents: _filteredStudents2.default,
-  paginatedCampuses: _pagination2.default
+  selectedStudent: _singleStudent2.default
 });
 
 exports.default = appReducer;
-
-/***/ }),
-
-/***/ "./app/redux/pagination.js":
-/*!*********************************!*\
-  !*** ./app/redux/pagination.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchCampusesFilterThunk = exports.fetchCampusesPaginationThunk = exports.paginationAction = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _campuses = __webpack_require__(/*! ./campuses */ "./app/redux/campuses.js");
-
-var _filteredCampuses = __webpack_require__(/*! ./filteredCampuses */ "./app/redux/filteredCampuses.js");
-
-var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var PAGINATION = 'PAGINATION';
-
-var paginationAction = exports.paginationAction = function paginationAction(campusesData) {
-  return { type: PAGINATION, campusesData: campusesData };
-};
-
-var fetchCampusesPaginationThunk = exports.fetchCampusesPaginationThunk = function fetchCampusesPaginationThunk(page) {
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var response, campusesData;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _axios2.default.get('/api/campuses/page/' + page);
-
-            case 2:
-              response = _context.sent;
-              campusesData = response.data;
-
-              dispatch(paginationAction(campusesData));
-
-            case 5:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-var fetchCampusesFilterThunk = exports.fetchCampusesFilterThunk = function fetchCampusesFilterThunk(page, filter) {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var response, campusesData, campuses, newCampuses, _newCampuses;
-
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return _axios2.default.get('/api/campuses/page/' + page + '/?filter=' + filter);
-
-            case 2:
-              response = _context2.sent;
-              campusesData = response.data;
-              campuses = campusesData.result;
-
-
-              if (filter === 'hasStudents') {
-                newCampuses = campuses.filter(function (campus) {
-                  return campus.students.length;
-                });
-
-                dispatch(paginationAction(_extends({}, campusesData, { result: newCampuses })));
-              } else if (filter === 'noStudents') {
-                _newCampuses = campuses.filter(function (campus) {
-                  return campus.students.length === 0;
-                });
-
-                dispatch(paginationAction(_extends({}, campusesData, { result: _newCampuses })));
-              }
-
-            case 6:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-exports.default = function () {
-  var paginatatedCampuses = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var action = arguments[1];
-
-  switch (action.type) {
-    case PAGINATION:
-      return action.campusesData;
-    case _filteredCampuses.FILTER_CAMPUSES:
-      return action.filteredCampuses;
-    case _campuses.CREATE_CAMPUS:
-      return _extends({}, paginatatedCampuses, {
-        result: [].concat(_toConsumableArray(paginatatedCampuses.result), [action.campus])
-      });
-    case _campuses.DELETE_CAMPUS:
-      {
-        var newCampuses = paginatatedCampuses.result.filter(function (campus) {
-          return campus.id !== action.campusId;
-        });
-        return _extends({}, paginatatedCampuses, {
-          result: newCampuses
-        });
-      }
-    default:
-      return paginatatedCampuses;
-  }
-};
-
-/***/ }),
-
-/***/ "./app/redux/singleCampus.js":
-/*!***********************************!*\
-  !*** ./app/redux/singleCampus.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchStudentsForCampusThunk = exports.updateStudentFromCampusThunk = exports.updateCampusThunk = exports.fetchSingleCampus = exports.setStudentsForCampus = exports.updateStudent = exports.updateCampus = exports.setSingleCampus = undefined;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-
-var _axios2 = _interopRequireDefault(_axios);
-
-var _campuses = __webpack_require__(/*! ./campuses */ "./app/redux/campuses.js");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var SET_SINGLE_CAMPUS = 'SET_SINGLE_CAMPUS';
-var UPDATE_CAMPUS = 'UPDATE_CAMPUS';
-var UPDATE_STUDENT_FROM_CAMPUS = 'UPDATE_STUDENT_FROM_CAMPUS';
-var SET_STUDENTS_FOR_CAMPUS = 'SET_STUDENTS_FOR_CAMPUS';
-
-var setSingleCampus = exports.setSingleCampus = function setSingleCampus(selectedCampus) {
-  return { type: SET_SINGLE_CAMPUS, selectedCampus: selectedCampus };
-};
-
-var updateCampus = exports.updateCampus = function updateCampus(campus) {
-  return { type: UPDATE_CAMPUS, campus: campus };
-};
-
-var updateStudent = exports.updateStudent = function updateStudent(student, updatedStudent) {
-  return { type: UPDATE_STUDENT_FROM_CAMPUS, student: student, updatedStudent: updatedStudent };
-};
-
-var setStudentsForCampus = exports.setStudentsForCampus = function setStudentsForCampus(students) {
-  return { type: SET_STUDENTS_FOR_CAMPUS, students: students };
-};
-
-var fetchSingleCampus = exports.fetchSingleCampus = function fetchSingleCampus(campusId) {
-  return function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
-      var response, selectedCampus, action;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return _axios2.default.get('/api/campuses/' + campusId);
-
-            case 2:
-              response = _context.sent;
-              selectedCampus = response.data;
-              action = setSingleCampus(selectedCampus);
-
-              dispatch(action);
-
-            case 6:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, undefined);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-};
-
-var updateCampusThunk = exports.updateCampusThunk = function updateCampusThunk(campus) {
-  return function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch) {
-      var response, updatedCampus;
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return _axios2.default.put('/api/campuses/' + campus.id, campus);
-
-            case 2:
-              response = _context2.sent;
-              updatedCampus = response.data;
-
-              dispatch(updateCampus(updatedCampus));
-
-            case 5:
-            case 'end':
-              return _context2.stop();
-          }
-        }
-      }, _callee2, undefined);
-    }));
-
-    return function (_x2) {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-};
-
-var updateStudentFromCampusThunk = exports.updateStudentFromCampusThunk = function updateStudentFromCampusThunk(student) {
-  return function () {
-    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(dispatch) {
-      var response, updatedStudent;
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.next = 2;
-              return _axios2.default.put('/api/students/' + student.id, student);
-
-            case 2:
-              response = _context3.sent;
-              updatedStudent = response.data;
-
-              dispatch(updateStudent(student, updatedStudent));
-
-            case 5:
-            case 'end':
-              return _context3.stop();
-          }
-        }
-      }, _callee3, undefined);
-    }));
-
-    return function (_x3) {
-      return _ref3.apply(this, arguments);
-    };
-  }();
-};
-
-var fetchStudentsForCampusThunk = exports.fetchStudentsForCampusThunk = function fetchStudentsForCampusThunk(selectedCampus) {
-  return function () {
-    var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(dispatch) {
-      var response, students;
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
-        while (1) {
-          switch (_context4.prev = _context4.next) {
-            case 0:
-              _context4.next = 2;
-              return _axios2.default.get('/api/students');
-
-            case 2:
-              response = _context4.sent;
-              students = response.data;
-
-              students.filter(function (student) {
-                return student.campusId !== selectedCampus.id;
-              });
-              dispatch(setStudentsForCampus(students));
-
-            case 6:
-            case 'end':
-              return _context4.stop();
-          }
-        }
-      }, _callee4, undefined);
-    }));
-
-    return function (_x4) {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-};
-
-exports.default = function () {
-  var selectedCampus = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { students: [] };
-  var action = arguments[1];
-
-  switch (action.type) {
-    case _campuses.CREATE_CAMPUS:
-      return action.campus;
-    case UPDATE_STUDENT_FROM_CAMPUS:
-      {
-        if (action.student.campusId === selectedCampus.id) {
-          return _extends({}, selectedCampus, {
-            students: [].concat(_toConsumableArray(selectedCampus.students), [action.updatedStudent])
-          });
-        } else {
-          var newStudents = selectedCampus.students.filter(function (student) {
-            return student.id !== action.student.id;
-          });
-          return _extends({}, selectedCampus, { students: newStudents });
-        }
-      }
-    case SET_SINGLE_CAMPUS:
-      return action.selectedCampus;
-    case UPDATE_CAMPUS:
-      return action.campus;
-    default:
-      return selectedCampus;
-  }
-};
 
 /***/ }),
 
@@ -3423,15 +1507,9 @@ var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } } // https://github.com/evgenyrodionov/redux-logger
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-
-// https://github.com/gaearon/redux-thunk
-
-var middleware = [
-// `withExtraArgument` gives us access to axios in our async action creators!
-// https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
-_reduxThunk2.default.withExtraArgument({ axios: _axios2.default })];
+var middleware = [_reduxThunk2.default.withExtraArgument({ axios: _axios2.default })];
 if (process.browser) {
   // We'd like the redux logger to only log messages when it's running in the
   // browser, and not when we run the tests from within Mocha.
@@ -3457,10 +1535,7 @@ var rootReducer = function rootReducer(state, action) {
   return (0, _redux3.default)(state, action);
 };
 
-exports.default = (0, _redux.createStore)(rootReducer,
-// 👇 This uses the Redux DevTools extension, assuming you have it installed in your browser.
-// 👇 See: https://github.com/zalmoxisus/redux-devtools-extension
-(0, _reduxDevtoolsExtension.composeWithDevTools)(_redux.applyMiddleware.apply(undefined, _toConsumableArray(middleware))));
+exports.default = (0, _redux.createStore)(rootReducer, (0, _reduxDevtoolsExtension.composeWithDevTools)(_redux.applyMiddleware.apply(undefined, _toConsumableArray(middleware))));
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
@@ -4126,10 +2201,8 @@ module.exports = _typeof;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
-global.HTMLElement =
-  typeof window === 'undefined' ? Object : window.HTMLElement;
-  
+
+
 Object.defineProperty(exports, '__esModule', { value: true });
 
 var env = __webpack_require__(/*! exenv */ "./node_modules/exenv/index.js");
@@ -4137,18 +2210,13 @@ var PropTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types
 var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 function _typeof(obj) {
-  if (typeof Symbol === 'function' && typeof Symbol.iterator === 'symbol') {
-    _typeof = function(obj) {
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
       return typeof obj;
     };
   } else {
-    _typeof = function(obj) {
-      return obj &&
-        typeof Symbol === 'function' &&
-        obj.constructor === Symbol &&
-        obj !== Symbol.prototype
-        ? 'symbol'
-        : typeof obj;
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
   }
 
@@ -4157,7 +2225,7 @@ function _typeof(obj) {
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
-    throw new TypeError('Cannot call a class as a function');
+    throw new TypeError("Cannot call a class as a function");
   }
 }
 
@@ -4166,7 +2234,7 @@ function _defineProperties(target, props) {
     var descriptor = props[i];
     descriptor.enumerable = descriptor.enumerable || false;
     descriptor.configurable = true;
-    if ('value' in descriptor) descriptor.writable = true;
+    if ("value" in descriptor) descriptor.writable = true;
     Object.defineProperty(target, descriptor.key, descriptor);
   }
 }
@@ -4183,7 +2251,7 @@ function _defineProperty(obj, key, value) {
       value: value,
       enumerable: true,
       configurable: true,
-      writable: true,
+      writable: true
     });
   } else {
     obj[key] = value;
@@ -4193,52 +2261,46 @@ function _defineProperty(obj, key, value) {
 }
 
 function _inherits(subClass, superClass) {
-  if (typeof superClass !== 'function' && superClass !== null) {
-    throw new TypeError('Super expression must either be null or a function');
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
   }
 
   subClass.prototype = Object.create(superClass && superClass.prototype, {
     constructor: {
       value: subClass,
       writable: true,
-      configurable: true,
-    },
+      configurable: true
+    }
   });
   if (superClass) _setPrototypeOf(subClass, superClass);
 }
 
 function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf
-    ? Object.getPrototypeOf
-    : function _getPrototypeOf(o) {
-        return o.__proto__ || Object.getPrototypeOf(o);
-      };
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
   return _getPrototypeOf(o);
 }
 
 function _setPrototypeOf(o, p) {
-  _setPrototypeOf =
-    Object.setPrototypeOf ||
-    function _setPrototypeOf(o, p) {
-      o.__proto__ = p;
-      return o;
-    };
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
 
   return _setPrototypeOf(o, p);
 }
 
 function _assertThisInitialized(self) {
   if (self === void 0) {
-    throw new ReferenceError(
-      "this hasn't been initialised - super() hasn't been called"
-    );
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
 
   return self;
 }
 
 function _possibleConstructorReturn(self, call) {
-  if (call && (typeof call === 'object' || typeof call === 'function')) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
     return call;
   }
 
@@ -4250,97 +2312,95 @@ function _possibleConstructorReturn(self, call) {
  * with benchmarks and submit PR with faster alternative. Each method contains links to benchmarks.
  */
 var EventSet =
-  /*#__PURE__*/
-  (function() {
-    /**
-     * @see https://jsperf.com/suir-eventset-constructor
-     */
-    function EventSet(eventHandlers) {
-      _classCallCheck(this, EventSet);
+/*#__PURE__*/
+function () {
+  /**
+   * @see https://jsperf.com/suir-eventset-constructor
+   */
+  function EventSet(eventHandlers) {
+    _classCallCheck(this, EventSet);
 
-      _defineProperty(this, 'handlers', void 0);
+    _defineProperty(this, "handlers", void 0);
 
-      this.handlers = eventHandlers.slice(0);
+    this.handlers = eventHandlers.slice(0);
+  }
+  /**
+   * @see https://jsperf.com/suir-eventset-addhandlers
+   */
+
+
+  _createClass(EventSet, [{
+    key: "addHandlers",
+    value: function addHandlers(additionalHandlers) {
+      var newHandlers = this.handlers.slice(0);
+      var length = additionalHandlers.length; // Heads up!
+      // Previously we use Set there, it granted uniqueness of handlers, now dispatchEvent() is
+      // responsible for this.
+
+      for (var i = 0; i < length; i += 1) {
+        newHandlers.push(additionalHandlers[i]);
+      }
+
+      return new EventSet(newHandlers);
     }
     /**
-     * @see https://jsperf.com/suir-eventset-addhandlers
+     * @see https://jsperf.com/suir-eventset-dispatchsingle
+     * @see https://jsperf.com/suir-eventset-dispatchmultiple2
      */
 
-    _createClass(EventSet, [
-      {
-        key: 'addHandlers',
-        value: function addHandlers(additionalHandlers) {
-          var newHandlers = this.handlers.slice(0);
-          var length = additionalHandlers.length; // Heads up!
-          // Previously we use Set there, it granted uniqueness of handlers, now dispatchEvent() is
-          // responsible for this.
+  }, {
+    key: "dispatchEvent",
+    value: function dispatchEvent(event, dispatchAll) {
+      var count = this.handlers.length - 1;
 
-          for (var i = 0; i < length; i += 1) {
-            newHandlers.push(additionalHandlers[i]);
-          }
+      if (!dispatchAll) {
+        // Heads up!
+        // We don't use .pop() there because it will mutate the array.
+        var recentHandler = this.handlers[count];
+        recentHandler(event);
+        return;
+      }
 
-          return new EventSet(newHandlers);
-        },
-        /**
-         * @see https://jsperf.com/suir-eventset-dispatchsingle
-         * @see https://jsperf.com/suir-eventset-dispatchmultiple2
-         */
-      },
-      {
-        key: 'dispatchEvent',
-        value: function dispatchEvent(event, dispatchAll) {
-          var count = this.handlers.length - 1;
+      for (var i = count; i >= 0; i -= 1) {
+        if (!this.handlers[i].called) {
+          this.handlers[i].called = true;
+          this.handlers[i](event);
+        }
+      }
 
-          if (!dispatchAll) {
-            // Heads up!
-            // We don't use .pop() there because it will mutate the array.
-            var recentHandler = this.handlers[count];
-            recentHandler(event);
-            return;
-          }
+      for (var _i = count; _i >= 0; _i -= 1) {
+        this.handlers[_i].called = false;
+      }
+    }
+  }, {
+    key: "hasHandlers",
+    value: function hasHandlers() {
+      return this.handlers.length > 0;
+    }
+    /**
+     * @see https://jsperf.com/suir-eventset-removehandlers
+     */
 
-          for (var i = count; i >= 0; i -= 1) {
-            if (!this.handlers[i].called) {
-              this.handlers[i].called = true;
-              this.handlers[i](event);
-            }
-          }
+  }, {
+    key: "removeHandlers",
+    value: function removeHandlers(removalHandlers) {
+      var newHandlers = [];
+      var length = this.handlers.length;
 
-          for (var _i = count; _i >= 0; _i -= 1) {
-            this.handlers[_i].called = false;
-          }
-        },
-      },
-      {
-        key: 'hasHandlers',
-        value: function hasHandlers() {
-          return this.handlers.length > 0;
-        },
-        /**
-         * @see https://jsperf.com/suir-eventset-removehandlers
-         */
-      },
-      {
-        key: 'removeHandlers',
-        value: function removeHandlers(removalHandlers) {
-          var newHandlers = [];
-          var length = this.handlers.length;
+      for (var i = 0; i < length; i += 1) {
+        var handler = this.handlers[i];
 
-          for (var i = 0; i < length; i += 1) {
-            var handler = this.handlers[i];
+        if (removalHandlers.indexOf(handler) === -1) {
+          newHandlers.push(handler);
+        }
+      }
 
-            if (removalHandlers.indexOf(handler) === -1) {
-              newHandlers.push(handler);
-            }
-          }
+      return new EventSet(newHandlers);
+    }
+  }]);
 
-          return new EventSet(newHandlers);
-        },
-      },
-    ]);
-
-    return EventSet;
-  })();
+  return EventSet;
+}();
 
 /**
  * An IE11-compatible function.
@@ -4349,7 +2409,7 @@ var EventSet =
  */
 function cloneMap(map) {
   var newMap = new Map();
-  map.forEach(function(value, key) {
+  map.forEach(function (value, key) {
     newMap.set(key, value);
   });
   return newMap;
@@ -4363,12 +2423,9 @@ function normalizeHandlers(handlers) {
  * @see https://github.com/facebook/react/blob/v16.8.2/packages/react-reconciler/src/ReactFiberCommitWork.js#L665
  */
 
-var isRefObject = function isRefObject(
-  ref // eslint-disable-next-line
+var isRefObject = function isRefObject(ref // eslint-disable-next-line
 ) {
-  return (
-    ref !== null && _typeof(ref) === 'object' && ref.hasOwnProperty('current')
-  );
+  return ref !== null && _typeof(ref) === 'object' && ref.hasOwnProperty('current');
 };
 /**
  * Normalizes `target` for EventStack, because `target` can be passed as `boolean` or `string`.
@@ -4384,271 +2441,226 @@ function normalizeTarget(target) {
 }
 
 var EventPool =
-  /*#__PURE__*/
-  (function() {
-    function EventPool(poolName, handlerSets) {
-      _classCallCheck(this, EventPool);
+/*#__PURE__*/
+function () {
+  function EventPool(poolName, handlerSets) {
+    _classCallCheck(this, EventPool);
 
-      _defineProperty(this, 'handlerSets', void 0);
+    _defineProperty(this, "handlerSets", void 0);
 
-      _defineProperty(this, 'poolName', void 0);
+    _defineProperty(this, "poolName", void 0);
 
-      this.handlerSets = handlerSets;
-      this.poolName = poolName;
+    this.handlerSets = handlerSets;
+    this.poolName = poolName;
+  }
+
+  _createClass(EventPool, [{
+    key: "addHandlers",
+    value: function addHandlers(eventType, eventHandlers) {
+      var handlerSets = cloneMap(this.handlerSets);
+
+      if (handlerSets.has(eventType)) {
+        var eventSet = handlerSets.get(eventType);
+        handlerSets.set(eventType, eventSet.addHandlers(eventHandlers));
+      } else {
+        handlerSets.set(eventType, new EventSet(eventHandlers));
+      }
+
+      return new EventPool(this.poolName, handlerSets);
     }
+  }, {
+    key: "dispatchEvent",
+    value: function dispatchEvent(eventType, event) {
+      var handlerSet = this.handlerSets.get(eventType);
+      var shouldDispatchAll = this.poolName === 'default';
 
-    _createClass(EventPool, [
-      {
-        key: 'addHandlers',
-        value: function addHandlers(eventType, eventHandlers) {
-          var handlerSets = cloneMap(this.handlerSets);
+      if (handlerSet) {
+        handlerSet.dispatchEvent(event, shouldDispatchAll);
+      }
+    }
+  }, {
+    key: "hasHandlers",
+    value: function hasHandlers() {
+      return this.handlerSets.size > 0;
+    }
+  }, {
+    key: "removeHandlers",
+    value: function removeHandlers(eventType, eventHandlers) {
+      var handlerSets = cloneMap(this.handlerSets);
 
-          if (handlerSets.has(eventType)) {
-            var eventSet = handlerSets.get(eventType);
-            handlerSets.set(eventType, eventSet.addHandlers(eventHandlers));
-          } else {
-            handlerSets.set(eventType, new EventSet(eventHandlers));
-          }
+      if (!handlerSets.has(eventType)) {
+        return new EventPool(this.poolName, handlerSets);
+      }
 
-          return new EventPool(this.poolName, handlerSets);
-        },
-      },
-      {
-        key: 'dispatchEvent',
-        value: function dispatchEvent(eventType, event) {
-          var handlerSet = this.handlerSets.get(eventType);
-          var shouldDispatchAll = this.poolName === 'default';
+      var currentSet = handlerSets.get(eventType);
+      var nextSet = currentSet.removeHandlers(eventHandlers);
 
-          if (handlerSet) {
-            handlerSet.dispatchEvent(event, shouldDispatchAll);
-          }
-        },
-      },
-      {
-        key: 'hasHandlers',
-        value: function hasHandlers() {
-          return this.handlerSets.size > 0;
-        },
-      },
-      {
-        key: 'removeHandlers',
-        value: function removeHandlers(eventType, eventHandlers) {
-          var handlerSets = cloneMap(this.handlerSets);
+      if (nextSet.hasHandlers()) {
+        handlerSets.set(eventType, nextSet);
+      } else {
+        handlerSets.delete(eventType);
+      }
 
-          if (!handlerSets.has(eventType)) {
-            return new EventPool(this.poolName, handlerSets);
-          }
+      return new EventPool(this.poolName, handlerSets);
+    }
+  }]);
 
-          var currentSet = handlerSets.get(eventType);
-          var nextSet = currentSet.removeHandlers(eventHandlers);
+  return EventPool;
+}();
 
-          if (nextSet.hasHandlers()) {
-            handlerSets.set(eventType, nextSet);
-          } else {
-            handlerSets.delete(eventType);
-          }
-
-          return new EventPool(this.poolName, handlerSets);
-        },
-      },
-    ]);
-
-    return EventPool;
-  })();
-
-_defineProperty(EventPool, 'createByType', function(
-  poolName,
-  eventType,
-  eventHandlers
-) {
+_defineProperty(EventPool, "createByType", function (poolName, eventType, eventHandlers) {
   var handlerSets = new Map();
   handlerSets.set(eventType, new EventSet(eventHandlers));
   return new EventPool(poolName, handlerSets);
 });
 
 var EventTarget =
-  /*#__PURE__*/
-  (function() {
-    function EventTarget(target) {
-      var _this = this;
+/*#__PURE__*/
+function () {
+  function EventTarget(target) {
+    var _this = this;
 
-      _classCallCheck(this, EventTarget);
+    _classCallCheck(this, EventTarget);
 
-      _defineProperty(this, 'handlers', new Map());
+    _defineProperty(this, "handlers", new Map());
 
-      _defineProperty(this, 'pools', new Map());
+    _defineProperty(this, "pools", new Map());
 
-      _defineProperty(this, 'target', void 0);
+    _defineProperty(this, "target", void 0);
 
-      _defineProperty(this, 'createEmitter', function(eventType) {
-        return function(event) {
-          _this.pools.forEach(function(pool) {
-            pool.dispatchEvent(eventType, event);
-          });
-        };
-      });
+    _defineProperty(this, "createEmitter", function (eventType) {
+      return function (event) {
+        _this.pools.forEach(function (pool) {
+          pool.dispatchEvent(eventType, event);
+        });
+      };
+    });
 
-      this.target = target;
+    this.target = target;
+  }
+
+  _createClass(EventTarget, [{
+    key: "addHandlers",
+    value: function addHandlers(poolName, eventType, eventHandlers) {
+      if (this.pools.has(poolName)) {
+        var eventPool = this.pools.get(poolName);
+        this.pools.set(poolName, eventPool.addHandlers(eventType, eventHandlers));
+      } else {
+        this.pools.set(poolName, EventPool.createByType(poolName, eventType, eventHandlers));
+      }
+
+      if (!this.handlers.has(eventType)) {
+        this.addTargetHandler(eventType);
+      }
     }
+  }, {
+    key: "hasHandlers",
+    value: function hasHandlers() {
+      return this.handlers.size > 0;
+    }
+  }, {
+    key: "removeHandlers",
+    value: function removeHandlers(poolName, eventType, eventHandlers) {
+      if (!this.pools.has(poolName)) {
+        return;
+      }
 
-    _createClass(EventTarget, [
-      {
-        key: 'addHandlers',
-        value: function addHandlers(poolName, eventType, eventHandlers) {
-          if (this.pools.has(poolName)) {
-            var eventPool = this.pools.get(poolName);
-            this.pools.set(
-              poolName,
-              eventPool.addHandlers(eventType, eventHandlers)
-            );
-          } else {
-            this.pools.set(
-              poolName,
-              EventPool.createByType(poolName, eventType, eventHandlers)
-            );
-          }
+      var pool = this.pools.get(poolName);
+      var newPool = pool.removeHandlers(eventType, eventHandlers);
 
-          if (!this.handlers.has(eventType)) {
-            this.addTargetHandler(eventType);
-          }
-        },
-      },
-      {
-        key: 'hasHandlers',
-        value: function hasHandlers() {
-          return this.handlers.size > 0;
-        },
-      },
-      {
-        key: 'removeHandlers',
-        value: function removeHandlers(poolName, eventType, eventHandlers) {
-          if (!this.pools.has(poolName)) {
-            return;
-          }
+      if (newPool.hasHandlers()) {
+        this.pools.set(poolName, newPool);
+      } else {
+        this.pools.delete(poolName);
+      }
 
-          var pool = this.pools.get(poolName);
-          var newPool = pool.removeHandlers(eventType, eventHandlers);
+      if (this.pools.size === 0) {
+        this.removeTargetHandler(eventType);
+      }
+    }
+  }, {
+    key: "addTargetHandler",
+    value: function addTargetHandler(eventType) {
+      var handler = this.createEmitter(eventType);
+      this.handlers.set(eventType, handler);
+      this.target.addEventListener(eventType, handler, true);
+    }
+  }, {
+    key: "removeTargetHandler",
+    value: function removeTargetHandler(eventType) {
+      if (this.handlers.has(eventType)) {
+        this.target.removeEventListener(eventType, this.handlers.get(eventType), true);
+        this.handlers.delete(eventType);
+      }
+    }
+  }]);
 
-          if (newPool.hasHandlers()) {
-            this.pools.set(poolName, newPool);
-          } else {
-            this.pools.delete(poolName);
-          }
-
-          if (this.pools.size === 0) {
-            this.removeTargetHandler(eventType);
-          }
-        },
-      },
-      {
-        key: 'addTargetHandler',
-        value: function addTargetHandler(eventType) {
-          var handler = this.createEmitter(eventType);
-          this.handlers.set(eventType, handler);
-          this.target.addEventListener(eventType, handler, true);
-        },
-      },
-      {
-        key: 'removeTargetHandler',
-        value: function removeTargetHandler(eventType) {
-          if (this.handlers.has(eventType)) {
-            this.target.removeEventListener(
-              eventType,
-              this.handlers.get(eventType),
-              true
-            );
-            this.handlers.delete(eventType);
-          }
-        },
-      },
-    ]);
-
-    return EventTarget;
-  })();
+  return EventTarget;
+}();
 
 var EventStack =
-  /*#__PURE__*/
-  (function() {
-    function EventStack() {
-      var _this = this;
+/*#__PURE__*/
+function () {
+  function EventStack() {
+    var _this = this;
 
-      _classCallCheck(this, EventStack);
+    _classCallCheck(this, EventStack);
 
-      _defineProperty(this, 'targets', new Map());
+    _defineProperty(this, "targets", new Map());
 
-      _defineProperty(this, 'getTarget', function(target) {
-        var autoCreate =
-          arguments.length > 1 && arguments[1] !== undefined
-            ? arguments[1]
-            : true;
-        var normalized = normalizeTarget(target);
+    _defineProperty(this, "getTarget", function (target) {
+      var autoCreate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var normalized = normalizeTarget(target);
 
-        if (_this.targets.has(normalized)) {
-          return _this.targets.get(normalized);
-        }
+      if (_this.targets.has(normalized)) {
+        return _this.targets.get(normalized);
+      }
 
-        if (!autoCreate) return null;
-        var eventTarget = new EventTarget(normalized);
+      if (!autoCreate) return null;
+      var eventTarget = new EventTarget(normalized);
 
-        _this.targets.set(normalized, eventTarget);
+      _this.targets.set(normalized, eventTarget);
 
-        return eventTarget;
-      });
+      return eventTarget;
+    });
 
-      _defineProperty(this, 'removeTarget', function(target) {
-        _this.targets.delete(normalizeTarget(target));
-      });
+    _defineProperty(this, "removeTarget", function (target) {
+      _this.targets.delete(normalizeTarget(target));
+    });
+  }
+
+  _createClass(EventStack, [{
+    key: "sub",
+    value: function sub(eventName, eventHandlers) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      if (!env.canUseDOM) return;
+      var _options$target = options.target,
+          target = _options$target === void 0 ? document : _options$target,
+          _options$pool = options.pool,
+          pool = _options$pool === void 0 ? 'default' : _options$pool;
+      var eventTarget = this.getTarget(target);
+      eventTarget.addHandlers(pool, eventName, normalizeHandlers(eventHandlers));
     }
+  }, {
+    key: "unsub",
+    value: function unsub(eventName, eventHandlers) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      if (!env.canUseDOM) return;
+      var _options$target2 = options.target,
+          target = _options$target2 === void 0 ? document : _options$target2,
+          _options$pool2 = options.pool,
+          pool = _options$pool2 === void 0 ? 'default' : _options$pool2;
+      var eventTarget = this.getTarget(target, false);
 
-    _createClass(EventStack, [
-      {
-        key: 'sub',
-        value: function sub(eventName, eventHandlers) {
-          var options =
-            arguments.length > 2 && arguments[2] !== undefined
-              ? arguments[2]
-              : {};
-          if (!env.canUseDOM) return;
-          var _options$target = options.target,
-            target = _options$target === void 0 ? document : _options$target,
-            _options$pool = options.pool,
-            pool = _options$pool === void 0 ? 'default' : _options$pool;
-          var eventTarget = this.getTarget(target);
-          eventTarget.addHandlers(
-            pool,
-            eventName,
-            normalizeHandlers(eventHandlers)
-          );
-        },
-      },
-      {
-        key: 'unsub',
-        value: function unsub(eventName, eventHandlers) {
-          var options =
-            arguments.length > 2 && arguments[2] !== undefined
-              ? arguments[2]
-              : {};
-          if (!env.canUseDOM) return;
-          var _options$target2 = options.target,
-            target = _options$target2 === void 0 ? document : _options$target2,
-            _options$pool2 = options.pool,
-            pool = _options$pool2 === void 0 ? 'default' : _options$pool2;
-          var eventTarget = this.getTarget(target, false);
+      if (eventTarget) {
+        eventTarget.removeHandlers(pool, eventName, normalizeHandlers(eventHandlers));
+        if (!eventTarget.hasHandlers()) this.removeTarget(target);
+      }
+    }
+  }]);
 
-          if (eventTarget) {
-            eventTarget.removeHandlers(
-              pool,
-              eventName,
-              normalizeHandlers(eventHandlers)
-            );
-            if (!eventTarget.hasHandlers()) this.removeTarget(target);
-          }
-        },
-      },
-    ]);
-
-    return EventStack;
-  })();
+  return EventStack;
+}();
 
 var instance = new EventStack();
 
@@ -4656,106 +2668,91 @@ var instance = new EventStack();
  * This component exposes the EventStack API as public and provides a declarative way to manage it.
  */
 var EventStack$1 =
-  /*#__PURE__*/
-  (function(_React$PureComponent) {
-    _inherits(EventStack, _React$PureComponent);
+/*#__PURE__*/
+function (_React$PureComponent) {
+  _inherits(EventStack, _React$PureComponent);
 
-    function EventStack() {
-      _classCallCheck(this, EventStack);
+  function EventStack() {
+    _classCallCheck(this, EventStack);
 
-      return _possibleConstructorReturn(
-        this,
-        _getPrototypeOf(EventStack).apply(this, arguments)
-      );
+    return _possibleConstructorReturn(this, _getPrototypeOf(EventStack).apply(this, arguments));
+  }
+
+  _createClass(EventStack, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.subscribe(this.props);
     }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      this.unsubscribe(prevProps);
+      this.subscribe(this.props);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.unsubscribe(this.props);
+    }
+  }, {
+    key: "subscribe",
+    value: function subscribe(props) {
+      var name = props.name,
+          on = props.on,
+          pool = props.pool,
+          target = props.target;
+      instance.sub(name, on, {
+        pool: pool,
+        target: target
+      });
+    }
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe(props) {
+      var name = props.name,
+          on = props.on,
+          pool = props.pool,
+          target = props.target;
+      instance.unsub(name, on, {
+        pool: pool,
+        target: target
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return null;
+    }
+  }]);
 
-    _createClass(EventStack, [
-      {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-          this.subscribe(this.props);
-        },
-      },
-      {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps) {
-          this.unsubscribe(prevProps);
-          this.subscribe(this.props);
-        },
-      },
-      {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-          this.unsubscribe(this.props);
-        },
-      },
-      {
-        key: 'subscribe',
-        value: function subscribe(props) {
-          var name = props.name,
-            on = props.on,
-            pool = props.pool,
-            target = props.target;
-          instance.sub(name, on, {
-            pool: pool,
-            target: target,
-          });
-        },
-      },
-      {
-        key: 'unsubscribe',
-        value: function unsubscribe(props) {
-          var name = props.name,
-            on = props.on,
-            pool = props.pool,
-            target = props.target;
-          instance.unsub(name, on, {
-            pool: pool,
-            target: target,
-          });
-        },
-      },
-      {
-        key: 'render',
-        value: function render() {
-          return null;
-        },
-      },
-    ]);
+  return EventStack;
+}(React.PureComponent);
 
-    return EventStack;
-  })(React.PureComponent);
-
-_defineProperty(EventStack$1, 'defaultProps', {
+_defineProperty(EventStack$1, "defaultProps", {
   pool: 'default',
-  target: 'document',
+  target: 'document'
 });
 EventStack$1.propTypes = {
   /** An event name on which we will subscribe. */
   name: PropTypes.string.isRequired,
 
   /** An event handler or array of event handlers. */
-  on: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.func)])
-    .isRequired,
+  on: PropTypes.oneOfType([PropTypes.func, PropTypes.arrayOf(PropTypes.func)]).isRequired,
 
   /** A name of pool. */
   pool: PropTypes.string,
 
   /** A DOM element on which we will subscribe. */
-  target: PropTypes.oneOfType([
-    PropTypes.oneOf(['document', 'window']), // Heads up!
-    // This condition for SSR safety.
-    PropTypes.instanceOf(env.canUseDOM ? HTMLElement : Object),
-    PropTypes.shape({
-      current: PropTypes.object,
-    }),
-  ]),
+  target: PropTypes.oneOfType([PropTypes.oneOf(['document', 'window']), // Heads up!
+  // This condition for SSR safety.
+  PropTypes.instanceOf(env.canUseDOM ? HTMLElement : Object), PropTypes.shape({
+    current: PropTypes.object
+  })])
 };
 
 exports.instance = instance;
 exports.default = EventStack$1;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -82021,7 +80018,7 @@ var partitionHTMLProps = function partitionHTMLProps(props) {
 /*!*************************************************************!*\
   !*** ./node_modules/semantic-ui-react/dist/es/lib/index.js ***!
   \*************************************************************/
-/*! exports provided: AutoControlledComponent, getChildMapping, mergeChildMappings, childrenUtils, useKeyOnly, useKeyOrValueAndKey, useValueAndKey, useMultipleProp, useTextAlignProp, useVerticalAlignProp, useWidthProp, customPropTypes, eventStack, getUnhandledProps, getElementType, htmlInputAttrs, htmlInputEvents, htmlInputProps, htmlImageProps, partitionHTMLProps, isBrowser, doesNodeContainClick, leven, createPaginationItems, SUI, numberToWordMap, numberToWord, normalizeOffset, normalizeTransitionDuration, objectDiff, handleRef, isRefObject, createShorthand, createShorthandFactory, createHTMLDivision, createHTMLIframe, createHTMLImage, createHTMLInput, createHTMLLabel, createHTMLParagraph */
+/*! exports provided: AutoControlledComponent, getChildMapping, mergeChildMappings, childrenUtils, useKeyOnly, useKeyOrValueAndKey, useValueAndKey, useMultipleProp, useTextAlignProp, useVerticalAlignProp, useWidthProp, customPropTypes, eventStack, createShorthand, createShorthandFactory, createHTMLDivision, createHTMLIframe, createHTMLImage, createHTMLInput, createHTMLLabel, createHTMLParagraph, getUnhandledProps, getElementType, htmlInputAttrs, htmlInputEvents, htmlInputProps, htmlImageProps, partitionHTMLProps, isBrowser, doesNodeContainClick, leven, createPaginationItems, SUI, numberToWordMap, numberToWord, normalizeOffset, normalizeTransitionDuration, objectDiff, handleRef, isRefObject */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

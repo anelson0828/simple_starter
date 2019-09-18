@@ -10,9 +10,6 @@ const Nav = () => {
           <NavLink to="/">Home</NavLink>
         </Menu.Item>
         <Menu.Item header>
-          <NavLink to="/campuses/">Campuses</NavLink>
-        </Menu.Item>
-        <Menu.Item header>
           <NavLink to="/students/">Students</NavLink>
         </Menu.Item>
       </Container>

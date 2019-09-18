@@ -10,13 +10,11 @@ import {
   Divider,
   Grid,
 } from 'semantic-ui-react';
-import CampusCard from './CampusCard';
 
 class DisconnectedSingleStudent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: '',
       loading: true,
     };
   }
@@ -77,18 +75,6 @@ class DisconnectedSingleStudent extends React.Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-        <Container style={{ marginTop: '2rem' }}>
-          <Divider style={{ margin: '1rem' }} horizontal>
-            Campus
-          </Divider>
-          {selectedStudent.campus ? (
-            <Container className="centered">
-              <CampusCard campus={selectedStudent.campus} />
-            </Container>
-          ) : (
-            'This student does not have a campus.'
-          )}
-        </Container>
       </Container>
     );
   }

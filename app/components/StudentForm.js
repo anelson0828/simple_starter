@@ -13,7 +13,6 @@ class DisconnectedStudentForm extends React.Component {
       email: this.props.selectedStudent.email,
       imageUrl: this.props.selectedStudent.imageUrl,
       gpa: this.props.selectedStudent.gpa,
-      errorMessage: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +38,6 @@ class DisconnectedStudentForm extends React.Component {
       this.props.update(student);
     } catch (error) {
       console.log('error', error.message);
-      this.setState({ errorMessage: error.message });
     }
   }
 
@@ -86,11 +84,6 @@ class DisconnectedStudentForm extends React.Component {
           >
             Back
           </Button>
-          <Message
-            error
-            header="Error"
-            content="Looks like there's a problem with your submission. Please try again."
-          />
         </Form>
       </Container>
     );

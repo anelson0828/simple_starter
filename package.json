@@ -1,16 +1,14 @@
 {
-  "name": "final-project",
+  "name": "simple_starter",
   "version": "0.0.1",
-  "description": "A review time project",
+  "description": "A basic boilerplate",
   "main": "index.js",
   "scripts": {
     "start-dev": "npm run build-watch & npm run start-server",
     "start-server": "node main.js -e html,js,css --ignore public",
     "build-watch": "webpack -w",
     "test": "NODE_ENV='test' mocha  ./tests --recursive --watch --require babel-polyfill --require babel-register",
-    "start": "npm run build-watch & npm run start-server",
-    "startOld": "echo 'Running server for production - developers, use npm run start-dev for development' && node main",
-    "seed": "node seed.js"
+    "start": "npm run build-watch & npm run start-server"
   },
   "keywords": [
     "react",
@@ -22,7 +20,6 @@
     "body-parser": "^1.18.2",
     "chalk": "^2.4.1",
     "express": "^4.14.0",
-    "faker": "^4.1.0",
     "pg": "^7.4.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

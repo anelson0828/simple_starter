@@ -1,12 +1,9 @@
 const db = require('./database');
 const Student = require('./student');
-const Campus = require('./campus');
 
-Student.belongsTo(Campus);
-Campus.hasMany(Student);
+// add associations here
 
 module.exports = {
   db,
   Student,
-  Campus,
 };

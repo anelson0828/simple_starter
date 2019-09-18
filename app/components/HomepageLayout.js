@@ -14,30 +14,6 @@ const DisconnectedHomepage = props => (
     <Header as="h1">Welcome!</Header>
     <Card.Group stackable itemsPerRow="2" style={{ marginTop: '5rem' }}>
       <Card raised style={{ margin: '1rem' }}>
-        <Image
-          src="https://d13b2ieg84qqce.cloudfront.net/ad72f5277e4ca7e90712c9b8145a1145168a0ce2.jpg"
-          wrapped
-          ui={false}
-          size="medium"
-        />
-        <Card.Content>
-          <Statistic>
-            <Statistic.Value>{props.campuses.length}</Statistic.Value>
-            <Statistic.Label>Campuses</Statistic.Label>
-          </Statistic>
-        </Card.Content>
-        <Card.Content extra>
-          <Button
-            onClick={() => {
-              props.history.push('/campuses');
-            }}
-          >
-            View Campuses
-          </Button>
-        </Card.Content>
-      </Card>
-      <Card raised style={{ margin: '1rem' }}>
-        <Image src="/student_home.jpg" wrapped />
         <Card.Content>
           <Statistic>
             <Statistic.Value>{props.students.length}</Statistic.Value>
@@ -61,7 +37,6 @@ const DisconnectedHomepage = props => (
 const mapState = state => {
   return {
     students: state.students,
-    campuses: state.campuses,
   };
 };
 

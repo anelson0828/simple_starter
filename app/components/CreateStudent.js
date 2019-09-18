@@ -11,7 +11,6 @@ class DisconnectedCreateStudent extends Component {
       lastName: '',
       email: '',
       gpa: 0.0,
-      errorMessage: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,11 +41,9 @@ class DisconnectedCreateStudent extends Component {
         lastName: '',
         email: '',
         gpa: 0.0,
-        errorMessage: '',
       });
     } catch (error) {
       console.log('error', error.message);
-      this.setState({ errorMessage: error.message });
     }
   }
 
@@ -94,11 +91,6 @@ class DisconnectedCreateStudent extends Component {
           >
             Back
           </Button>
-          <Message
-            error
-            header="Error"
-            content="Looks like there's a problem with your submission. Please try again."
-          />
         </Form>
       </Container>
     );
